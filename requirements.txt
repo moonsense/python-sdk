@@ -1,5 +1,5 @@
 setuptools
 wheel
 twine
-numpy
+requests
 bumpversion
