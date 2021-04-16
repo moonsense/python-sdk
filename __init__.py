@@ -1,0 +1,1 @@
+name='python-sample-package'
