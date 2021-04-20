@@ -11,7 +11,7 @@ setup(
     description="Moonsense Cloud API client",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    install_requires=["requests"],
+    install_requires=["requests", "python-dateutil"],
     url="https://github.com/moonsense/python-sdk.git",
     author="Moonsense Team",
     author_email="support@moonsense.io",
