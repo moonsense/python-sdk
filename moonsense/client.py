@@ -1,4 +1,5 @@
 import requests
+import json
 
 from typing import Iterable
 
@@ -108,8 +109,8 @@ class Client(object):
             else:
                 break
 
-    def download_session(self, session_id, output_file):
-        with open(output_file, 'wb') as fd:
+    def download_session(self, session_id, output_file) -> None:
+        with open(output_file, "wb") as fd:
             for chunk in self.list_chunks(session_id):
                 endpoint = self._build_url(chunk.region_id) + chunk.uri()
                 http_response = requests.get(endpoint, stream=True, **self._headers)
@@ -119,3 +120,14 @@ class Client(object):
                     )
                 for buffer in http_response.iter_content(chunk_size=1024 * 1024):
                     fd.write(buffer)
+
+    def read_session(self, session_id) -> Iterable[dict]:
+        for chunk in self.list_chunks(session_id):
+            endpoint = self._build_url(chunk.region_id) + chunk.uri()
+            http_response = requests.get(endpoint, stream=True, **self._headers)
+            if http_response.status_code != 200:
+                raise RuntimeError(
+                    f"unable to read: {chunk}. status code: {http_response.status_code}"
+                )
+            for line in http_response.iter_lines(chunk_size=1024 * 1024):
+                yield json.loads(line)
