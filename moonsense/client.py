@@ -12,7 +12,7 @@ class Client(object):
     def __init__(
         self,
         secret_token: str,
-        root_domain: str = "moonsense.dev",
+        root_domain: str = "moonsense.cloud",
         protocol: str = "https",
         default_region: str = "us-central1.gcp",
     ) -> None:
@@ -48,7 +48,7 @@ class Client(object):
             )
             if http_response.status_code != 200:
                 raise RuntimeError(
-                    "unable to list sessions. status code: " + http_response.status_code
+                    f"unable to list sessions. status code: {http_response.status_code}"
                 )
 
             response = http_response.json()
@@ -73,7 +73,7 @@ class Client(object):
         http_response = requests.get(endpoint, **self._headers)
         if http_response.status_code != 200:
             raise RuntimeError(
-                "unable to describe sessions. status code: " + http_response.status_code
+                f"unable to describe session. status code: {http_response.status_code}"
             )
         return Session(http_response.json())
 
@@ -89,8 +89,7 @@ class Client(object):
             )
             if http_response.status_code != 200:
                 raise RuntimeError(
-                    "unable to list session chunks. status code: "
-                    + http_response.status_code
+                    f"unable to list session chunks. status code: {http_response.status_code}"
                 )
 
             response = http_response.json()
