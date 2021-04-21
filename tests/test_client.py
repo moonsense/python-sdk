@@ -1,11 +1,12 @@
 import os
-import pytest
+import tempfile
 
 from moonsense import client
 
 PROTOCOL = "https"
 ROOT_DOMAIN = "moonsense.dev"
 DEFAULT_REGION = "us-central1.gcp"
+SESSION_ID = "qCyM5JXCzPgniCnZjVdjqD"
 
 # PROTOCOL = "http"
 # ROOT_DOMAIN = "localhost:8081"
@@ -41,8 +42,13 @@ def test_list_sessions():
 
 def test_list_chunks():
     c = new_client()
-
-    session_id = "TPhqRmrgHeSRigJxbavQhh"
-    chunks = list(c.list_chunks(session_id))
+    chunks = list(c.list_chunks(SESSION_ID))
     assert len(chunks) > 0
     assert chunks[0].md5 != ""
+
+def test_download_session():
+    c = new_client()
+    with tempfile.TemporaryDirectory() as tmpdirname:
+        output_file = os.path.join(tmpdirname, SESSION_ID+".json")
+        c.download_session(SESSION_ID, output_file)
+        assert os.path.getsize(output_file) > 1024

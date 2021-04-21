@@ -96,7 +96,7 @@ class Client(object):
             if not "chunks" in response:
                 return  # got an empy page
             for chunk in response["chunks"]:
-                yield Chunk(chunk)
+                yield Chunk(session_id, session.region_id, chunk)
 
             # Determine if there is another page
             pagination = response["pagination"]
@@ -107,3 +107,15 @@ class Client(object):
                 page = pagination["next_page"]
             else:
                 break
+
+    def download_session(self, session_id, output_file):
+        with open(output_file, 'wb') as fd:
+            for chunk in self.list_chunks(session_id):
+                endpoint = self._build_url(chunk.region_id) + chunk.uri()
+                http_response = requests.get(endpoint, stream=True, **self._headers)
+                if http_response.status_code != 200:
+                    raise RuntimeError(
+                        f"unable to read: {chunk}. status code: {http_response.status_code}"
+                    )
+                for buffer in http_response.iter_content(chunk_size=1024 * 1024):
+                    fd.write(buffer)

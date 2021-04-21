@@ -63,12 +63,19 @@ class Session(object):
 class Chunk(object):
     chunk_id: str
     md5: str
+    session_id: str
+    region_id: str
     created_at: datetime
 
-    def __init__(self, chunk) -> None:
+    def __init__(self, session_id, region_id, chunk) -> None:
         self.chunk_id = chunk['chunk_id']
         self.md5 = chunk['md5']
+        self.session_id = session_id
+        self.region_id = region_id
         self.created_at = date_parser.parse(chunk["created_at"])
+
+    def uri(self):
+        return f"/v1/sessions/{self.session_id}/chunks/{self.chunk_id}"
 
     def __repr__(self) -> str:
         return f"Chunk(chunk_id={self.chunk_id}, md5={self.md5}, created_at={self.created_at})"
