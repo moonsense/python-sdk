@@ -59,3 +59,16 @@ class Session(object):
             f"Session(app_id={self.app_id}, session_id={self.session_id}, region_id={self.region_id}, "
             + f"circle={self.circle}, labels={self.labels}, created_at={self.created_at})"
         )
+
+class Chunk(object):
+    chunk_id: str
+    md5: str
+    created_at: datetime
+
+    def __init__(self, chunk) -> None:
+        self.chunk_id = chunk['chunk_id']
+        self.md5 = chunk['md5']
+        self.created_at = date_parser.parse(chunk["created_at"])
+
+    def __repr__(self) -> str:
+        return f"Chunk(chunk_id={self.chunk_id}, md5={self.md5}, created_at={self.created_at})"

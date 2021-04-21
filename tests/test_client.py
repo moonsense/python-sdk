@@ -20,7 +20,7 @@ def new_client():
 
 def test_regions():
     c = new_client()
-    assert "europe-west1.gcp" in [r["name"] for r in c.regions()]
+    assert "europe-west1.gcp" in [r["name"] for r in c.list_regions()]
 
 
 def test_whoami():
@@ -28,13 +28,21 @@ def test_whoami():
     assert c.whoami()["app_id"] != ""
 
 
-def test_sessions():
+def test_list_sessions():
     c = new_client()
-    result = list(c.sessions())
+
+    result = list(c.list_sessions())
     assert len(result) > 0
     assert result[0].app_id != ""
 
+    session = c.describe_session(result[0].session_id)
+    assert session.created_at == result[0].created_at
 
-def test_chunks():
+
+def test_list_chunks():
+    c = new_client()
+
     session_id = "TPhqRmrgHeSRigJxbavQhh"
-    pass
+    chunks = list(c.list_chunks(session_id))
+    assert len(chunks) > 0
+    assert chunks[0].md5 != ""
