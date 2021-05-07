@@ -1,7 +1,9 @@
 import os
 import tempfile
-
 from moonsense import client
+import dotenv
+
+dotenv.load_dotenv()
 
 PROTOCOL = "https"
 ROOT_DOMAIN = "moonsense.dev"
@@ -17,6 +19,10 @@ def new_client():
     return client.Client(
         os.environ["SECRET_TOKEN"], ROOT_DOMAIN, PROTOCOL, DEFAULT_REGION
     )
+
+def test_env_variable_client():
+    c = client.Client(None, ROOT_DOMAIN, PROTOCOL, DEFAULT_REGION)
+    assert isinstance(c, client.Client)
 
 
 def test_regions():

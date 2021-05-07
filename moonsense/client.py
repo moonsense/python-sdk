@@ -1,3 +1,5 @@
+import os
+
 import requests
 import json
 
@@ -11,11 +13,15 @@ class Client(object):
 
     def __init__(
         self,
-        secret_token: str,
+        secret_token: str =None,
         root_domain: str = "moonsense.cloud",
         protocol: str = "https",
         default_region: str = "us-central1.gcp",
     ) -> None:
+        if secret_token is None:
+            secret_token = os.environ.get('MOONSENSE_SECRET_TOKEN',None)
+            if secret_token is None:
+                raise RuntimeError('secret token must either be set as an input param or as an environment variable MOONSENSE_SECRET_TOKEN')
         self._root_domain = root_domain
         self._protocol = protocol
         self._default_region = default_region
