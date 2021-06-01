@@ -34,5 +34,10 @@ setup(
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
+        "License :: OSI Approved :: Apache Software License",
+        "Intended Audience :: Developers",
+        "Intended Audience :: Science/Research",
+        "Development Status :: 3 - Alpha",
+        "Framework :: Jupyter",
     ],
 )
