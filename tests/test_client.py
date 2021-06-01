@@ -16,9 +16,6 @@ limitations under the License.
 import os
 import tempfile
 from moonsense import client
-import dotenv
-
-dotenv.load_dotenv()
 
 PROTOCOL = "https"
 ROOT_DOMAIN = "moonsense.dev"
