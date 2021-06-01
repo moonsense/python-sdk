@@ -177,6 +177,22 @@ class Client(object):
             else:
                 break
 
+    def read_chunk(self, chunk: Chunk) -> Iterable[dict]:
+        """
+        Read all the bundles with a data chunk
+
+        :param chunk: session data chunk object
+        :return: generate of bundles
+        """
+        endpoint = self._build_url(chunk.region_id) + chunk.uri()
+        http_response = requests.get(endpoint, stream=True, **self._headers)
+        if http_response.status_code != 200:
+            raise RuntimeError(
+                f"unable to read: {chunk}. status code: {http_response.status_code}"
+            )
+        for line in http_response.iter_lines(chunk_size=1024 * 1024):
+            yield json.loads(line)
+
     def download_session(self, session_id, output_file) -> None:
         """
         Download and consolidate all the chunks for a session into a single file
