@@ -1,4 +1,4 @@
-# moonsense
+# Moonsense Cloud API Client
 
 Simple client library for the Moonsense Cloud API.
 
@@ -24,7 +24,7 @@ for session in client.list_sessions():
 ```
 
 Note that explicitly writing your Moonsense secret key is discharged for security reasons. You may set `MOONSENSE_SECRET_KEY` as an
-environment variable, and instnatiate your client without specifying na input secret token.
+environment variable, and instantiate your client without specifying an input secret token.
 
 ## Tests
 

@@ -5,6 +5,11 @@ import pandas as pd
 
 
 def read_accelerometer(session_file) -> pd.DataFrame:
+    """
+    Read accelerometer data from a session file
+
+    :param session_file: path to session file
+    """
     df = pd.read_json(session_file, lines=True)
     accelerometer_data = functools.reduce(
         operator.iconcat,

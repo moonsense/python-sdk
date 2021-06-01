@@ -1,3 +1,8 @@
+""" Moonsense Cloud API Client
+
+A simple API client that makes it easy to read data from the Moonsense Cloud and
+create Cards that will be displayed back in the Moonsense Recorder.
+"""
 import os
 
 import requests
@@ -9,19 +14,29 @@ from .models import Session, Chunk
 
 
 class Client(object):
-    """ Moonsense Cloud API client """
+    """ Moonsense Cloud API Client """
 
     def __init__(
         self,
-        secret_token: str =None,
+        secret_token: str = None,
         root_domain: str = "moonsense.cloud",
         protocol: str = "https",
         default_region: str = "us-central1.gcp",
     ) -> None:
+        """
+        Construct a new 'Client' object
+
+        :param secret_token: API secret token generated from the Moonsense Cloud web console
+        :param root_domain: Root API domain (defaults to moonsense.cloud)
+        :param protocol: Protocol to use when connecting to the API (defaults to https)
+        :param default_region: Default Moonsense Cloud Data Plane region to connect to
+        """
         if secret_token is None:
-            secret_token = os.environ.get('MOONSENSE_SECRET_TOKEN',None)
+            secret_token = os.environ.get("MOONSENSE_SECRET_TOKEN", None)
             if secret_token is None:
-                raise RuntimeError('secret token must either be set as an input param or as an environment variable MOONSENSE_SECRET_TOKEN')
+                raise RuntimeError(
+                    "secret token must either be set as an input param or as an environment variable MOONSENSE_SECRET_TOKEN"
+                )
         self._root_domain = root_domain
         self._protocol = protocol
         self._default_region = default_region
@@ -36,16 +51,35 @@ class Client(object):
             return f"{self._protocol}://{region}.data-api.{self._root_domain}"
 
     def list_regions(self):
-        " Retrieve the list of regions in the Moonsense Cloud used for data ingest and storage "
+        """
+        Retrieve the list of Data Plane regions in the Moonsense Cloud
+
+        These are used for data ingest and storage. Data is encrypted while at-rest and
+        in-transit. Granular data never leaves a region.
+
+        See: https://api.moonsense.cloud/v1/regions
+
+        :return: a list of dictionaries describing the regions
+        """
         endpoint = "https://api." + self._root_domain + "/v1/regions"
         return requests.get(endpoint).json()
 
     def whoami(self):
+        """
+        Describe the authentication token used to connect to the API
+
+        :return: a dictionary describing the secret token
+        """
         endpoint = self._build_url(self._default_region) + "/v1/tokens/self"
         r = requests.get(endpoint, **self._headers)
         return r.json()
 
     def list_sessions(self) -> Iterable[Session]:
+        """
+        List sessions for the current project
+
+        :return: a generator of 'Session' objects
+        """
         endpoint = self._build_url(self._default_region) + "/v1/sessions"
         page = 1
         while True:
@@ -74,6 +108,12 @@ class Client(object):
                 break
 
     def describe_session(self, session_id) -> Session:
+        """
+        Describe a specific session
+
+        :param session_id: The ID of the session
+        :return: a 'Session' object with details
+        """
         endpoint = self._build_url(self._default_region) + f"/v1/sessions/{session_id}"
 
         http_response = requests.get(endpoint, **self._headers)
@@ -84,6 +124,12 @@ class Client(object):
         return Session(http_response.json())
 
     def list_chunks(self, session_id) -> Iterable[Chunk]:
+        """
+        List all the granular data chunks that are part of a session
+
+        :param session_id: The ID of the session
+        :return: a generator of 'Chunk' objects
+        """
         session = self.describe_session(session_id)
         endpoint = (
             self._build_url(session.region_id) + f"/v1/sessions/{session_id}/chunks"
@@ -115,6 +161,12 @@ class Client(object):
                 break
 
     def download_session(self, session_id, output_file) -> None:
+        """
+        Download and consolidate all the chunks for a session into a single file
+
+        :param session_id: The ID of the session
+        :param output_file: The path to the output file
+        """
         with open(output_file, "wb") as fd:
             for chunk in self.list_chunks(session_id):
                 endpoint = self._build_url(chunk.region_id) + chunk.uri()
@@ -127,6 +179,12 @@ class Client(object):
                     fd.write(buffer)
 
     def read_session(self, session_id) -> Iterable[dict]:
+        """
+        Read data points from a session from all the chunks
+
+        :param session_id: The ID of the session
+        :return: a generator of dict entries
+        """
         for chunk in self.list_chunks(session_id):
             endpoint = self._build_url(chunk.region_id) + chunk.uri()
             http_response = requests.get(endpoint, stream=True, **self._headers)
@@ -136,3 +194,46 @@ class Client(object):
                 )
             for line in http_response.iter_lines(chunk_size=1024 * 1024):
                 yield json.loads(line)
+
+    def list_cards(self, session_id):
+        """
+        List all the cards associated with a session
+
+        :param session_id: The ID of the session
+        :return: list of cards
+        """
+        session = self.describe_session(session_id)
+        region = session.region_id if self._default_region != "" else ""
+
+        endpoint = self._build_url(region) + "/v1/cards?session_id=" + session_id
+        http_response = requests.get(endpoint, **self._headers)
+
+        response = http_response.json()
+        return response["cards"] if "cards" in response else []
+
+    def create_card(self, session_id, title, description, source_type="API") -> None:
+        """
+        Create a new card associated with this session ID
+
+        :param session_id: The ID of the session
+        :return: none
+        """
+        session = self.describe_session(session_id)
+        region = session.region_id if self._default_region != "" else ""
+        endpoint = self._build_url(region) + "/v1/cards"
+
+        http_response = requests.post(
+            endpoint,
+            json={
+                "session_id": session.session_id,
+                "title": title,
+                "description": description,
+                "source_type": source_type,
+            },
+            **self._headers,
+        )
+
+        if http_response.status_code != 200:
+            raise RuntimeError(
+                f"unable to create card. status code: {http_response.status_code} body: {http_response.text}"
+            )
