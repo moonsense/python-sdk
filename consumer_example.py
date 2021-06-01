@@ -14,6 +14,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+"""
+This example script shows how you can easily write a session data consumer
+that will periodically pull for new session data chunks and process them.
+
+On start, the scripts checks for active sessions that received new data in
+the last 90 seconds and for each stars a thread to process chunks.
+
+Each thread maintains a list of processed chunks and for every new chunk
+it will call the process_chunk() method. That method gets access to all the
+bundles in a chunk and can publish cards in the session that will be
+visible in the Recorder app.
+"""
+
 import logging
 import itertools
 import time
@@ -25,7 +38,6 @@ from moonsense.models import Session, Chunk
 from moonsense.client import Client
 
 # Override the process_chunk method to do useful things with the session data
-
 def process_chunk(client: Client, session: Session, chunk: Chunk) -> None:
     bundles = list(client.read_chunk(chunk))
 
