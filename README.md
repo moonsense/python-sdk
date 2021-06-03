@@ -4,7 +4,13 @@ Simple client library for the Moonsense Cloud API.
 
 # Installation
 
-Install the module from source like this:
+Install the module from PyPI: 
+
+```shell
+pip install moonsense 
+```
+
+Or from source like this:
 
 ```shell
 python setup.py install 
