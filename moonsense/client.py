@@ -74,12 +74,12 @@ class Client(object):
         These are used for data ingest and storage. Data is encrypted while at-rest and
         in-transit. Granular data never leaves a region.
 
-        See: https://api.moonsense.cloud/v1/regions
+        See: https://api.moonsense.cloud/v2/regions
 
         :return: a list of dictionaries describing the regions
         """
-        endpoint = "https://api." + self._root_domain + "/v1/regions"
-        return requests.get(endpoint).json()
+        endpoint = "https://api." + self._root_domain + "/v2/regions"
+        return requests.get(endpoint).json().get('regions', [])
 
     def whoami(self):
         """
@@ -87,7 +87,7 @@ class Client(object):
 
         :return: a dictionary describing the secret token
         """
-        endpoint = self._build_url(self._default_region) + "/v1/tokens/self"
+        endpoint = self._build_url(self._default_region) + "/v2/tokens/self"
         r = requests.get(endpoint, **self._headers)
         return r.json()
 
@@ -97,7 +97,7 @@ class Client(object):
 
         :return: a generator of 'Session' objects
         """
-        endpoint = self._build_url(self._default_region) + "/v1/sessions"
+        endpoint = self._build_url(self._default_region) + "/v2/sessions"
         page = 1
         while True:
             http_response = requests.get(
@@ -131,7 +131,7 @@ class Client(object):
         :param session_id: The ID of the session
         :return: a 'Session' object with details
         """
-        endpoint = self._build_url(self._default_region) + f"/v1/sessions/{session_id}"
+        endpoint = self._build_url(self._default_region) + f"/v2/sessions/{session_id}"
 
         http_response = requests.get(endpoint, **self._headers)
         if http_response.status_code != 200:
@@ -149,7 +149,7 @@ class Client(object):
         """
         session = self.describe_session(session_id)
         endpoint = (
-            self._build_url(session.region_id) + f"/v1/sessions/{session_id}/chunks"
+            self._build_url(session.region_id) + f"/v2/sessions/{session_id}/chunks"
         )
         page = 1
         while True:
@@ -238,7 +238,7 @@ class Client(object):
         session = self.describe_session(session_id)
         region = session.region_id if self._default_region != "" else ""
 
-        endpoint = self._build_url(region) + "/v1/cards?session_id=" + session_id
+        endpoint = self._build_url(region) + "/v2/cards?session_id=" + session_id
         http_response = requests.get(endpoint, **self._headers)
 
         response = http_response.json()
@@ -253,7 +253,7 @@ class Client(object):
         """
         session = self.describe_session(session_id)
         region = session.region_id if self._default_region != "" else ""
-        endpoint = self._build_url(region) + "/v1/cards"
+        endpoint = self._build_url(region) + "/v2/cards"
 
         http_response = requests.post(
             endpoint,
