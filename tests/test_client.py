@@ -16,12 +16,16 @@ limitations under the License.
 
 import os
 import tempfile
+import uuid
+
 from moonsense import client
 
 PROTOCOL = "https"
 ROOT_DOMAIN = "moonsense.dev"
 DEFAULT_REGION = "us-central1.gcp"
-SESSION_ID = "qCyM5JXCzPgniCnZjVdjqD"
+
+SESSION_ID = "TmQmVGYUh6poCucvvBBLFj"
+SESSION_BUNDLES_COUNT = 7
 
 # PROTOCOL = "http"
 # ROOT_DOMAIN = "localhost:8081"
@@ -73,3 +77,17 @@ def test_download_session():
         output_file = os.path.join(tmpdirname, SESSION_ID + ".json")
         c.download_session(SESSION_ID, output_file)
         assert os.path.getsize(output_file) > 1024
+
+
+def test_read_session():
+    c = new_client()
+    bundles_count = sum(1 for _ in c.read_session(SESSION_ID))
+    assert bundles_count == SESSION_BUNDLES_COUNT
+
+
+def test_create_and_list_cards():
+    c = new_client()
+    expected_title = str(uuid.uuid4())
+    c.create_card(SESSION_ID, expected_title, "test description")
+    result =  c.list_cards(SESSION_ID)
+    assert result[0]['title'] == expected_title
