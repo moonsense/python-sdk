@@ -58,7 +58,7 @@ class SessionMetadata(object):
 
     def __init__(self, metadata) -> None:
         self.install_id = metadata["install_id"] if "install_id" in metadata else None
-        self.platform = metadata["platform"]
+        self.platform = metadata["platform"] if "platform" in metadata else None
         self.manufacturer = metadata["manufacturer"] if "manufacturer" in metadata else None
         self.model = metadata["model"] if "model" in metadata else None
         self.system_version = metadata["system_version"] if "system_version" in metadata else None
