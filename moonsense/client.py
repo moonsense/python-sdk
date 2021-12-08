@@ -25,7 +25,7 @@ import os
 import requests
 import json
 
-from typing import Iterable
+from typing import Iterable, List
 
 from .models import Session, Chunk
 
@@ -91,7 +91,8 @@ class Client(object):
         r = requests.get(endpoint, **self._headers)
         return r.json()
 
-    def list_sessions(self) -> Iterable[Session]:
+    def list_sessions(self, recording_profile: str = None, 
+        labels: List[str] = None, client_session_group_id: str = None ) -> Iterable[Session]:
         """
         List sessions for the current project
 
@@ -100,8 +101,19 @@ class Client(object):
         endpoint = self._build_url(self._default_region) + "/v2/sessions"
         page = 1
         while True:
+            params=[("per_page", "50"), ("page", page)]
+
+            if recording_profile != None:
+                params.append(("filter[recording_profile]", recording_profile))
+
+            if labels != None:
+                params.append(("filter[labels][]", labels))
+
+            if client_session_group_id != None:
+                params.append(("filter[client_session_group_id]", client_session_group_id))
+
             http_response = requests.get(
-                endpoint, params=[("per_page", "50"), ("page", page)], **self._headers
+                endpoint, params, **self._headers
             )
             if http_response.status_code != 200:
                 raise RuntimeError(
