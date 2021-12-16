@@ -39,13 +39,15 @@ from moonsense.client import Client
 
 # Override the process_chunk method to do useful things with the session data
 def process_chunk(client: Client, session: Session, chunk: Chunk) -> None:
-    bundles = list(client.read_chunk(chunk))
+    bundles = list(client.read_chunk(session.session_id, chunk.chunk_id))
 
-    client.create_card(
-        session.session_id,
-        "Python Consumer Example",
-        f"Chunk {chunk.chunk_id} has {len(bundles)} bundles",
-    )
+    logging.info(f"Chunk {chunk.chunk_id} has {len(bundles)} bundles")
+
+    # client.create_card(
+    #     session.session_id,
+    #     "Python Consumer Example",
+    #     f"Chunk {chunk.chunk_id} has {len(bundles)} bundles",
+    # )
 
 
 def main():
@@ -66,8 +68,8 @@ def main():
                     ),
                 ).start()
 
-        logging.info("Waiting for 10 seconds until the next check")
-        time.sleep(10)
+        logging.info("Waiting for 5 seconds until the next check")
+        time.sleep(5)
 
 
 def worker(client: Client, session: Session) -> None:
@@ -95,7 +97,8 @@ def worker(client: Client, session: Session) -> None:
 
 
 def active(session: Session) -> bool:
-    return (datetime.now(timezone.utc) - session.newest_event) < timedelta(seconds=90)
+    newest_event = datetime.fromtimestamp(session.newest_event.seconds, timezone.utc)
+    return newest_event > datetime.now(timezone.utc) - timedelta(seconds=90)
 
 
 if __name__ == "__main__":

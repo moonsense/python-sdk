@@ -24,8 +24,8 @@ PROTOCOL = "https"
 ROOT_DOMAIN = "moonsense.dev"
 DEFAULT_REGION = "us-central1.gcp"
 
-SESSION_ID = "TmQmVGYUh6poCucvvBBLFj"
-SESSION_BUNDLES_COUNT = 7
+SESSION_ID = "yhZ8PoCcDRJ7R76gFtgDfH"
+SESSION_BUNDLES_COUNT = 2
 
 # PROTOCOL = "http"
 # ROOT_DOMAIN = "localhost:8081"
@@ -45,12 +45,12 @@ def test_env_variable_client():
 
 def test_regions():
     c = new_client()
-    assert "europe-west1.gcp" in [r["name"] for r in c.list_regions()]
+    assert "europe-west1.gcp" in [r.name for r in c.list_regions().regions]
 
 
 def test_whoami():
     c = new_client()
-    assert c.whoami()["app_id"] != ""
+    assert c.whoami().app_id != ""
 
 
 def test_list_sessions():
@@ -64,11 +64,18 @@ def test_list_sessions():
     assert session.created_at == result[0].created_at
 
 
-def test_list_chunks():
+def test_list_and_read_chunks():
     c = new_client()
     chunks = list(c.list_chunks(SESSION_ID))
     assert len(chunks) > 0
     assert chunks[0].md5 != ""
+
+    bundles = c.read_chunk(SESSION_ID, chunks[0].chunk_id)
+    count = 0
+    for envelope in bundles:
+        assert envelope.bundle is not None
+        count += 1
+    assert count > 0
 
 
 def test_download_session():
@@ -81,8 +88,12 @@ def test_download_session():
 
 def test_read_session():
     c = new_client()
-    bundles_count = sum(1 for _ in c.read_session(SESSION_ID))
-    assert bundles_count == SESSION_BUNDLES_COUNT
+    bundles = c.read_session(SESSION_ID)
+    count = 0 
+    for envelope in bundles:
+        assert envelope.bundle is not None
+        count += 1
+    assert count == SESSION_BUNDLES_COUNT
 
 
 def test_create_and_list_cards():
@@ -90,4 +101,4 @@ def test_create_and_list_cards():
     expected_title = str(uuid.uuid4())
     c.create_card(SESSION_ID, expected_title, "test description")
     result =  c.list_cards(SESSION_ID)
-    assert result[0]['title'] == expected_title
+    assert result[0].title == expected_title

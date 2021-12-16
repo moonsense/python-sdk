@@ -21,13 +21,14 @@ create Cards that will be displayed back in the Moonsense Recorder.
 """
 
 import os
-
 import requests
-import json
 
+from google.protobuf import json_format
 from typing import Iterable, List
 
-from .models import Session, Chunk
+from .models import Session, Chunk, TokenSelfResponse, \
+    DataRegionsListResponse, SessionListResponse, ChunksListResponse, \
+        CardListResponse, Card, SealedBundle
 
 
 class Client(object):
@@ -67,7 +68,7 @@ class Client(object):
         else:
             return f"{self._protocol}://{region}.data-api.{self._root_domain}"
 
-    def list_regions(self):
+    def list_regions(self) -> DataRegionsListResponse:
         """
         Retrieve the list of Data Plane regions in the Moonsense Cloud
 
@@ -79,20 +80,19 @@ class Client(object):
         :return: a list of dictionaries describing the regions
         """
         endpoint = "https://api." + self._root_domain + "/v2/regions"
-        return requests.get(endpoint).json().get('regions', [])
+        return json_format.Parse(requests.get(endpoint).text, DataRegionsListResponse())
 
-    def whoami(self):
+    def whoami(self) -> TokenSelfResponse:
         """
         Describe the authentication token used to connect to the API
 
-        :return: a dictionary describing the secret token
+        :return: a 'TokenSelfResponse' object with details
         """
         endpoint = self._build_url(self._default_region) + "/v2/tokens/self"
         r = requests.get(endpoint, **self._headers)
-        return r.json()
+        return json_format.Parse(r.text, TokenSelfResponse())
 
-    def list_sessions(self, recording_profile: str = None, 
-        labels: List[str] = None, client_session_group_id: str = None ) -> Iterable[Session]:
+    def list_sessions(self, labels: List[str] = None, client_session_group_id: str = None ) -> Iterable[Session]:
         """
         List sessions for the current project
 
@@ -102,9 +102,6 @@ class Client(object):
         page = 1
         while True:
             params=[("per_page", "50"), ("page", page)]
-
-            if recording_profile != None:
-                params.append(("filter[recording_profile]", recording_profile))
 
             if labels != None:
                 params.append(("filter[labels][]", labels))
@@ -120,37 +117,34 @@ class Client(object):
                     f"unable to list sessions. status code: {http_response.status_code}"
                 )
 
-            response = http_response.json()
-            if not "sessions" in response:
-                return  # got an empy page
-            for session in response["sessions"]:
-                yield Session(session)
+            response = json_format.Parse(http_response.text, SessionListResponse())
+            if len(response.sessions) == 0:
+                return # no more sessions
+            for session in response.sessions:
+                yield session
 
-            # Determine if there is another page
-            pagination = response["pagination"]
-            if (
-                "next_page" in pagination
-                and pagination["current_page"] < pagination["next_page"]
-            ):
-                page = pagination["next_page"]
+            if response.pagination.current_page < response.pagination.total_pages:
+                page = response.pagination.current_page + 1
             else:
                 break
 
-    def describe_session(self, session_id) -> Session:
+    def describe_session(self, session_id, minimal=True) -> Session:
         """
         Describe a specific session
 
         :param session_id: The ID of the session
+        :param minimal: If true, only total values are returned for counters
         :return: a 'Session' object with details
         """
-        endpoint = self._build_url(self._default_region) + f"/v2/sessions/{session_id}"
+        view = "minimal" if minimal else "full"
+        endpoint = self._build_url(self._default_region) + f"/v2/sessions/{session_id}?view={view}"
 
         http_response = requests.get(endpoint, **self._headers)
         if http_response.status_code != 200:
             raise RuntimeError(
                 f"unable to describe session. status code: {http_response.status_code}"
             )
-        return Session(http_response.json())
+        return json_format.Parse(http_response.text, Session())
 
     def list_chunks(self, session_id) -> Iterable[Chunk]:
         """
@@ -173,37 +167,33 @@ class Client(object):
                     f"unable to list session chunks. status code: {http_response.status_code}"
                 )
 
-            response = http_response.json()
-            if not "chunks" in response:
-                return  # got an empy page
-            for chunk in response["chunks"]:
-                yield Chunk(session_id, session.region_id, chunk)
+            response = json_format.Parse(http_response.text, ChunksListResponse())
+            if len(response.chunks) == 0:
+                return  # no chunks found for this session
+            for chunk in response.chunks:
+                yield chunk
 
-            # Determine if there is another page
-            pagination = response["pagination"]
-            if (
-                "next_page" in pagination
-                and pagination["current_page"] < pagination["next_page"]
-            ):
-                page = pagination["next_page"]
+            if response.pagination.current_page < response.pagination.total_pages:
+                page = response.pagination.current_page + 1
             else:
                 break
 
-    def read_chunk(self, chunk: Chunk) -> Iterable[dict]:
+    def read_chunk(self, session_id, chunk_id) -> Iterable[SealedBundle]:
         """
-        Read all the bundles with a data chunk
+        Read all the bundles within a data chunk
 
         :param chunk: session data chunk object
-        :return: generate of bundles
+        :return: generator of bundles
         """
-        endpoint = self._build_url(chunk.region_id) + chunk.uri()
+        session = self.describe_session(session_id)
+        endpoint = self._build_url(session.region_id) + f"/v2/sessions/{session_id}/chunks/{chunk_id}"
         http_response = requests.get(endpoint, stream=True, **self._headers)
         if http_response.status_code != 200:
             raise RuntimeError(
-                f"unable to read: {chunk}. status code: {http_response.status_code}"
+                f"unable to read: {chunk_id}. status code: {http_response.status_code}"
             )
         for line in http_response.iter_lines(chunk_size=1024 * 1024):
-            yield json.loads(line)
+            yield json_format.Parse(line, SealedBundle())
 
     def download_session(self, session_id, output_file) -> None:
         """
@@ -213,8 +203,9 @@ class Client(object):
         :param output_file: The path to the output file
         """
         with open(output_file, "wb") as fd:
+            session = self.describe_session(session_id)
             for chunk in self.list_chunks(session_id):
-                endpoint = self._build_url(chunk.region_id) + chunk.uri()
+                endpoint = self._build_url(session.region_id) + f"/v2/sessions/{session_id}/chunks/{chunk.chunk_id}"
                 http_response = requests.get(endpoint, stream=True, **self._headers)
                 if http_response.status_code != 200:
                     raise RuntimeError(
@@ -223,24 +214,25 @@ class Client(object):
                 for buffer in http_response.iter_content(chunk_size=1024 * 1024):
                     fd.write(buffer)
 
-    def read_session(self, session_id) -> Iterable[dict]:
+    def read_session(self, session_id) -> Iterable[SealedBundle]:
         """
         Read data points from a session from all the chunks
 
         :param session_id: The ID of the session
         :return: a generator of dict entries
         """
+        session = self.describe_session(session_id)
         for chunk in self.list_chunks(session_id):
-            endpoint = self._build_url(chunk.region_id) + chunk.uri()
+            endpoint = self._build_url(session.region_id) + f"/v2/sessions/{session_id}/chunks/{chunk.chunk_id}"
             http_response = requests.get(endpoint, stream=True, **self._headers)
             if http_response.status_code != 200:
                 raise RuntimeError(
                     f"unable to read: {chunk}. status code: {http_response.status_code}"
                 )
             for line in http_response.iter_lines(chunk_size=1024 * 1024):
-                yield json.loads(line)
+                yield json_format.Parse(line, SealedBundle())
 
-    def list_cards(self, session_id):
+    def list_cards(self, session_id) -> List[Card]:
         """
         List all the cards associated with a session
 
@@ -253,8 +245,8 @@ class Client(object):
         endpoint = self._build_url(region) + "/v2/cards?session_id=" + session_id
         http_response = requests.get(endpoint, **self._headers)
 
-        response = http_response.json()
-        return response["cards"] if "cards" in response else []
+        response = json_format.Parse(http_response.text, CardListResponse())
+        return response.cards
 
     def create_card(self, session_id, title, description, source_type="API") -> None:
         """
