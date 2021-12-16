@@ -16,8 +16,8 @@ limitations under the License.
 
 import logging
 
-from google.protobuf import json_format
 from moonsense.models import WebhookPayload
+from moonsense.util import json_format
 
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
