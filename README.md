@@ -669,6 +669,16 @@ message TargetElement {
 
 Simply run: `pytest`
 
+# Release
+
+```bash
+rm -rf build/ dist/
+python setup.py sdist bdist_wheel
+twine upload dist/*
+```
+
+Dont' forget to bump main branch to the next version.
+
 # Code coverge
 
 Generate coverage report with: `py.test --cov=moonsense tests/`
