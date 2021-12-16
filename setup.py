@@ -26,7 +26,11 @@ setup(
     description="Moonsense Cloud API Client",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    install_requires=["requests", "python-dateutil", "pandas"],
+    install_requires=[
+        "protobuf>=3,<4",
+        "requests>=2.26,<3", 
+        "pandas>=1.3,<2",
+    ],
     url="https://github.com/moonsense/python-sdk.git",
     author="Moonsense Team",
     author_email="support@moonsense.io",
@@ -36,7 +40,6 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
-        "Development Status :: 3 - Alpha",
-        "Framework :: Jupyter",
+        "Development Status :: 3 - Alpha"
     ],
 )
