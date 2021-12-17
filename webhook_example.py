@@ -52,6 +52,9 @@ class WebhookHandler(BaseHTTPRequestHandler):
         logging.info("Type: %s, Session ID: %s, App ID: %s", 
             payload.event_type, payload.session_id, payload.app_id)
 
+        logging.info("Client Session Group ID: %s", payload.client_session_group_id)
+        logging.info("Session Labels: %s", ", ".join(payload.session_labels))
+
         # Extract basic features for mouse & touch gestures
         envelope = payload.bundle
         if envelope is not None:
@@ -77,7 +80,7 @@ def run(server_class=HTTPServer, handler_class=WebhookHandler, port=8000):
     server_address = ("", port)
     httpd = server_class(server_address, handler_class)
 
-    logging.info("Starting httpd...\n")
+    logging.info(f"Starting httpd on port {port} ...\n")
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
