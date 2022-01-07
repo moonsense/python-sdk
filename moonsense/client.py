@@ -80,7 +80,7 @@ class Client(object):
         :return: a list of dictionaries describing the regions
         """
         endpoint = "https://api." + self._root_domain + "/v2/regions"
-        return json_format.Parse(requests.get(endpoint).text, DataRegionsListResponse())
+        return json_format.Parse(requests.get(endpoint).text, DataRegionsListResponse(), ignore_unknown_fields=True)
 
     def whoami(self) -> TokenSelfResponse:
         """
@@ -90,7 +90,7 @@ class Client(object):
         """
         endpoint = self._build_url(self._default_region) + "/v2/tokens/self"
         r = requests.get(endpoint, **self._headers)
-        return json_format.Parse(r.text, TokenSelfResponse())
+        return json_format.Parse(r.text, TokenSelfResponse(), ignore_unknown_fields=True)
 
     def list_sessions(self, labels: List[str] = None, client_session_group_id: str = None ) -> Iterable[Session]:
         """
@@ -117,7 +117,7 @@ class Client(object):
                     f"unable to list sessions. status code: {http_response.status_code}"
                 )
 
-            response = json_format.Parse(http_response.text, SessionListResponse())
+            response = json_format.Parse(http_response.text, SessionListResponse(), ignore_unknown_fields=True)
             if len(response.sessions) == 0:
                 return # no more sessions
             for session in response.sessions:
@@ -144,7 +144,8 @@ class Client(object):
             raise RuntimeError(
                 f"unable to describe session. status code: {http_response.status_code}"
             )
-        return json_format.Parse(http_response.text, Session())
+            
+        return json_format.Parse(http_response.text, Session(), ignore_unknown_fields=True)
 
     def list_chunks(self, session_id) -> Iterable[Chunk]:
         """
@@ -167,7 +168,7 @@ class Client(object):
                     f"unable to list session chunks. status code: {http_response.status_code}"
                 )
 
-            response = json_format.Parse(http_response.text, ChunksListResponse())
+            response = json_format.Parse(http_response.text, ChunksListResponse(), ignore_unknown_fields=True)
             if len(response.chunks) == 0:
                 return  # no chunks found for this session
             for chunk in response.chunks:
@@ -193,7 +194,7 @@ class Client(object):
                 f"unable to read: {chunk_id}. status code: {http_response.status_code}"
             )
         for line in http_response.iter_lines(chunk_size=1024 * 1024):
-            yield json_format.Parse(line, SealedBundle())
+            yield json_format.Parse(line, SealedBundle(), ignore_unknown_fields=True)
 
     def download_session(self, session_id, output_file) -> None:
         """
@@ -230,7 +231,7 @@ class Client(object):
                     f"unable to read: {chunk}. status code: {http_response.status_code}"
                 )
             for line in http_response.iter_lines(chunk_size=1024 * 1024):
-                yield json_format.Parse(line, SealedBundle())
+                yield json_format.Parse(line, SealedBundle(), ignore_unknown_fields=True)
 
     def list_cards(self, session_id) -> List[Card]:
         """
@@ -245,7 +246,7 @@ class Client(object):
         endpoint = self._build_url(region) + "/v2/cards?session_id=" + session_id
         http_response = requests.get(endpoint, **self._headers)
 
-        response = json_format.Parse(http_response.text, CardListResponse())
+        response = json_format.Parse(http_response.text, CardListResponse(), ignore_unknown_fields=True)
         return response.cards
 
     def create_card(self, session_id, title, description, source_type="API") -> None:
