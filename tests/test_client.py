@@ -89,7 +89,7 @@ def test_download_session():
 def test_read_session():
     c = new_client()
     bundles = c.read_session(SESSION_ID)
-    count = 0 
+    count = 0
     for envelope in bundles:
         assert envelope.bundle is not None
         count += 1
@@ -102,3 +102,16 @@ def test_create_and_list_cards():
     c.create_card(SESSION_ID, expected_title, "test description")
     result =  c.list_cards(SESSION_ID)
     assert result[0].title == expected_title
+
+def test_create_and_list_cards():
+    c = new_client()
+    c.update_session_labels(SESSION_ID, ["stopped-for-visibility-change", "test", "hello"])
+
+    session = c.describe_session(SESSION_ID)
+
+    labels = []
+    for label in session.labels:
+        labels.append(label.name)
+
+    sorted_labels = sorted(labels)
+    assert sorted_labels == ['hello', 'stopped-for-visibility-change', 'test']
