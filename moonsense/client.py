@@ -168,10 +168,9 @@ class Client(object):
         http_response = requests.post(endpoint, json=payload, **self._headers)
 
         if http_response.status_code != 200:
-            print(http_response.json())
-            # raise RuntimeError(
-            #     f"unable to update session labels. status code: {http_response.status_code}"
-            # )
+            raise RuntimeError(
+                f"unable to update session labels. status code: {http_response.status_code}"
+            )
 
     def list_chunks(self, session_id) -> Iterable[Chunk]:
         """
