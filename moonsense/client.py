@@ -23,12 +23,18 @@ create Cards that will be displayed back in the Moonsense Recorder.
 import os
 import requests
 
+from enum import Enum
 from google.protobuf import json_format
 from typing import Iterable, List
 
 from .models import Session, Chunk, TokenSelfResponse, \
     DataRegionsListResponse, SessionListResponse, ChunksListResponse, \
     CardListResponse, Card, SealedBundle
+
+class Platform(Enum):
+    iOS = "iOS"
+    ANDROID = "ANDROID"
+    WEB = "WEB"
 
 
 class Client(object):
@@ -93,10 +99,13 @@ class Client(object):
         r = requests.get(endpoint, **self._headers)
         return json_format.Parse(r.text, TokenSelfResponse(), ignore_unknown_fields=True)
 
-    def list_sessions(self, labels: List[str] = None, client_session_group_id: str = None) -> Iterable[Session]:
+    def list_sessions(self, labels: List[str] = None, client_session_group_id: str = None, platforms: List[Platform] = None) -> Iterable[Session]:
         """
         List sessions for the current project
 
+        :param labels: A list of labels to match.
+        :param client_session_group_id: Optional - The client session group id to match.
+        :param platforms: Optional - The list of 'Platform's to match. If 'None' is supplied, all 'Platform's will be returned.
         :return: a generator of 'Session' objects
         """
         endpoint = self._build_url(self._default_region) + "/v2/sessions"
@@ -110,6 +119,9 @@ class Client(object):
             if client_session_group_id != None:
                 params.append(
                     ("filter[client_session_group_id]", client_session_group_id))
+
+            if platforms != None:
+                params.append(("filter[platforms][]", [p.value for p in platforms]))
 
             http_response = requests.get(
                 endpoint, params, **self._headers
