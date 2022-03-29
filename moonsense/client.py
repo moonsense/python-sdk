@@ -104,8 +104,8 @@ class Client(object):
         List sessions for the current project
 
         :param labels: A list of labels to match.
-        :param client_session_group_id: The client session group id to match
-        :param platforms: The list of 'Platform's to match.
+        :param client_session_group_id: Optional - The client session group id to match.
+        :param platforms: Optional - The list of 'Platform's to match. If 'None' is supplied, all 'Platform's will be returned.
         :return: a generator of 'Session' objects
         """
         endpoint = self._build_url(self._default_region) + "/v2/sessions"
