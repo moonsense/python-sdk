@@ -1,0 +1,92 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: GET
+    uri: https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/zKDPvZfVLMc6jjUHNpmXHk?view=minimal
+  response:
+    body:
+      string: '{"session_id":"zKDPvZfVLMc6jjUHNpmXHk", "app_id":"QBgby9m6X5TbSSWDYVUyak",
+        "oldest_event":"2022-05-03T00:03:49.484432647Z", "newest_event":"2022-05-03T00:04:19.744Z",
+        "created_at":"2022-05-03T00:03:49.549983Z", "circle":{"centroid":{"latitude":37.335180971791615,
+        "longitude":-122.03254980000001}, "radius":52240.02420460293}, "metadata":{"platform":"iOS",
+        "manufacturer":"iPhone", "model":"x86_64", "system_version":"15.4", "recording_profile":{"name":"fraud_and_risk",
+        "version":"1"}, "device_physical_width":"750", "device_physical_height":"1334",
+        "device_logical_width":"375", "device_logical_height":"667", "device_pixel_ratio":2},
+        "counters":{"battery":{"total":7}, "bundle":{"buckets":[{"start_time":"1651536240000",
+        "value":"6"}, {"start_time":"1651536180000", "value":"1"}], "total":7}, "location":{"total":32}},
+        "labels":[{"label_id":"22ebbFGcy5M9n7UdWFiQHL", "name":"testing"}], "region_id":"us-central1.gcp"}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Content-Length:
+      - '920'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 03 May 2022 00:54:51 GMT
+      Via:
+      - 1.1 google
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: GET
+    uri: https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/zKDPvZfVLMc6jjUHNpmXHk/bundles
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAA/+yZW2/bRhOGc/39CoHXsjDHnR1dfW3TIkBaI0WaQ1sUAi3RrmwdDIlO4Rj+74Wk
+        FA5VHrxqgaCC90YgueDj2Zl331magOgE9AT4BAD45OPL568+/HL+9vsfxuHy8s2L0+v5+xdXg8v1
+        cvHs0AEAEAC2v/C3XxRR++ve7j6qBH3Wg4OJCeNmXearZ/CPWfvB/UfGXXZ2s5jMimx4l82W47yc
+        LhejSV7m2fDXu2xSlMVqPl0Uk1FeZsMMg6KyGCK5ZP1e9vtyNf24XJT5bJSPxzerfHybDbXfy2Z5
+        OS1vJkU2ZBswK7oabe4vFxefHpwg0QCYVDz2e9n6uigm2RAHLvf9XjNbvhg7EAMDPJ4dwAFF69hC
+        piT2GZx5QNxOR3JLojOAhHq6YCCu0qmdToycRFdzb4idARir9NhO59TYo9p2eWvoGESkQteOvEsa
+        HTdp54aVB47k+/Tf+r1sPJsWi3JUTudbOf6Rz2bbi9F8OptN15W/x3Crgc3j1cNzYuNgrg+PVkU+
+        q77j05yQ3fd72VlelsXqNhve3W8u8+vr0XSSDbMfv744u/V5eK8/nb1+/e75z2/f3OZXm9eOV8Wk
+        WJTTfLab+dXFu5fPx/n5t6fnpy/Pb6++WX83f3W5mbku1uvNbrKdVu8rm2k362K1m3O2vJjki//P
+        l8vFulisi8F0uXvP6kOxalwJj24u2f3/DtnKArGSh6TUCiFpbWqDA2o1s9peVyG1roKj1Fd1MMWt
+        2B/o0kG31NDdWBpCVwet7ifSsZtFFk+hIwmb1dMFDSgpdk+MHRXZGmIndqnuZuqpinaDWK9oQYvS
+        oejdnONQtLtxDHSwogWYKSm1ZhQbCgvUtFpYjK2FJYkmjQQCVm8VGg32yhrbbVIolU4eG0xaQ2Ss
+        GhV00Jk0JtFVxb2eLi7++YZCA+9Y+VSTpggKDbEzQqVFoEFMNWkRg9Ag6WCRuyS9nXMUkhYFcFc9
+        XNLKiimpZQiGDalFQoyV1FpoL6yQ6BXMFBucSlxU435htdJTXZrVBaWebhbIqvQOScdEUXEMBlhP
+        DxyrLQK0Hzkk1aQFha0hdHEy36cnKtoNrF7R+giT1uMxaQUAcsKDFa2Qmlphrm+/hCOE6nEOvbWu
+        FGl3Rno03BhDvU8JOfhe02/tdEoMXYGMGrYTIg5pdGZOil2ZQkN/Iqi49xGhiy6JK6+B0RsUjShY
+        /YASEgWt0izo8AhBh+MRtAJEFjhc0KnnaHUyrrdoAQ+OKcc53bRbKfRAFBt6P4Go1XM0d8CNNKmo
+        gxKGhqIGD1yVFLd3JxoZ00KPxMINkiKMVZOkDnqqRRsSNOxlaGh7C5/q0OqNPXfA7p57N+coBB0A
+        NtYQ9wSdtJTS8I0xYPTYuZQOcCxLSVGcN0v5pf9d8zSextN4Gv/a+DMAAP//aAiF9AAgAAA=
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Content-Disposition:
+      - attachment; filename="2022-05-03-0003-zKDPvZfVLMc6jjUHNpmXHk.tar.gz"
+      Content-Length:
+      - '1079'
+      Content-Type:
+      - application/octet-stream
+      Date:
+      - Tue, 03 May 2022 00:54:51 GMT
+      Via:
+      - 1.1 google
+    status:
+      code: 200
+      message: OK
+version: 1

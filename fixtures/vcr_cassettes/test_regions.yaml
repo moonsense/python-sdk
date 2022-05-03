@@ -1,0 +1,37 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: GET
+    uri: https://api.moonsense.dev/v2/regions
+  response:
+    body:
+      string: '{"regions":[{"name":"us-central1.gcp", "url":"https://us-central1.gcp.data-api.moonsense.dev",
+        "lat":42.33206136730587, "lon":-93.96252378751736, "region":"North America",
+        "labels":["gcp", "iowa", "US"], "default_primary":true, "status":"ok"}, {"name":"europe-west1.gcp",
+        "url":"https://europe-west1.gcp.data-api.moonsense.dev", "lat":50.79973715970629,
+        "lon":4.6960573204936855, "region":"Europe", "labels":["gcp", "belgium", "EU"],
+        "default_backup":true, "status":"ok"}]}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Content-Length:
+      - '473'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 03 May 2022 01:12:03 GMT
+      Via:
+      - 1.1 google
+    status:
+      code: 200
+      message: OK
+version: 1

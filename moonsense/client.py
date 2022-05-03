@@ -22,6 +22,9 @@ create Cards that will be displayed back in the Moonsense Recorder.
 
 import os
 import requests
+import tempfile
+import tarfile
+import shutil
 
 from google.protobuf import json_format
 from typing import Iterable, List
@@ -174,7 +177,8 @@ class Client(object):
 
     def list_chunks(self, session_id) -> Iterable[Chunk]:
         """
-        List all the granular data chunks that are part of a session
+        List all the granular data chunks that are part of a session that were persisted in
+        in the Moonsense Cloud.
 
         :param session_id: The ID of the session
         :return: a generator of 'Chunk' objects
@@ -208,10 +212,8 @@ class Client(object):
 
     def read_chunk(self, session_id, chunk_id) -> Iterable[SealedBundle]:
         """
-        Read all the bundles within a data chunk
-
-        :param chunk: session data chunk object
-        :return: generator of bundles
+        Read all the bundles within a data chunk :param chunk: session data chunk object
+        :return: generator of bundles. The chunk read had to be persisted in the Moonsense Cloud first.
         """
         session = self.describe_session(session_id)
         endpoint = self._build_url(
@@ -226,44 +228,57 @@ class Client(object):
 
     def download_session(self, session_id, output_file) -> None:
         """
-        Download and consolidate all the chunks for a session into a single file
+        Download and consolidate all data ingested so far for a session into a single file - one JSON per line.
 
         :param session_id: The ID of the session
         :param output_file: The path to the output file
         """
-        with open(output_file, "wb") as fd:
-            session = self.describe_session(session_id)
-            for chunk in self.list_chunks(session_id):
-                endpoint = self._build_url(
-                    session.region_id) + f"/v2/sessions/{session_id}/chunks/{chunk.chunk_id}"
-                http_response = requests.get(
-                    endpoint, stream=True, **self._headers)
-                if http_response.status_code != 200:
-                    raise RuntimeError(
-                        f"unable to read: {chunk}. status code: {http_response.status_code}"
-                    )
+        session = self.describe_session(session_id)
+
+        endpoint = self._build_url(session.region_id) + f"/v2/sessions/{session_id}/bundles"
+        http_response = requests.get(endpoint, stream=True, **self._headers)
+        if http_response.status_code != 200:
+            raise RuntimeError(
+                f"unable to read: {chunk}. status code: {http_response.status_code}")
+
+        # create temporary director for writing and unpacking tar.gz file.
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            temp_output_file = os.path.join(tmpdirname, "temp-" + session_id + ".tar.gz")
+
+            # write the response of the API to a tar.gz file.
+            with open(temp_output_file, "wb") as temp_tar_fd:
                 for buffer in http_response.iter_content(chunk_size=1024 * 1024):
-                    fd.write(buffer)
+                    temp_tar_fd.write(buffer)
+
+            # open the tar file
+            with tarfile.open(temp_output_file, mode='r:gz') as temp_tar:
+                # choose a path to extract the tar.gz archive.
+                temp_extract_path = os.path.join(tmpdirname, "extracted")
+                temp_tar_contents = temp_tar.getmembers()
+                if len(temp_tar_contents) != 1:
+                        raise RuntimeError("Expected to download just one file but got many")
+
+                json_file_name = temp_tar_contents[0].name
+                # extract the archive.
+                temp_tar.extractall(temp_extract_path)
+                # move the only file in the archive to the final user-inputted path.
+                shutil.move(os.path.join(tmpdirname, "extracted", json_file_name), output_file)
 
     def read_session(self, session_id) -> Iterable[SealedBundle]:
         """
-        Read data points from a session from all the chunks
+        Read all data points from a session that were sent so far.
 
         :param session_id: The ID of the session
         :return: a generator of dict entries
         """
-        session = self.describe_session(session_id)
-        for chunk in self.list_chunks(session_id):
-            endpoint = self._build_url(
-                session.region_id) + f"/v2/sessions/{session_id}/chunks/{chunk.chunk_id}"
-            http_response = requests.get(
-                endpoint, stream=True, **self._headers)
-            if http_response.status_code != 200:
-                raise RuntimeError(
-                    f"unable to read: {chunk}. status code: {http_response.status_code}"
-                )
-            for line in http_response.iter_lines(chunk_size=1024 * 1024):
-                yield json_format.Parse(line, SealedBundle(), ignore_unknown_fields=True)
+
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            temp_output_file = os.path.join(tmpdirname, "temp-" + session_id + ".json")
+            self.download_session(session_id, temp_output_file)
+
+            with open(temp_output_file, "r") as temp_file:
+                for line in temp_file.readlines():
+                    yield json_format.Parse(line, SealedBundle(), ignore_unknown_fields=True)
 
     def list_cards(self, session_id) -> List[Card]:
         """

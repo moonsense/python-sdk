@@ -1,0 +1,168 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: GET
+    uri: https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/zKDPvZfVLMc6jjUHNpmXHk?view=minimal
+  response:
+    body:
+      string: '{"session_id":"zKDPvZfVLMc6jjUHNpmXHk", "app_id":"QBgby9m6X5TbSSWDYVUyak",
+        "oldest_event":"2022-05-03T00:03:49.484432647Z", "newest_event":"2022-05-03T00:04:19.744Z",
+        "created_at":"2022-05-03T00:03:49.549983Z", "circle":{"centroid":{"latitude":37.335180971791615,
+        "longitude":-122.03254980000001}, "radius":52240.02420460293}, "metadata":{"platform":"iOS",
+        "manufacturer":"iPhone", "model":"x86_64", "system_version":"15.4", "recording_profile":{"name":"fraud_and_risk",
+        "version":"1"}, "device_physical_width":"750", "device_physical_height":"1334",
+        "device_logical_width":"375", "device_logical_height":"667", "device_pixel_ratio":2},
+        "counters":{"battery":{"total":7}, "bundle":{"buckets":[{"start_time":"1651536240000",
+        "value":"6"}, {"start_time":"1651536180000", "value":"1"}], "total":7}, "location":{"total":32}},
+        "labels":[{"label_id":"wLPFMpnqe2LmMzWSmbAfcW", "name":"hello"}, {"label_id":"f6RUFhNCZksprKsMyJUY5U",
+        "name":"stopped-for-visibility-change"}, {"label_id":"gHBXgofQ8SBYNeELkek9fW",
+        "name":"test"}], "region_id":"us-central1.gcp"}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Content-Length:
+      - '1051'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 03 May 2022 01:09:09 GMT
+      Via:
+      - 1.1 google
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: GET
+    uri: https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/zKDPvZfVLMc6jjUHNpmXHk/chunks?per_page=50&page=1
+  response:
+    body:
+      string: '{"session_id":"zKDPvZfVLMc6jjUHNpmXHk", "chunks":[{"chunk_id":"0",
+        "md5":"avd7Ey-e_BYKRqaGrUrwvg==", "created_at":"2022-05-03T00:04:56.332Z"}],
+        "pagination":{"current_page":1, "per_page":1, "total_pages":1, "total_count":1}}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Content-Length:
+      - '224'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 03 May 2022 01:09:10 GMT
+      Via:
+      - 1.1 google
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: GET
+    uri: https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/zKDPvZfVLMc6jjUHNpmXHk?view=minimal
+  response:
+    body:
+      string: '{"session_id":"zKDPvZfVLMc6jjUHNpmXHk", "app_id":"QBgby9m6X5TbSSWDYVUyak",
+        "oldest_event":"2022-05-03T00:03:49.484432647Z", "newest_event":"2022-05-03T00:04:19.744Z",
+        "created_at":"2022-05-03T00:03:49.549983Z", "circle":{"centroid":{"latitude":37.335180971791615,
+        "longitude":-122.03254980000001}, "radius":52240.02420460293}, "metadata":{"platform":"iOS",
+        "manufacturer":"iPhone", "model":"x86_64", "system_version":"15.4", "recording_profile":{"name":"fraud_and_risk",
+        "version":"1"}, "device_physical_width":"750", "device_physical_height":"1334",
+        "device_logical_width":"375", "device_logical_height":"667", "device_pixel_ratio":2},
+        "counters":{"battery":{"total":7}, "bundle":{"buckets":[{"start_time":"1651536240000",
+        "value":"6"}, {"start_time":"1651536180000", "value":"1"}], "total":7}, "location":{"total":32}},
+        "labels":[{"label_id":"wLPFMpnqe2LmMzWSmbAfcW", "name":"hello"}, {"label_id":"f6RUFhNCZksprKsMyJUY5U",
+        "name":"stopped-for-visibility-change"}, {"label_id":"gHBXgofQ8SBYNeELkek9fW",
+        "name":"test"}], "region_id":"us-central1.gcp"}'
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Content-Length:
+      - '1051'
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 03 May 2022 01:09:10 GMT
+      Via:
+      - 1.1 google
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.26.0
+    method: GET
+    uri: https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/zKDPvZfVLMc6jjUHNpmXHk/chunks/0
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAN1Y224bNxB972fssyqQc+GQemobtwjg1EiRa1sUwkpaO+usJEOSUziC/72zSlCb
+        BkWZegkcQC+rJeZwLmfOzG6ryfVi1jXVaFt1y2m9aZeL8aze1NXo7201azbNat4umtm43lSjyjq2
+        jCTWQqBqUH1YrtrPy8Wm7sb1dHq9qqc31YiHZlB1amlzPVO7KENEtoEF9O/l4uLr/z9agKFBYAp+
+        UK2vmmZWjeww0O1gPzB9G2AHaNCYxwM7E4wlTgATCAPJHTLiEDALrT5LEbRelVwSmqzai6AhC63g
+        WATNEkLaa70U2gjaZ6Gx1GvP0oc1AW0dEd2H5nyuqQza9qnGdMANeggPoP8ZVNOubRab8aad75j3
+        b911u4fxvO26dh1dRmxf8f3b1d1rQEEngf9/s2rqLrbw9YirbgfVpN6or3r97a0+1VdX41avU/3x
+        y8XkJszde349efXq3cmfb9/c1B/V5nTVzPSCrbq+O/jzxbvTk2l9/uvZ+dnp+c3HZ+vf5i8v9eC6
+        Wa/7lrE79fn05OWnv87fvvh96i4v3zw/u5q/f96bu17rDXdHJsuLWb34ab5cLtaN/obtcmdl9UlP
+        7ItAcAKM1e0P2yO6lRpg0CiU5JPAAqfy6ZTWHKWTs5XkSivJBUvJInbCtif1HTTloaXU6SBIaac5
+        GI66BuUblteUlUBbIBRJQpMVAwVeh0KvLVuUtNdqjKKGxaGQukGMT1JXvfKUp+6XI0+duiGgOOeP
+        pi4Z1YGifIqAT5eSYeGolNDmSokKZdeCISNJFWAvJq5im9U+glJoCD4tu+w82kiATB5a5yJfBM06
+        R4UkNAUK99oGDEM+4KWyC96wSXuN2sPpPrQvlF0iMS7NXSceD3B3d+SJc5coSDASjucu6/Rdkk80
+        Tmw6nxas9ffzKS5bSq5QBrTL+LQCaREz+wellIMu1V1klRlKQos4kAg6z11fSCD0ToxNQjsV8ahr
+        ZPcEKpVd9VhpkkRWWxIeQJdRV2VXktTlw7LL34PsakMWNgxHU1fbamE+SVftZDrRGxftXjbkKkmZ
+        vltqHo8saF1Sf1ROdB+NBjjJQkOh0xolgXTTAB39S6BRw1cEjboQJGcN0ok2XvEPQFNhwNnpQJGm
+        rlVeRx82XBlzmfYy1x1mrvsOmNt/kwIQezxzS3dd1naLSdElE3Qbffzuxf3MUALtQCe4PdCeo10X
+        88iifhchM1iXrmF1GiP6YHbSYB2vy5z2gIRp+oD1kfJBHrpUdHW4Mul2pa8kjneh5nLYNy4r7KFx
+        +cuRp87cEIIXMA+YWxRCSn/oc1oW/lAIgzFPPYTO9FGkvvn9B7vIsYuXGAAA
+    headers:
+      Alt-Svc:
+      - h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+      Content-Disposition:
+      - attachment; filename="0.gz"
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/octet-stream
+      Date:
+      - Tue, 03 May 2022 01:09:10 GMT
+      Transfer-Encoding:
+      - chunked
+      Via:
+      - 1.1 google
+    status:
+      code: 200
+      message: OK
+version: 1
