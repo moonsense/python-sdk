@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\023io.moonsense.modelsB\024ErrorReportingProtosZ3moonsense.io/pkg/pb/error_reporting;error_reporting',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x15\x65rror_reporting.proto\x12\x0f\x65rror_reporting\x1a\x17validate/validate.proto\x1a\x0f\x63ommon_v2.proto\"\\\n\x05\x46rame\x12\x10\n\x08\x66unction\x18\x01 \x01(\t\x12\x0e\n\x06module\x18\x02 \x01(\t\x12\x10\n\x08\x66ilename\x18\x03 \x01(\t\x12\x0f\n\x07line_no\x18\x04 \x01(\x05\x12\x0e\n\x06\x63ol_no\x18\x05 \x01(\x05\"f\n\tException\x12\x15\n\x04type\x18\x01 \x01(\tB\x07\xfa\x42\x04r\x02\x10\x01\x12\x16\n\x05value\x18\x02 \x01(\tB\x07\xfa\x42\x04r\x02\x10\x01\x12*\n\nstacktrace\x18\x03 \x03(\x0b\x32\x16.error_reporting.Frame\"\xa1\x03\n\x0c\x45rrorMessage\x12\x16\n\x05title\x18\x01 \x01(\tB\x07\xfa\x42\x04r\x02\x10\x01\x12\x1a\n\ttimestamp\x18\x02 \x01(\x03\x42\x07\xfa\x42\x04\"\x02 \x00\x12\x37\n\x08platform\x18\x03 \x01(\x0e\x32\x19.v2.common.DevicePlatformB\n\xfa\x42\x07\x82\x01\x04\x10\x01 \x00\x12\x14\n\x0cmanufacturer\x18\x04 \x01(\t\x12\r\n\x05model\x18\x05 \x01(\t\x12\x12\n\nos_version\x18\x06 \x01(\t\x12>\n\x05level\x18\x07 \x01(\x0e\x32#.error_reporting.ErrorMessage.LevelB\n\xfa\x42\x07\x82\x01\x04\x10\x01 \x00\x12\x17\n\x0frelease_version\x18\x08 \x01(\t\x12\x15\n\rproguard_uuid\x18\t \x01(\t\x12-\n\texception\x18\n \x01(\x0b\x32\x1a.error_reporting.Exception\"L\n\x05Level\x12\x0b\n\x07INVALID\x10\x00\x12\t\n\x05\x44\x45\x42UG\x10\x01\x12\x08\n\x04INFO\x10\x02\x12\x0b\n\x07WARNING\x10\x03\x12\t\n\x05\x45RROR\x10\x04\x12\t\n\x05\x46\x41TAL\x10\x05\x42`\n\x13io.moonsense.modelsB\x14\x45rrorReportingProtosZ3moonsense.io/pkg/pb/error_reporting;error_reportingb\x06proto3'
+  serialized_pb=b'\n\x15\x65rror_reporting.proto\x12\x0f\x65rror_reporting\x1a\x17validate/validate.proto\x1a\x0f\x63ommon_v2.proto\"\\\n\x05\x46rame\x12\x10\n\x08\x66unction\x18\x01 \x01(\t\x12\x0e\n\x06module\x18\x02 \x01(\t\x12\x10\n\x08\x66ilename\x18\x03 \x01(\t\x12\x0f\n\x07line_no\x18\x04 \x01(\x05\x12\x0e\n\x06\x63ol_no\x18\x05 \x01(\x05\"f\n\tException\x12\x15\n\x04type\x18\x01 \x01(\tB\x07\xfa\x42\x04r\x02\x10\x01\x12\x16\n\x05value\x18\x02 \x01(\tB\x07\xfa\x42\x04r\x02\x10\x01\x12*\n\nstacktrace\x18\x03 \x03(\x0b\x32\x16.error_reporting.Frame\"\xa4\x04\n\x0c\x45rrorMessage\x12\x16\n\x05title\x18\x01 \x01(\tB\x07\xfa\x42\x04r\x02\x10\x01\x12\x1a\n\ttimestamp\x18\x02 \x01(\x03\x42\x07\xfa\x42\x04\"\x02 \x00\x12\x37\n\x08platform\x18\x03 \x01(\x0e\x32\x19.v2.common.DevicePlatformB\n\xfa\x42\x07\x82\x01\x04\x10\x01 \x00\x12\x14\n\x0cmanufacturer\x18\x04 \x01(\t\x12\r\n\x05model\x18\x05 \x01(\t\x12\x12\n\nos_version\x18\x06 \x01(\t\x12>\n\x05level\x18\x07 \x01(\x0e\x32#.error_reporting.ErrorMessage.LevelB\n\xfa\x42\x07\x82\x01\x04\x10\x01 \x00\x12\x17\n\x0frelease_version\x18\x08 \x01(\t\x12\x15\n\rproguard_uuid\x18\t \x01(\t\x12-\n\texception\x18\n \x01(\x0b\x32\x1a.error_reporting.Exception\x12J\n\x0f\x61\x64\x64itional_tags\x18\x0b \x03(\x0b\x32\x31.error_reporting.ErrorMessage.AdditionalTagsEntry\x1a\x35\n\x13\x41\x64\x64itionalTagsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"L\n\x05Level\x12\x0b\n\x07INVALID\x10\x00\x12\t\n\x05\x44\x45\x42UG\x10\x01\x12\x08\n\x04INFO\x10\x02\x12\x0b\n\x07WARNING\x10\x03\x12\t\n\x05\x45RROR\x10\x04\x12\t\n\x05\x46\x41TAL\x10\x05\x42`\n\x13io.moonsense.modelsB\x14\x45rrorReportingProtosZ3moonsense.io/pkg/pb/error_reporting;error_reportingb\x06proto3'
   ,
   dependencies=[validate_dot_validate__pb2.DESCRIPTOR,common__v2__pb2.DESCRIPTOR,])
 
@@ -67,8 +67,8 @@ _ERRORMESSAGE_LEVEL = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=624,
-  serialized_end=700,
+  serialized_start=755,
+  serialized_end=831,
 )
 _sym_db.RegisterEnumDescriptor(_ERRORMESSAGE_LEVEL)
 
@@ -179,6 +179,44 @@ _EXCEPTION = _descriptor.Descriptor(
 )
 
 
+_ERRORMESSAGE_ADDITIONALTAGSENTRY = _descriptor.Descriptor(
+  name='AdditionalTagsEntry',
+  full_name='error_reporting.ErrorMessage.AdditionalTagsEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='error_reporting.ErrorMessage.AdditionalTagsEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='error_reporting.ErrorMessage.AdditionalTagsEntry.value', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=700,
+  serialized_end=753,
+)
+
 _ERRORMESSAGE = _descriptor.Descriptor(
   name='ErrorMessage',
   full_name='error_reporting.ErrorMessage',
@@ -257,10 +295,17 @@ _ERRORMESSAGE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='additional_tags', full_name='error_reporting.ErrorMessage.additional_tags', index=10,
+      number=11, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
-  nested_types=[],
+  nested_types=[_ERRORMESSAGE_ADDITIONALTAGSENTRY, ],
   enum_types=[
     _ERRORMESSAGE_LEVEL,
   ],
@@ -271,13 +316,15 @@ _ERRORMESSAGE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=283,
-  serialized_end=700,
+  serialized_end=831,
 )
 
 _EXCEPTION.fields_by_name['stacktrace'].message_type = _FRAME
+_ERRORMESSAGE_ADDITIONALTAGSENTRY.containing_type = _ERRORMESSAGE
 _ERRORMESSAGE.fields_by_name['platform'].enum_type = common__v2__pb2._DEVICEPLATFORM
 _ERRORMESSAGE.fields_by_name['level'].enum_type = _ERRORMESSAGE_LEVEL
 _ERRORMESSAGE.fields_by_name['exception'].message_type = _EXCEPTION
+_ERRORMESSAGE.fields_by_name['additional_tags'].message_type = _ERRORMESSAGE_ADDITIONALTAGSENTRY
 _ERRORMESSAGE_LEVEL.containing_type = _ERRORMESSAGE
 DESCRIPTOR.message_types_by_name['Frame'] = _FRAME
 DESCRIPTOR.message_types_by_name['Exception'] = _EXCEPTION
@@ -299,16 +346,25 @@ Exception = _reflection.GeneratedProtocolMessageType('Exception', (_message.Mess
 _sym_db.RegisterMessage(Exception)
 
 ErrorMessage = _reflection.GeneratedProtocolMessageType('ErrorMessage', (_message.Message,), {
+
+  'AdditionalTagsEntry' : _reflection.GeneratedProtocolMessageType('AdditionalTagsEntry', (_message.Message,), {
+    'DESCRIPTOR' : _ERRORMESSAGE_ADDITIONALTAGSENTRY,
+    '__module__' : 'error_reporting_pb2'
+    # @@protoc_insertion_point(class_scope:error_reporting.ErrorMessage.AdditionalTagsEntry)
+    })
+  ,
   'DESCRIPTOR' : _ERRORMESSAGE,
   '__module__' : 'error_reporting_pb2'
   # @@protoc_insertion_point(class_scope:error_reporting.ErrorMessage)
   })
 _sym_db.RegisterMessage(ErrorMessage)
+_sym_db.RegisterMessage(ErrorMessage.AdditionalTagsEntry)
 
 
 DESCRIPTOR._options = None
 _EXCEPTION.fields_by_name['type']._options = None
 _EXCEPTION.fields_by_name['value']._options = None
+_ERRORMESSAGE_ADDITIONALTAGSENTRY._options = None
 _ERRORMESSAGE.fields_by_name['title']._options = None
 _ERRORMESSAGE.fields_by_name['timestamp']._options = None
 _ERRORMESSAGE.fields_by_name['platform']._options = None
