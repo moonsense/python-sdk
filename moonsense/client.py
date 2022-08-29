@@ -238,21 +238,7 @@ class Client(object):
         for line in http_response.iter_lines(chunk_size=1024 * 1024):
             yield json_format.Parse(line, SealedBundle(), ignore_unknown_fields=True)
 
-    def download_session(self, session_id, output_file) -> None:
-        """
-        Download and consolidate all data ingested so far for a session into a single file - one JSON per line.
-
-        :param session_id: The ID of the session
-        :param output_file: The path to the output file
-        """
-        session = self.describe_session(session_id)
-
-        endpoint = self._build_url(session.region_id) + f"/v2/sessions/{session_id}/bundles"
-        http_response = requests.get(endpoint, stream=True, **self._headers)
-        if http_response.status_code != 200:
-            raise RuntimeError(
-                f"unable to read: {chunk}. status code: {http_response.status_code}")
-
+    def _download_file(self, session_id, http_response, output_file):
         # create temporary director for writing and unpacking tar.gz file.
         with tempfile.TemporaryDirectory() as tmpdirname:
             temp_output_file = os.path.join(tmpdirname, "temp-" + session_id + ".tar.gz")
@@ -270,11 +256,48 @@ class Client(object):
                 if len(temp_tar_contents) != 1:
                         raise RuntimeError("Expected to download just one file but got many")
 
-                json_file_name = temp_tar_contents[0].name
+                extracted_file_name = temp_tar_contents[0].name
                 # extract the archive.
                 temp_tar.extractall(temp_extract_path)
                 # move the only file in the archive to the final user-inputted path.
-                shutil.move(os.path.join(tmpdirname, "extracted", json_file_name), output_file)
+                shutil.move(os.path.join(tmpdirname, "extracted", extracted_file_name), output_file)
+
+
+    def download_session(self, session_id, output_file) -> None:
+        """
+        Download and consolidate all data ingested so far for a session into a single file - one JSON per line.
+
+        :param session_id: The ID of the session
+        :param output_file: The path to the output file
+        """
+        session = self.describe_session(session_id, minimal=True)
+
+        endpoint = self._build_url(session.region_id) + f"/v2/sessions/{session_id}/bundles"
+        ttp_response = requests.get(endpoint, stream=True, **self._headers)
+        if http_response.status_code != 200:
+            raise RuntimeError(
+                f"unable to read: {chunk}. status code: {http_response.status_code}")
+        
+        self._download_file(session_id, http_response, output_file)
+
+        
+    def download_pcap_data(self, session_id, output_file) -> None:
+        """
+        Download a consolidated PCAP file with all the network packet data captured by the Moonsense Cloud
+
+        :param session_id: The ID of the session
+        :param output_file: The path to the output file
+        """
+        session = self.describe_session(session_id, minimal=True)
+
+        endpoint = self._build_url(session.region_id) + f"/v2/sessions/{session_id}/network-telemetry/packets"
+        http_response = requests.get(endpoint, stream=True, **self._headers)
+        if http_response.status_code != 200:
+            raise RuntimeError(
+                f"unable to read: {chunk}. status code: {http_response.status_code}")
+
+        self._download_file(session_id, http_response, output_file)
+
 
     def read_session(self, session_id) -> Iterable[SealedBundle]:
         """
@@ -291,6 +314,7 @@ class Client(object):
             with open(temp_output_file, "r") as temp_file:
                 for line in temp_file.readlines():
                     yield json_format.Parse(line, SealedBundle(), ignore_unknown_fields=True)
+
 
     def list_cards(self, session_id) -> List[Card]:
         """
