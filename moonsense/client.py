@@ -273,14 +273,14 @@ class Client(object):
         session = self.describe_session(session_id, minimal=True)
 
         endpoint = self._build_url(session.region_id) + f"/v2/sessions/{session_id}/bundles"
-        ttp_response = requests.get(endpoint, stream=True, **self._headers)
+        http_response = requests.get(endpoint, stream=True, **self._headers)
         if http_response.status_code != 200:
             raise RuntimeError(
                 f"unable to read: {chunk}. status code: {http_response.status_code}")
-        
+
         self._download_file(session_id, http_response, output_file)
 
-        
+
     def download_pcap_data(self, session_id, output_file) -> None:
         """
         Download a consolidated PCAP file with all the network packet data captured by the Moonsense Cloud
