@@ -38,6 +38,33 @@ MOCK_SECRET_TOKEN = "test.secret.token"
 def new_client():
     return client.Client(MOCK_SECRET_TOKEN, ROOT_DOMAIN, PROTOCOL, DEFAULT_REGION)
 
+
+def generate_test_session(session_id=shortuuid.uuid(), app_id=shortuuid.uuid(), created_at=datetime.datetime.now(), labels=[]):
+    return {
+        "session_id": session_id,
+        "app_id": app_id,
+        "created_at": created_at.isoformat() + "Z",
+        "metadata":{
+            "platform":"iOS"
+        },
+        "labels":labels
+    }
+
+
+def generate_test_sessions_list(count, current_page, total_pages, total_count):
+    sessions = []
+    for i in range(count):
+        sessions.append(generate_test_session())
+    return {
+        "sessions": sessions,
+        "pagination":{
+            "current_page": current_page,
+            "per_page":50,
+            "total_pages": total_pages,
+            "total_count": total_count
+        }}
+
+
 def test_regions():
     with responses.RequestsMock() as rsps:
         rsps.add(
@@ -107,32 +134,6 @@ def test_list_sessions():
         assert result[1].session_id == "test_session_id2"
 
 
-def generate_test_session(session_id=shortuuid.uuid(), app_id=shortuuid.uuid(), created_at=datetime.datetime.now(), labels=[]):
-    return {
-        "session_id": session_id,
-        "app_id": app_id,
-        "created_at": created_at.isoformat() + "Z",
-        "metadata":{
-            "platform":"iOS"
-        },
-        "labels":labels
-    }
-
-
-def generate_test_sessions_list(count, current_page, total_pages, total_count):
-    sessions = []
-    for i in range(count):
-        sessions.append(generate_test_session())
-    return {
-        "sessions": sessions,
-        "pagination":{
-            "current_page": current_page,
-            "per_page":50,
-            "total_pages": total_pages,
-            "total_count": total_count
-        }}
-
-
 def test_list_sessions_with_pagination():
     session_page1 = generate_test_sessions_list(count=2, current_page=1, total_pages=2, total_count=4)
     session_page2 = generate_test_sessions_list(count=2, current_page=2, total_pages=2, total_count=4)
@@ -161,22 +162,44 @@ def test_list_sessions_with_pagination():
         assert result[0].app_id == session_page1["sessions"][0]["app_id"]
         
 
+def test_list_and_read_chunks():
+    test_session = generate_test_session("test_session_id1", "test_app_id")
+    created_at = datetime.datetime.now()
 
-# def test_list_and_read_chunks():
-#     with vcr.use_cassette('fixtures/vcr_cassettes/test_list_and_read_chunks.yaml', filter_headers=['authorization']):
-#         c = new_client()
-#         chunks = list(c.list_chunks(SESSION_ID))
-#         print(chunks)
-#         assert len(chunks) > 0
-#         assert chunks[0].md5 != ""
+    with responses.RequestsMock() as rsps:
+        rsps.add(
+            responses.GET,
+            "https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/test_session_id1?view=minimal",
+            body=json.dumps(test_session),
+            status=200,
+            content_type="application/json",
+        )
 
-#         bundles = c.read_chunk(SESSION_ID, chunks[0].chunk_id)
-#         count = 0
-#         for envelope in bundles:
-#             print("!!")
-#             assert envelope.bundle is not None
-#             count += 1
-#         assert count > 0
+        rsps.add(
+            responses.GET,
+            "https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/test_session_id1/chunks?per_page=50&page=1",
+            body=json.dumps({
+                "session_id": "test_session_id1",
+                "chunks": [{"chunk_id": "chunk_id1", "md5": "abcd", "created_at": created_at.isoformat() + "Z"}],
+                "pagination":{"current_page":1,"total_pages":1}
+            }),
+            status=200,
+            content_type="application/json",
+        )
+
+        c = new_client()
+        chunks = list(c.list_chunks("test_session_id1"))
+        print(chunks)
+        assert len(chunks) > 0
+        assert chunks[0].md5 != ""
+
+        # bundles = c.read_chunk("test_session_id1", chunks[0].chunk_id)
+        # count = 0
+        # for envelope in bundles:
+        #     print("!!")
+        #     assert envelope.bundle is not None
+        #     count += 1
+        # assert count > 0
 
 
 # def test_download_session():
