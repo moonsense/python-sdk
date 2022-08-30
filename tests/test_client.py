@@ -14,12 +14,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
+from typing import Any
+
 import os
 import tempfile
 import uuid
+import io
+import tarfile
+import gzip
 
 import json
 import responses
+from responses import matchers
 import datetime
 
 import shortuuid
@@ -39,7 +45,12 @@ def new_client():
     return client.Client(MOCK_SECRET_TOKEN, ROOT_DOMAIN, PROTOCOL, DEFAULT_REGION)
 
 
-def generate_test_session(session_id=shortuuid.uuid(), app_id=shortuuid.uuid(), created_at=datetime.datetime.now(), labels=[]):
+def generate_test_session(session_id=shortuuid.uuid(),
+    app_id=shortuuid.uuid(),
+    created_at=datetime.datetime.now(),
+    labels=[],
+    region_id=DEFAULT_REGION):
+
     return {
         "session_id": session_id,
         "app_id": app_id,
@@ -47,7 +58,8 @@ def generate_test_session(session_id=shortuuid.uuid(), app_id=shortuuid.uuid(), 
         "metadata":{
             "platform":"iOS"
         },
-        "labels":labels
+        "labels": labels,
+        "region_id": region_id
     }
 
 
@@ -64,6 +76,41 @@ def generate_test_sessions_list(count, current_page, total_pages, total_count):
             "total_count": total_count
         }}
 
+
+def generate_downloadable_payload(data: str) -> bytes:
+    data_buffer = io.BytesIO()
+    data_buffer.write(data.encode())
+    data_buffer.seek(0)
+
+    # create tar gz file.
+    ioBuffer = io.BytesIO()
+    with tarfile.open(fileobj=ioBuffer, mode="w:gz") as tar:
+        info = tarfile.TarInfo("test-session_id1.json")
+        info.size = len(data)
+        tar.addfile(info, data_buffer)
+    
+    return ioBuffer.getvalue()
+
+
+# The chunk payload is a format of a JSON per line, gzipped.
+def generate_chunk_payload(data: list[dict[str, Any]]) -> bytes:
+    data_buffer = io.BytesIO()
+    gzip_handler = gzip.GzipFile(fileobj=data_buffer, mode='w')
+    for item in data:
+        json_line = json.dumps(item) + "\n"
+        gzip_handler.write(json_line.encode('utf8'))
+    gzip_handler.close()
+    
+    return data_buffer.getvalue()
+
+
+def generate_bundle(session_id, bundle_index=1):
+    return {
+        "bundle": {
+            "index": bundle_index,
+        },
+        "session_id": session_id
+    }
 
 def test_regions():
     with responses.RequestsMock() as rsps:
@@ -187,59 +234,179 @@ def test_list_and_read_chunks():
             content_type="application/json",
         )
 
+        rsps.add(
+            responses.GET,
+            "https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/test_session_id1/chunks/chunk_id1",
+            body=generate_chunk_payload([
+                generate_bundle("test_session_id1", 1),
+                generate_bundle("test_session_id1", 2)
+            ]),
+            headers={'Content-Encoding': 'gzip'},
+            status=200,
+            content_type="application/json",
+        )
+
         c = new_client()
         chunks = list(c.list_chunks("test_session_id1"))
-        print(chunks)
-        assert len(chunks) > 0
-        assert chunks[0].md5 != ""
+        assert len(chunks) == 1
+        assert chunks[0].md5 == "abcd"
 
-        # bundles = c.read_chunk("test_session_id1", chunks[0].chunk_id)
-        # count = 0
-        # for envelope in bundles:
-        #     print("!!")
-        #     assert envelope.bundle is not None
-        #     count += 1
-        # assert count > 0
-
-
-# def test_download_session():
-#     with vcr.use_cassette('fixtures/vcr_cassettes/test_download_session.yaml', filter_headers=['authorization']):
-#         c = new_client()
-#         with tempfile.TemporaryDirectory() as tmpdirname:
-#             output_file = os.path.join(tmpdirname, SESSION_ID + ".json")
-#             c.download_session(SESSION_ID, output_file)
-#             assert os.path.getsize(output_file) > 1024
+        bundles = c.read_chunk("test_session_id1", chunks[0].chunk_id)
+        count = 0
+        for envelope in bundles:
+            assert envelope.bundle is not None
+            count += 1
+        
+        assert count == 2
 
 
-# def test_read_session():
-#     with vcr.use_cassette('fixtures/vcr_cassettes/test_read_session.yaml', filter_headers=['authorization']):
-#         c = new_client()
-#         bundles = c.read_session(SESSION_ID)
-#         count = 0
-#         for envelope in bundles:
-#             assert envelope.bundle is not None
-#             count += 1
-#         assert count == 7
+def test_download_session():
+    test_session = generate_test_session("test_session_id1", "test_app_id")
+    created_at = datetime.datetime.now()
+    payload = json.dumps({"hello": "world"})
+
+    with responses.RequestsMock() as rsps:
+        rsps.add(
+            responses.GET,
+            "https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/test_session_id1?view=minimal",
+            body=json.dumps(test_session),
+            status=200,
+            content_type="application/json")
+        
+        rsps.add(
+            responses.GET,
+            "https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/test_session_id1/bundles",
+            body=generate_downloadable_payload(payload),
+            status=200,
+            content_type="application/json")
+
+        c = new_client()
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            output_file = os.path.join(tmpdirname, "test_session_id1.json")
+            c.download_session("test_session_id1", output_file)
+            assert os.path.getsize(output_file) == len(payload)
 
 
-# def test_create_and_list_cards():
-#     with vcr.use_cassette('fixtures/vcr_cassettes/test_create_and_list_cards.yaml', filter_headers=['authorization']):
-#         c = new_client()
-#         expected_title = "random-expected-title"
-#         c.create_card(SESSION_ID, expected_title, "test description")
-#         result =  c.list_cards(SESSION_ID)
-#         assert result[0].title == expected_title
+def test_download_packets():
+    test_session = generate_test_session("test_session_id1", "test_app_id")
+    created_at = datetime.datetime.now()
+    payload = json.dumps({"hello": "world"})
 
-# def test_set_and_retrieve_labels():
-#     with vcr.use_cassette('fixtures/vcr_cassettes/test_set_and_retrieve_labels.yaml', filter_headers=['authorization']):
-#         c = new_client()
-#         c.update_session_labels(SESSION_ID, ["stopped-for-visibility-change", "test", "hello"])
+    with responses.RequestsMock() as rsps:
+        rsps.add(
+            responses.GET,
+            "https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/test_session_id1?view=minimal",
+            body=json.dumps(test_session),
+            status=200,
+            content_type="application/json")
+        
+        rsps.add(
+            responses.GET,
+            "https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/test_session_id1/network-telemetry/packets",
+            body=generate_downloadable_payload(payload),
+            status=200,
+            content_type="application/json")
 
-#         session = c.describe_session(SESSION_ID)
+        c = new_client()
+        with tempfile.TemporaryDirectory() as tmpdirname:
+            output_file = os.path.join(tmpdirname, "test_session_id1.json")
+            c.download_pcap_data("test_session_id1", output_file)
+            assert os.path.getsize(output_file) == len(payload)
 
-#         labels = []
-#         for label in session.labels:
-#             labels.append(label.name)
 
-#         sorted_labels = sorted(labels)
-#         assert sorted_labels == ['hello', 'stopped-for-visibility-change', 'test']
+def test_read_session():
+    test_session_id = "test_session_id1"
+    test_session = generate_test_session(test_session_id, "test_app_id")
+    created_at = datetime.datetime.now()
+    payload = json.dumps(generate_bundle(test_session_id, 1)) + \
+        "\n" + json.dumps(generate_bundle(test_session_id, 2)) + \
+        "\n" + json.dumps(generate_bundle(test_session_id, 3))
+
+    with responses.RequestsMock() as rsps:
+        rsps.add(
+            responses.GET,
+            "https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/test_session_id1?view=minimal",
+            body=json.dumps(test_session),
+            status=200,
+            content_type="application/json")
+        
+        rsps.add(
+            responses.GET,
+            "https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/test_session_id1/bundles",
+            body=generate_downloadable_payload(payload),
+            status=200,
+            content_type="application/json")
+
+        c = new_client()
+        bundles = c.read_session("test_session_id1")
+    
+        count = 0
+        for envelope in bundles:
+            assert envelope.bundle is not None
+            count += 1
+        assert count == 3
+
+
+def test_set_and_retrieve_labels():
+    test_session_id = "test_session_id1"
+    test_session = generate_test_session(test_session_id, "test_app_id", labels=[
+        {"name":"label1"},
+        {"name":"label2"}
+    ])
+
+    updated_session = generate_test_session(test_session_id, "test_app_id", labels=[
+        {"name":"label1"},
+        {"name":"updated_label1"},
+        {"name":"updated_label2"},
+    ])
+
+    with responses.RequestsMock() as rsps:
+        rsps.add(
+            responses.GET,
+            "https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/test_session_id1?view=minimal",
+            body=json.dumps(test_session),
+            status=200,
+            content_type="application/json",
+        )
+
+        rsps.add(
+            responses.POST,
+            "https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/test_session_id1/labels",
+            body="",
+            match=[
+                matchers.json_params_matcher({"labels": [
+                    {"name": "label1"},
+                    {"name": "updated_label1"},
+                    {"name": "updated_label2"}
+                ]})
+            ],
+            status=200,
+            content_type="application/json",
+        )
+
+        rsps.add(
+            responses.GET,
+            "https://us-central1.gcp.data-api.moonsense.dev/v2/sessions/test_session_id1?view=minimal",
+            body=json.dumps(updated_session),
+            status=200,
+            content_type="application/json",
+        )
+
+        c = new_client()
+        session = c.describe_session(test_session_id)
+        
+        labels = []
+        for label in session.labels:
+            labels.append(label.name)
+        assert sorted(labels) == ['label1', 'label2']
+
+        c.update_session_labels(test_session_id, ["label1", "updated_label1", "updated_label2"])
+
+        session = c.describe_session(test_session_id)
+
+        labels = []
+        for label in session.labels:
+            labels.append(label.name)
+
+        sorted_labels = sorted(labels)
+        assert sorted_labels == ["label1", "updated_label1", "updated_label2"]
