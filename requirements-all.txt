@@ -4,7 +4,7 @@ charset-normalizer==2.1.1
 coverage==6.4.4
 idna==3.3
 iniconfig==1.1.1
-moonsense==0.8.0
+moonsense==0.8.1
 numpy==1.23.2
 packaging==21.3
 pandas==1.5.0rc0
