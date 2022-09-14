@@ -276,7 +276,7 @@ class Client(object):
         http_response = requests.get(endpoint, stream=True, **self._headers)
         if http_response.status_code != 200:
             raise RuntimeError(
-                f"unable to read: {chunk}. status code: {http_response.status_code}")
+                f"unable to read: {session_id}. status code: {http_response.status_code}")
 
         self._download_file(session_id, http_response, output_file)
 
@@ -294,7 +294,7 @@ class Client(object):
         http_response = requests.get(endpoint, stream=True, **self._headers)
         if http_response.status_code != 200:
             raise RuntimeError(
-                f"unable to read: {chunk}. status code: {http_response.status_code}")
+                f"unable to read: {session_id}. status code: {http_response.status_code}")
 
         self._download_file(session_id, http_response, output_file)
 
