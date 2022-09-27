@@ -21,7 +21,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\026io.moonsense.models.v2B\016BundleV2ProtosZ$moonsense.io/pkg/pb/v2/bundle;bundle',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0f\x62undle_v2.proto\x12\tv2.bundle\x1a\x0f\x63ommon_v2.proto\x1a\rfeature.proto\"\xc5\x01\n\x0cSealedBundle\x12!\n\x06\x62undle\x18\x01 \x01(\x0b\x32\x11.v2.bundle.Bundle\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12\x15\n\rcredential_id\x18\x03 \x01(\t\x12\x12\n\nsession_id\x18\x04 \x01(\t\x12\x0f\n\x07user_id\x18\x05 \x01(\t\x12\x1a\n\x12server_time_millis\x18\x06 \x01(\x03\x12\x12\n\ninstall_id\x18\x07 \x01(\t\x12\x16\n\x0e\x63lient_user_id\x18\x08 \x01(\t\"\xa7\x0b\n\x06\x42undle\x12*\n\rlocation_data\x18\x01 \x03(\x0b\x32\x13.v2.bundle.Location\x12\x34\n\x12\x61\x63\x63\x65lerometer_data\x18\x02 \x03(\x0b\x32\x18.v2.bundle.Accelerometer\x12\x32\n\x11magnetometer_data\x18\x03 \x03(\x0b\x32\x17.v2.bundle.Magnetometer\x12,\n\x0egyroscope_data\x18\x04 \x03(\x0b\x32\x14.v2.bundle.Gyroscope\x12%\n\x0b\x63lient_time\x18\x05 \x01(\x0b\x32\x10.v2.bundle.Clock\x12#\n\x07\x62\x61ttery\x18\x06 \x01(\x0b\x32\x12.v2.bundle.Battery\x12*\n\ractivity_data\x18\x07 \x03(\x0b\x32\x13.v2.bundle.Activity\x12\x30\n\x10orientation_data\x18\x08 \x03(\x0b\x32\x16.v2.bundle.Orientation\x12\x30\n\x10temperature_data\x18\t \x03(\x0b\x32\x16.v2.bundle.Temperature\x12$\n\nlight_data\x18\n \x03(\x0b\x32\x10.v2.bundle.Light\x12*\n\rpressure_data\x18\x0b \x03(\x0b\x32\x13.v2.bundle.Pressure\x12*\n\rhumidity_data\x18\x0c \x03(\x0b\x32\x13.v2.bundle.Humidity\x12$\n\nsteps_data\x18\r \x03(\x0b\x32\x10.v2.bundle.Steps\x12-\n\x0fheart_rate_data\x18\x0e \x03(\x0b\x32\x14.v2.bundle.HeartRate\x12(\n\x0cpointer_data\x18\x0f \x03(\x0b\x32\x12.v2.bundle.Pointer\x12;\n\x19linear_accelerometer_data\x18\x10 \x03(\x0b\x32\x18.v2.bundle.Accelerometer\x12\"\n\x07markers\x18\x11 \x03(\x0b\x32\x11.v2.bundle.Marker\x12\r\n\x05index\x18\x12 \x01(\x05\x12/\n\x10text_change_data\x18\x13 \x03(\x0b\x32\x15.v2.bundle.TextChange\x12+\n\x0ekey_press_data\x18\x14 \x03(\x0b\x32\x13.v2.bundle.KeyPress\x12\x31\n\x11\x66ocus_change_data\x18\x15 \x03(\x0b\x32\x16.v2.bundle.FocusChange\x12\x37\n\x14viewport_scroll_data\x18\x16 \x03(\x0b\x32\x19.v2.bundle.ViewportScroll\x12/\n\x10mouse_wheel_data\x18\x17 \x03(\x0b\x32\x15.v2.bundle.MouseWheel\x12\x35\n\x11permission_events\x18\x18 \x03(\x0b\x32\x1a.v2.bundle.PermissionEvent\x12:\n\x14viewport_size_events\x18\x19 \x03(\x0b\x32\x1c.v2.bundle.ViewportSizeEvent\x12;\n\x15\x61pp_life_cycle_events\x18\x1a \x03(\x0b\x32\x1c.v2.bundle.AppLifeCycleEvent\x12-\n\rcustom_events\x18\x1b \x03(\x0b\x32\x16.v2.bundle.CustomEvent\x12$\n\nclick_data\x18\x1c \x03(\x0b\x32\x10.v2.bundle.Click\x12\x17\n\x0fis_final_bundle\x18\x1d \x01(\x08\x12\x31\n\x08\x66\x65\x61tures\x18\x1e \x03(\x0b\x32\x1f.v2.bundle.Bundle.FeaturesEntry\x1a\x44\n\rFeaturesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\"\n\x05value\x18\x02 \x01(\x0b\x32\x13.v2.feature.Feature:\x02\x38\x01\"\"\n\x08Offset2D\x12\n\n\x02\x64x\x18\x01 \x01(\x01\x12\n\n\x02\x64y\x18\x02 \x01(\x01\"7\n\x0b\x43losedRange\x12\x13\n\x0blower_bound\x18\x01 \x01(\x01\x12\x13\n\x0bupper_bound\x18\x02 \x01(\x01\"0\n\x05Steps\x12\r\n\x05\x63ount\x18\x01 \x01(\x05\x12\x0c\n\x04\x66rom\x18\x02 \x01(\x03\x12\n\n\x02to\x18\x03 \x01(\x03\"3\n\tHeartRate\x12\x0c\n\x04rate\x18\x01 \x01(\x05\x12\x0c\n\x04\x66rom\x18\x02 \x01(\x03\x12\n\n\x02to\x18\x03 \x01(\x03\"\x83\x01\n\x07\x42\x61ttery\x12\x10\n\x08\x63\x61pacity\x18\x01 \x01(\x05\x12\'\n\x05state\x18\x02 \x01(\x0e\x32\x18.v2.bundle.Battery.State\"=\n\x05State\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0c\n\x08\x43HARGING\x10\x01\x12\x0f\n\x0b\x44ISCHARGING\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\"\xd1\x01\n\x08\x41\x63tivity\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12&\n\x04type\x18\x02 \x01(\x0e\x32\x18.v2.bundle.Activity.Type\x12\x12\n\nconfidence\x18\x03 \x01(\x05\"r\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0e\n\nIN_VEHICLE\x10\x01\x12\x0e\n\nON_BICYCLE\x10\x02\x12\x0b\n\x07ON_FOOT\x10\x03\x12\x0b\n\x07RUNNING\x10\x04\x12\t\n\x05STILL\x10\x05\x12\x0b\n\x07TILTING\x10\x06\x12\x0b\n\x07WALKING\x10\x07\"R\n\x0bOrientation\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\x0f\n\x07\x61zimuth\x18\x02 \x01(\x02\x12\r\n\x05pitch\x18\x03 \x01(\x02\x12\x0c\n\x04roll\x18\x04 \x01(\x02\"3\n\x0bTemperature\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x02\"-\n\x05Light\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x02\"0\n\x08Pressure\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x02\"0\n\x08Humidity\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x02\"V\n\x05\x43lock\x12\x18\n\x10wall_time_millis\x18\x01 \x01(\x03\x12\x14\n\x0ctimer_millis\x18\x02 \x01(\x03\x12\x1d\n\x15timer_realtime_millis\x18\x03 \x01(\x03\"\xfe\x01\n\x08Location\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\x1b\n\x13horizontal_accuracy\x18\x02 \x01(\x02\x12\x1a\n\x12vertical_accurracy\x18\x03 \x01(\x02\x12\x10\n\x08\x61ltitude\x18\x04 \x01(\x01\x12\x0f\n\x07\x62\x65\x61ring\x18\x05 \x01(\x02\x12 \n\x18\x62\x65\x61ring_accuracy_degrees\x18\x06 \x01(\x02\x12\x10\n\x08latitude\x18\x07 \x01(\x01\x12\x11\n\tlongitude\x18\x08 \x01(\x01\x12\x10\n\x08provider\x18\t \x01(\t\x12\r\n\x05speed\x18\n \x01(\x02\x12\x17\n\x0fspeed_accurracy\x18\x0b \x01(\x02\"G\n\rAccelerometer\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\t\n\x01x\x18\x02 \x01(\x01\x12\t\n\x01y\x18\x03 \x01(\x01\x12\t\n\x01z\x18\x04 \x01(\x01\"F\n\x0cMagnetometer\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\t\n\x01x\x18\x02 \x01(\x01\x12\t\n\x01y\x18\x03 \x01(\x01\x12\t\n\x01z\x18\x04 \x01(\x01\"C\n\tGyroscope\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\t\n\x01x\x18\x02 \x01(\x01\x12\t\n\x01y\x18\x03 \x01(\x01\x12\t\n\x01z\x18\x04 \x01(\x01\"\xc7\x06\n\x07Pointer\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12%\n\x04type\x18\x02 \x01(\x0e\x32\x17.v2.bundle.Pointer.Type\x12\x0f\n\x07\x62uttons\x18\x03 \x01(\x03\x12\"\n\x05\x64\x65lta\x18\x04 \x01(\x0b\x32\x13.v2.bundle.Offset2D\x12\x0e\n\x06\x64\x65vice\x18\x05 \x01(\x03\x12\x10\n\x08\x64istance\x18\x06 \x01(\x01\x12.\n\x0e\x64istance_range\x18\x07 \x01(\x0b\x32\x16.v2.bundle.ClosedRange\x12\x14\n\x08obscured\x18\x08 \x01(\x08\x42\x02\x18\x01\x12\x13\n\x0borientation\x18\t \x01(\x01\x12%\n\x08position\x18\n \x01(\x0b\x32\x13.v2.bundle.Offset2D\x12\x10\n\x08pressure\x18\x0b \x01(\x01\x12.\n\x0epressure_range\x18\x0c \x01(\x0b\x32\x16.v2.bundle.ClosedRange\x12\x14\n\x0cradius_major\x18\r \x01(\x01\x12\x14\n\x0cradius_minor\x18\x0e \x01(\x01\x12,\n\x0cradius_range\x18\x0f \x01(\x0b\x32\x16.v2.bundle.ClosedRange\x12\x0c\n\x04size\x18\x10 \x01(\x01\x12\x13\n\x0bsynthesized\x18\x11 \x01(\x08\x12\x0c\n\x04tilt\x18\x12 \x01(\x01\x12\x1c\n\x14is_software_keyboard\x18\x13 \x01(\x08\x12K\n\x18viewport_boundary_status\x18\x14 \x01(\x0e\x32).v2.bundle.Pointer.ViewportBoundaryStatus\x12(\n\x06target\x18\x15 \x01(\x0b\x32\x18.v2.bundle.TargetElement\"J\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\n\n\x06STYLUS\x10\x01\x12\x13\n\x0fINVERTED_STYLUS\x10\x02\x12\t\n\x05TOUCH\x10\x03\x12\t\n\x05MOUSE\x10\x04\"w\n\x16ViewportBoundaryStatus\x12$\n UNKNOWN_VIEWPORT_BOUNDARY_STATUS\x10\x00\x12\x12\n\x0e\x45NTER_VIEWPORT\x10\x01\x12\x0f\n\x0bIN_VIEWPORT\x10\x02\x12\x12\n\x0eLEAVE_VIEWPORT\x10\x03\"o\n\x05\x43lick\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12%\n\x08position\x18\x02 \x01(\x0b\x32\x13.v2.bundle.Offset2D\x12(\n\x06target\x18\x03 \x01(\x0b\x32\x18.v2.bundle.TargetElement\"=\n\x06Marker\x12%\n\x0b\x63lient_time\x18\x01 \x01(\x0b\x32\x10.v2.bundle.Clock\x12\x0c\n\x04name\x18\x02 \x01(\t\"7\n\rTargetElement\x12\x11\n\ttarget_id\x18\x01 \x01(\t\x12\x13\n\x0btarget_type\x18\x02 \x01(\t\"\xe2\x01\n\nTextChange\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12(\n\x06target\x18\x02 \x01(\x0b\x32\x18.v2.bundle.TargetElement\x12\r\n\x05\x66ocus\x18\x03 \x01(\x08\x12\x13\n\x0bmasked_text\x18\x04 \x01(\t\x12\x16\n\x0etruncated_text\x18\x05 \x01(\x08\x12,\n\x06\x61\x63tion\x18\x06 \x01(\x0e\x32\x1c.v2.bundle.TextChange.Action\")\n\x06\x41\x63tion\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03\x43UT\x10\x01\x12\t\n\x05PASTE\x10\x02\"\x96\x02\n\x08KeyPress\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12&\n\x04type\x18\x02 \x01(\x0e\x32\x18.v2.bundle.KeyPress.Type\x12\x13\n\x0bspecial_key\x18\x03 \x01(\t\x12\x12\n\nmasked_key\x18\x04 \x01(\x05\x12(\n\x06target\x18\x05 \x01(\x0b\x32\x18.v2.bundle.TargetElement\x12\x0f\n\x07\x61lt_key\x18\x06 \x01(\x08\x12\x13\n\x0b\x63ontrol_key\x18\x07 \x01(\x08\x12\x10\n\x08meta_key\x18\x08 \x01(\x08\x12\x11\n\tshift_key\x18\t \x01(\x08\"-\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\n\n\x06KEY_UP\x10\x01\x12\x0c\n\x08KEY_DOWN\x10\x02\"\xb0\x01\n\x0b\x46ocusChange\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12)\n\x04type\x18\x02 \x01(\x0e\x32\x1b.v2.bundle.FocusChange.Type\x12(\n\x06target\x18\x03 \x01(\x0b\x32\x18.v2.bundle.TargetElement\"5\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x10\n\x0c\x46OCUS_GAINED\x10\x01\x12\x0e\n\nFOCUS_LOST\x10\x02\"O\n\x0eViewportScroll\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\x12\n\nx_position\x18\x02 \x01(\x03\x12\x12\n\ny_position\x18\x03 \x01(\x03\"\xba\x02\n\nMouseWheel\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\x15\n\rwheel_delta_x\x18\x02 \x01(\x03\x12\x15\n\rwheel_delta_y\x18\x03 \x01(\x03\x12\x33\n\nwheel_mode\x18\x04 \x01(\x0e\x32\x1f.v2.bundle.MouseWheel.WheelMode\x12\x1a\n\x12wheel_delta_x_line\x18\x05 \x01(\x03\x12\x1a\n\x12wheel_delta_y_line\x18\x06 \x01(\x03\x12\x1a\n\x12wheel_delta_x_page\x18\x07 \x01(\x03\x12\x1a\n\x12wheel_delta_y_page\x18\x08 \x01(\x03\"B\n\tWheelMode\x12\x16\n\x12UNKNOWN_WHEEL_MODE\x10\x00\x12\t\n\x05PIXEL\x10\x01\x12\x08\n\x04LINE\x10\x02\x12\x08\n\x04PAGE\x10\x03\"\xbf\x02\n\x0fPermissionEvent\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12*\n\x0bsensor_type\x18\x02 \x01(\x0e\x32\x15.v2.common.SensorType\x12\x46\n\x11permission_status\x18\x03 \x01(\x0e\x32+.v2.bundle.PermissionEvent.PermissionStatus\"\xa0\x01\n\x10PermissionStatus\x12\x1d\n\x19UNKNOWN_PERMISSION_STATUS\x10\x00\x12\x0b\n\x07\x41LLOWED\x10\x01\x12\n\n\x06\x44\x45NIED\x10\x02\x12\x18\n\x14UNDETERMINED_BY_USER\x10\x03\x12 \n\x1cREQUIRES_PROMPT_TO_DETERMINE\x10\x04\x12\x18\n\x14SENSOR_NOT_AVAILABLE\x10\x05\"\xbd\x03\n\x11ViewportSizeEvent\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\x1d\n\x15\x64\x65vice_physical_width\x18\x02 \x01(\x03\x12\x1e\n\x16\x64\x65vice_physical_height\x18\x03 \x01(\x03\x12\x1c\n\x14\x64\x65vice_logical_width\x18\x04 \x01(\x03\x12\x1d\n\x15\x64\x65vice_logical_height\x18\x05 \x01(\x03\x12\x1a\n\x12\x64\x65vice_pixel_ratio\x18\x06 \x01(\x01\x12W\n\x14viewport_orientation\x18\x07 \x01(\x0e\x32\x39.v2.bundle.ViewportSizeEvent.ViewportOrientationDirection\"\x9f\x01\n\x1cViewportOrientationDirection\x12!\n\x1dUNKNOWN_ORIENTATION_DIRECTION\x10\x00\x12\x14\n\x10PORTRAIT_PRIMARY\x10\x01\x12\x16\n\x12PORTRAIT_SECONDARY\x10\x02\x12\x15\n\x11LANDSCAPE_PRIMARY\x10\x03\x12\x17\n\x13LANDSCAPE_SECONDARY\x10\x04\"\xe0\x01\n\x11\x41ppLifeCycleEvent\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12N\n\x15\x61pp_life_cycle_status\x18\x02 \x01(\x0e\x32/.v2.bundle.AppLifeCycleEvent.AppLifeCycleStatus\"d\n\x12\x41ppLifeCycleStatus\x12!\n\x1dUNKNOWN_APP_LIFE_CYCLE_STATUS\x10\x00\x12\x0e\n\nFOREGROUND\x10\x01\x12\x0e\n\nBACKGROUND\x10\x02\x12\x0b\n\x07\x44\x45STROY\x10\x03\"\xba\x01\n\x0b\x43ustomEvent\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\x12\n\nevent_name\x18\x02 \x01(\t\x12:\n\nproperties\x18\x03 \x03(\x0b\x32&.v2.bundle.CustomEvent.PropertiesEntry\x12\x11\n\tevent_key\x18\x04 \x01(\t\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42N\n\x16io.moonsense.models.v2B\x0e\x42undleV2ProtosZ$moonsense.io/pkg/pb/v2/bundle;bundleb\x06proto3'
+  serialized_pb=b'\n\x0f\x62undle_v2.proto\x12\tv2.bundle\x1a\x0f\x63ommon_v2.proto\x1a\rfeature.proto\"\xc5\x01\n\x0cSealedBundle\x12!\n\x06\x62undle\x18\x01 \x01(\x0b\x32\x11.v2.bundle.Bundle\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12\x15\n\rcredential_id\x18\x03 \x01(\t\x12\x12\n\nsession_id\x18\x04 \x01(\t\x12\x0f\n\x07user_id\x18\x05 \x01(\t\x12\x1a\n\x12server_time_millis\x18\x06 \x01(\x03\x12\x12\n\ninstall_id\x18\x07 \x01(\t\x12\x16\n\x0e\x63lient_user_id\x18\x08 \x01(\t\"\xde\x0b\n\x06\x42undle\x12*\n\rlocation_data\x18\x01 \x03(\x0b\x32\x13.v2.bundle.Location\x12\x34\n\x12\x61\x63\x63\x65lerometer_data\x18\x02 \x03(\x0b\x32\x18.v2.bundle.Accelerometer\x12\x32\n\x11magnetometer_data\x18\x03 \x03(\x0b\x32\x17.v2.bundle.Magnetometer\x12,\n\x0egyroscope_data\x18\x04 \x03(\x0b\x32\x14.v2.bundle.Gyroscope\x12%\n\x0b\x63lient_time\x18\x05 \x01(\x0b\x32\x10.v2.bundle.Clock\x12#\n\x07\x62\x61ttery\x18\x06 \x01(\x0b\x32\x12.v2.bundle.Battery\x12*\n\ractivity_data\x18\x07 \x03(\x0b\x32\x13.v2.bundle.Activity\x12\x30\n\x10orientation_data\x18\x08 \x03(\x0b\x32\x16.v2.bundle.Orientation\x12\x30\n\x10temperature_data\x18\t \x03(\x0b\x32\x16.v2.bundle.Temperature\x12$\n\nlight_data\x18\n \x03(\x0b\x32\x10.v2.bundle.Light\x12*\n\rpressure_data\x18\x0b \x03(\x0b\x32\x13.v2.bundle.Pressure\x12*\n\rhumidity_data\x18\x0c \x03(\x0b\x32\x13.v2.bundle.Humidity\x12$\n\nsteps_data\x18\r \x03(\x0b\x32\x10.v2.bundle.Steps\x12-\n\x0fheart_rate_data\x18\x0e \x03(\x0b\x32\x14.v2.bundle.HeartRate\x12(\n\x0cpointer_data\x18\x0f \x03(\x0b\x32\x12.v2.bundle.Pointer\x12;\n\x19linear_accelerometer_data\x18\x10 \x03(\x0b\x32\x18.v2.bundle.Accelerometer\x12\"\n\x07markers\x18\x11 \x03(\x0b\x32\x11.v2.bundle.Marker\x12\r\n\x05index\x18\x12 \x01(\x05\x12\x33\n\x10text_change_data\x18\x13 \x03(\x0b\x32\x15.v2.bundle.TextChangeB\x02\x18\x01\x12+\n\x0ekey_press_data\x18\x14 \x03(\x0b\x32\x13.v2.bundle.KeyPress\x12\x31\n\x11\x66ocus_change_data\x18\x15 \x03(\x0b\x32\x16.v2.bundle.FocusChange\x12\x37\n\x14viewport_scroll_data\x18\x16 \x03(\x0b\x32\x19.v2.bundle.ViewportScroll\x12/\n\x10mouse_wheel_data\x18\x17 \x03(\x0b\x32\x15.v2.bundle.MouseWheel\x12\x35\n\x11permission_events\x18\x18 \x03(\x0b\x32\x1a.v2.bundle.PermissionEvent\x12:\n\x14viewport_size_events\x18\x19 \x03(\x0b\x32\x1c.v2.bundle.ViewportSizeEvent\x12;\n\x15\x61pp_life_cycle_events\x18\x1a \x03(\x0b\x32\x1c.v2.bundle.AppLifeCycleEvent\x12-\n\rcustom_events\x18\x1b \x03(\x0b\x32\x16.v2.bundle.CustomEvent\x12$\n\nclick_data\x18\x1c \x03(\x0b\x32\x10.v2.bundle.Click\x12\x17\n\x0fis_final_bundle\x18\x1d \x01(\x08\x12\x31\n\x08\x66\x65\x61tures\x18\x1e \x03(\x0b\x32\x1f.v2.bundle.Bundle.FeaturesEntry\x12\x31\n\x11input_change_data\x18\x1f \x03(\x0b\x32\x16.v2.bundle.InputChange\x1a\x44\n\rFeaturesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\"\n\x05value\x18\x02 \x01(\x0b\x32\x13.v2.feature.Feature:\x02\x38\x01\"\"\n\x08Offset2D\x12\n\n\x02\x64x\x18\x01 \x01(\x01\x12\n\n\x02\x64y\x18\x02 \x01(\x01\"7\n\x0b\x43losedRange\x12\x13\n\x0blower_bound\x18\x01 \x01(\x01\x12\x13\n\x0bupper_bound\x18\x02 \x01(\x01\"0\n\x05Steps\x12\r\n\x05\x63ount\x18\x01 \x01(\x05\x12\x0c\n\x04\x66rom\x18\x02 \x01(\x03\x12\n\n\x02to\x18\x03 \x01(\x03\"3\n\tHeartRate\x12\x0c\n\x04rate\x18\x01 \x01(\x05\x12\x0c\n\x04\x66rom\x18\x02 \x01(\x03\x12\n\n\x02to\x18\x03 \x01(\x03\"\x83\x01\n\x07\x42\x61ttery\x12\x10\n\x08\x63\x61pacity\x18\x01 \x01(\x05\x12\'\n\x05state\x18\x02 \x01(\x0e\x32\x18.v2.bundle.Battery.State\"=\n\x05State\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0c\n\x08\x43HARGING\x10\x01\x12\x0f\n\x0b\x44ISCHARGING\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\"\xd1\x01\n\x08\x41\x63tivity\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12&\n\x04type\x18\x02 \x01(\x0e\x32\x18.v2.bundle.Activity.Type\x12\x12\n\nconfidence\x18\x03 \x01(\x05\"r\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0e\n\nIN_VEHICLE\x10\x01\x12\x0e\n\nON_BICYCLE\x10\x02\x12\x0b\n\x07ON_FOOT\x10\x03\x12\x0b\n\x07RUNNING\x10\x04\x12\t\n\x05STILL\x10\x05\x12\x0b\n\x07TILTING\x10\x06\x12\x0b\n\x07WALKING\x10\x07\"R\n\x0bOrientation\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\x0f\n\x07\x61zimuth\x18\x02 \x01(\x02\x12\r\n\x05pitch\x18\x03 \x01(\x02\x12\x0c\n\x04roll\x18\x04 \x01(\x02\"3\n\x0bTemperature\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x02\"-\n\x05Light\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x02\"0\n\x08Pressure\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x02\"0\n\x08Humidity\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x02\"V\n\x05\x43lock\x12\x18\n\x10wall_time_millis\x18\x01 \x01(\x03\x12\x14\n\x0ctimer_millis\x18\x02 \x01(\x03\x12\x1d\n\x15timer_realtime_millis\x18\x03 \x01(\x03\"\xfe\x01\n\x08Location\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\x1b\n\x13horizontal_accuracy\x18\x02 \x01(\x02\x12\x1a\n\x12vertical_accurracy\x18\x03 \x01(\x02\x12\x10\n\x08\x61ltitude\x18\x04 \x01(\x01\x12\x0f\n\x07\x62\x65\x61ring\x18\x05 \x01(\x02\x12 \n\x18\x62\x65\x61ring_accuracy_degrees\x18\x06 \x01(\x02\x12\x10\n\x08latitude\x18\x07 \x01(\x01\x12\x11\n\tlongitude\x18\x08 \x01(\x01\x12\x10\n\x08provider\x18\t \x01(\t\x12\r\n\x05speed\x18\n \x01(\x02\x12\x17\n\x0fspeed_accurracy\x18\x0b \x01(\x02\"G\n\rAccelerometer\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\t\n\x01x\x18\x02 \x01(\x01\x12\t\n\x01y\x18\x03 \x01(\x01\x12\t\n\x01z\x18\x04 \x01(\x01\"F\n\x0cMagnetometer\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\t\n\x01x\x18\x02 \x01(\x01\x12\t\n\x01y\x18\x03 \x01(\x01\x12\t\n\x01z\x18\x04 \x01(\x01\"C\n\tGyroscope\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\t\n\x01x\x18\x02 \x01(\x01\x12\t\n\x01y\x18\x03 \x01(\x01\x12\t\n\x01z\x18\x04 \x01(\x01\"\xc7\x06\n\x07Pointer\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12%\n\x04type\x18\x02 \x01(\x0e\x32\x17.v2.bundle.Pointer.Type\x12\x0f\n\x07\x62uttons\x18\x03 \x01(\x03\x12\"\n\x05\x64\x65lta\x18\x04 \x01(\x0b\x32\x13.v2.bundle.Offset2D\x12\x0e\n\x06\x64\x65vice\x18\x05 \x01(\x03\x12\x10\n\x08\x64istance\x18\x06 \x01(\x01\x12.\n\x0e\x64istance_range\x18\x07 \x01(\x0b\x32\x16.v2.bundle.ClosedRange\x12\x14\n\x08obscured\x18\x08 \x01(\x08\x42\x02\x18\x01\x12\x13\n\x0borientation\x18\t \x01(\x01\x12%\n\x08position\x18\n \x01(\x0b\x32\x13.v2.bundle.Offset2D\x12\x10\n\x08pressure\x18\x0b \x01(\x01\x12.\n\x0epressure_range\x18\x0c \x01(\x0b\x32\x16.v2.bundle.ClosedRange\x12\x14\n\x0cradius_major\x18\r \x01(\x01\x12\x14\n\x0cradius_minor\x18\x0e \x01(\x01\x12,\n\x0cradius_range\x18\x0f \x01(\x0b\x32\x16.v2.bundle.ClosedRange\x12\x0c\n\x04size\x18\x10 \x01(\x01\x12\x13\n\x0bsynthesized\x18\x11 \x01(\x08\x12\x0c\n\x04tilt\x18\x12 \x01(\x01\x12\x1c\n\x14is_software_keyboard\x18\x13 \x01(\x08\x12K\n\x18viewport_boundary_status\x18\x14 \x01(\x0e\x32).v2.bundle.Pointer.ViewportBoundaryStatus\x12(\n\x06target\x18\x15 \x01(\x0b\x32\x18.v2.bundle.TargetElement\"J\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\n\n\x06STYLUS\x10\x01\x12\x13\n\x0fINVERTED_STYLUS\x10\x02\x12\t\n\x05TOUCH\x10\x03\x12\t\n\x05MOUSE\x10\x04\"w\n\x16ViewportBoundaryStatus\x12$\n UNKNOWN_VIEWPORT_BOUNDARY_STATUS\x10\x00\x12\x12\n\x0e\x45NTER_VIEWPORT\x10\x01\x12\x0f\n\x0bIN_VIEWPORT\x10\x02\x12\x12\n\x0eLEAVE_VIEWPORT\x10\x03\"o\n\x05\x43lick\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12%\n\x08position\x18\x02 \x01(\x0b\x32\x13.v2.bundle.Offset2D\x12(\n\x06target\x18\x03 \x01(\x0b\x32\x18.v2.bundle.TargetElement\"=\n\x06Marker\x12%\n\x0b\x63lient_time\x18\x01 \x01(\x0b\x32\x10.v2.bundle.Clock\x12\x0c\n\x04name\x18\x02 \x01(\t\"7\n\rTargetElement\x12\x11\n\ttarget_id\x18\x01 \x01(\t\x12\x13\n\x0btarget_type\x18\x02 \x01(\t\"\xe6\x01\n\nTextChange\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12(\n\x06target\x18\x02 \x01(\x0b\x32\x18.v2.bundle.TargetElement\x12\r\n\x05\x66ocus\x18\x03 \x01(\x08\x12\x13\n\x0bmasked_text\x18\x04 \x01(\t\x12\x16\n\x0etruncated_text\x18\x05 \x01(\x08\x12,\n\x06\x61\x63tion\x18\x06 \x01(\x0e\x32\x1c.v2.bundle.TextChange.Action\")\n\x06\x41\x63tion\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03\x43UT\x10\x01\x12\t\n\x05PASTE\x10\x02:\x02\x18\x01\"\xe4\x01\n\x0bInputChange\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12(\n\x06target\x18\x02 \x01(\x0b\x32\x18.v2.bundle.TargetElement\x12\r\n\x05\x66ocus\x18\x03 \x01(\x08\x12\x13\n\x0bmasked_text\x18\x04 \x01(\t\x12\x16\n\x0etruncated_text\x18\x05 \x01(\x08\x12-\n\x06\x61\x63tion\x18\x06 \x01(\x0e\x32\x1d.v2.bundle.InputChange.Action\")\n\x06\x41\x63tion\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03\x43UT\x10\x01\x12\t\n\x05PASTE\x10\x02\"\x96\x02\n\x08KeyPress\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12&\n\x04type\x18\x02 \x01(\x0e\x32\x18.v2.bundle.KeyPress.Type\x12\x13\n\x0bspecial_key\x18\x03 \x01(\t\x12\x12\n\nmasked_key\x18\x04 \x01(\x05\x12(\n\x06target\x18\x05 \x01(\x0b\x32\x18.v2.bundle.TargetElement\x12\x0f\n\x07\x61lt_key\x18\x06 \x01(\x08\x12\x13\n\x0b\x63ontrol_key\x18\x07 \x01(\x08\x12\x10\n\x08meta_key\x18\x08 \x01(\x08\x12\x11\n\tshift_key\x18\t \x01(\x08\"-\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\n\n\x06KEY_UP\x10\x01\x12\x0c\n\x08KEY_DOWN\x10\x02\"\xb0\x01\n\x0b\x46ocusChange\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12)\n\x04type\x18\x02 \x01(\x0e\x32\x1b.v2.bundle.FocusChange.Type\x12(\n\x06target\x18\x03 \x01(\x0b\x32\x18.v2.bundle.TargetElement\"5\n\x04Type\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x10\n\x0c\x46OCUS_GAINED\x10\x01\x12\x0e\n\nFOCUS_LOST\x10\x02\"O\n\x0eViewportScroll\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\x12\n\nx_position\x18\x02 \x01(\x03\x12\x12\n\ny_position\x18\x03 \x01(\x03\"\xba\x02\n\nMouseWheel\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\x15\n\rwheel_delta_x\x18\x02 \x01(\x03\x12\x15\n\rwheel_delta_y\x18\x03 \x01(\x03\x12\x33\n\nwheel_mode\x18\x04 \x01(\x0e\x32\x1f.v2.bundle.MouseWheel.WheelMode\x12\x1a\n\x12wheel_delta_x_line\x18\x05 \x01(\x03\x12\x1a\n\x12wheel_delta_y_line\x18\x06 \x01(\x03\x12\x1a\n\x12wheel_delta_x_page\x18\x07 \x01(\x03\x12\x1a\n\x12wheel_delta_y_page\x18\x08 \x01(\x03\"B\n\tWheelMode\x12\x16\n\x12UNKNOWN_WHEEL_MODE\x10\x00\x12\t\n\x05PIXEL\x10\x01\x12\x08\n\x04LINE\x10\x02\x12\x08\n\x04PAGE\x10\x03\"\xbf\x02\n\x0fPermissionEvent\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12*\n\x0bsensor_type\x18\x02 \x01(\x0e\x32\x15.v2.common.SensorType\x12\x46\n\x11permission_status\x18\x03 \x01(\x0e\x32+.v2.bundle.PermissionEvent.PermissionStatus\"\xa0\x01\n\x10PermissionStatus\x12\x1d\n\x19UNKNOWN_PERMISSION_STATUS\x10\x00\x12\x0b\n\x07\x41LLOWED\x10\x01\x12\n\n\x06\x44\x45NIED\x10\x02\x12\x18\n\x14UNDETERMINED_BY_USER\x10\x03\x12 \n\x1cREQUIRES_PROMPT_TO_DETERMINE\x10\x04\x12\x18\n\x14SENSOR_NOT_AVAILABLE\x10\x05\"\xbd\x03\n\x11ViewportSizeEvent\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\x1d\n\x15\x64\x65vice_physical_width\x18\x02 \x01(\x03\x12\x1e\n\x16\x64\x65vice_physical_height\x18\x03 \x01(\x03\x12\x1c\n\x14\x64\x65vice_logical_width\x18\x04 \x01(\x03\x12\x1d\n\x15\x64\x65vice_logical_height\x18\x05 \x01(\x03\x12\x1a\n\x12\x64\x65vice_pixel_ratio\x18\x06 \x01(\x01\x12W\n\x14viewport_orientation\x18\x07 \x01(\x0e\x32\x39.v2.bundle.ViewportSizeEvent.ViewportOrientationDirection\"\x9f\x01\n\x1cViewportOrientationDirection\x12!\n\x1dUNKNOWN_ORIENTATION_DIRECTION\x10\x00\x12\x14\n\x10PORTRAIT_PRIMARY\x10\x01\x12\x16\n\x12PORTRAIT_SECONDARY\x10\x02\x12\x15\n\x11LANDSCAPE_PRIMARY\x10\x03\x12\x17\n\x13LANDSCAPE_SECONDARY\x10\x04\"\xe0\x01\n\x11\x41ppLifeCycleEvent\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12N\n\x15\x61pp_life_cycle_status\x18\x02 \x01(\x0e\x32/.v2.bundle.AppLifeCycleEvent.AppLifeCycleStatus\"d\n\x12\x41ppLifeCycleStatus\x12!\n\x1dUNKNOWN_APP_LIFE_CYCLE_STATUS\x10\x00\x12\x0e\n\nFOREGROUND\x10\x01\x12\x0e\n\nBACKGROUND\x10\x02\x12\x0b\n\x07\x44\x45STROY\x10\x03\"\xba\x01\n\x0b\x43ustomEvent\x12\x15\n\rdetermined_at\x18\x01 \x01(\x03\x12\x12\n\nevent_name\x18\x02 \x01(\t\x12:\n\nproperties\x18\x03 \x03(\x0b\x32&.v2.bundle.CustomEvent.PropertiesEntry\x12\x11\n\tevent_key\x18\x04 \x01(\t\x1a\x31\n\x0fPropertiesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42N\n\x16io.moonsense.models.v2B\x0e\x42undleV2ProtosZ$moonsense.io/pkg/pb/v2/bundle;bundleb\x06proto3'
   ,
   dependencies=[common__v2__pb2.DESCRIPTOR,feature__pb2.DESCRIPTOR,])
 
@@ -57,8 +57,8 @@ _BATTERY_STATE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1979,
-  serialized_end=2040,
+  serialized_start=2034,
+  serialized_end=2095,
 )
 _sym_db.RegisterEnumDescriptor(_BATTERY_STATE)
 
@@ -112,8 +112,8 @@ _ACTIVITY_TYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2138,
-  serialized_end=2252,
+  serialized_start=2193,
+  serialized_end=2307,
 )
 _sym_db.RegisterEnumDescriptor(_ACTIVITY_TYPE)
 
@@ -152,8 +152,8 @@ _POINTER_TYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3742,
-  serialized_end=3816,
+  serialized_start=3797,
+  serialized_end=3871,
 )
 _sym_db.RegisterEnumDescriptor(_POINTER_TYPE)
 
@@ -187,8 +187,8 @@ _POINTER_VIEWPORTBOUNDARYSTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=3818,
-  serialized_end=3937,
+  serialized_start=3873,
+  serialized_end=3992,
 )
 _sym_db.RegisterEnumDescriptor(_POINTER_VIEWPORTBOUNDARYSTATUS)
 
@@ -217,10 +217,40 @@ _TEXTCHANGE_ACTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4358,
-  serialized_end=4399,
+  serialized_start=4413,
+  serialized_end=4454,
 )
 _sym_db.RegisterEnumDescriptor(_TEXTCHANGE_ACTION)
+
+_INPUTCHANGE_ACTION = _descriptor.EnumDescriptor(
+  name='Action',
+  full_name='v2.bundle.InputChange.Action',
+  filename=None,
+  file=DESCRIPTOR,
+  create_key=_descriptor._internal_create_key,
+  values=[
+    _descriptor.EnumValueDescriptor(
+      name='UNKNOWN', index=0, number=0,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='CUT', index=1, number=1,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+    _descriptor.EnumValueDescriptor(
+      name='PASTE', index=2, number=2,
+      serialized_options=None,
+      type=None,
+      create_key=_descriptor._internal_create_key),
+  ],
+  containing_type=None,
+  serialized_options=None,
+  serialized_start=4413,
+  serialized_end=4454,
+)
+_sym_db.RegisterEnumDescriptor(_INPUTCHANGE_ACTION)
 
 _KEYPRESS_TYPE = _descriptor.EnumDescriptor(
   name='Type',
@@ -247,8 +277,8 @@ _KEYPRESS_TYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4635,
-  serialized_end=4680,
+  serialized_start=4925,
+  serialized_end=4970,
 )
 _sym_db.RegisterEnumDescriptor(_KEYPRESS_TYPE)
 
@@ -277,8 +307,8 @@ _FOCUSCHANGE_TYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=4806,
-  serialized_end=4859,
+  serialized_start=5096,
+  serialized_end=5149,
 )
 _sym_db.RegisterEnumDescriptor(_FOCUSCHANGE_TYPE)
 
@@ -312,8 +342,8 @@ _MOUSEWHEEL_WHEELMODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=5191,
-  serialized_end=5257,
+  serialized_start=5481,
+  serialized_end=5547,
 )
 _sym_db.RegisterEnumDescriptor(_MOUSEWHEEL_WHEELMODE)
 
@@ -357,8 +387,8 @@ _PERMISSIONEVENT_PERMISSIONSTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=5419,
-  serialized_end=5579,
+  serialized_start=5709,
+  serialized_end=5869,
 )
 _sym_db.RegisterEnumDescriptor(_PERMISSIONEVENT_PERMISSIONSTATUS)
 
@@ -397,8 +427,8 @@ _VIEWPORTSIZEEVENT_VIEWPORTORIENTATIONDIRECTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=5868,
-  serialized_end=6027,
+  serialized_start=6158,
+  serialized_end=6317,
 )
 _sym_db.RegisterEnumDescriptor(_VIEWPORTSIZEEVENT_VIEWPORTORIENTATIONDIRECTION)
 
@@ -432,8 +462,8 @@ _APPLIFECYCLEEVENT_APPLIFECYCLESTATUS = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=6154,
-  serialized_end=6254,
+  serialized_start=6444,
+  serialized_end=6544,
 )
 _sym_db.RegisterEnumDescriptor(_APPLIFECYCLEEVENT_APPLIFECYCLESTATUS)
 
@@ -553,8 +583,8 @@ _BUNDLE_FEATURESENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1642,
-  serialized_end=1710,
+  serialized_start=1697,
+  serialized_end=1765,
 )
 
 _BUNDLE = _descriptor.Descriptor(
@@ -697,7 +727,7 @@ _BUNDLE = _descriptor.Descriptor(
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+      serialized_options=b'\030\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='key_press_data', full_name='v2.bundle.Bundle.key_press_data', index=19,
       number=20, type=11, cpp_type=10, label=3,
@@ -775,6 +805,13 @@ _BUNDLE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='input_change_data', full_name='v2.bundle.Bundle.input_change_data', index=30,
+      number=31, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -788,7 +825,7 @@ _BUNDLE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=263,
-  serialized_end=1710,
+  serialized_end=1765,
 )
 
 
@@ -826,8 +863,8 @@ _OFFSET2D = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1712,
-  serialized_end=1746,
+  serialized_start=1767,
+  serialized_end=1801,
 )
 
 
@@ -865,8 +902,8 @@ _CLOSEDRANGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1748,
-  serialized_end=1803,
+  serialized_start=1803,
+  serialized_end=1858,
 )
 
 
@@ -911,8 +948,8 @@ _STEPS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1805,
-  serialized_end=1853,
+  serialized_start=1860,
+  serialized_end=1908,
 )
 
 
@@ -957,8 +994,8 @@ _HEARTRATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1855,
-  serialized_end=1906,
+  serialized_start=1910,
+  serialized_end=1961,
 )
 
 
@@ -997,8 +1034,8 @@ _BATTERY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1909,
-  serialized_end=2040,
+  serialized_start=1964,
+  serialized_end=2095,
 )
 
 
@@ -1044,8 +1081,8 @@ _ACTIVITY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2043,
-  serialized_end=2252,
+  serialized_start=2098,
+  serialized_end=2307,
 )
 
 
@@ -1097,8 +1134,8 @@ _ORIENTATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2254,
-  serialized_end=2336,
+  serialized_start=2309,
+  serialized_end=2391,
 )
 
 
@@ -1136,8 +1173,8 @@ _TEMPERATURE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2338,
-  serialized_end=2389,
+  serialized_start=2393,
+  serialized_end=2444,
 )
 
 
@@ -1175,8 +1212,8 @@ _LIGHT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2391,
-  serialized_end=2436,
+  serialized_start=2446,
+  serialized_end=2491,
 )
 
 
@@ -1214,8 +1251,8 @@ _PRESSURE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2438,
-  serialized_end=2486,
+  serialized_start=2493,
+  serialized_end=2541,
 )
 
 
@@ -1253,8 +1290,8 @@ _HUMIDITY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2488,
-  serialized_end=2536,
+  serialized_start=2543,
+  serialized_end=2591,
 )
 
 
@@ -1299,8 +1336,8 @@ _CLOCK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2538,
-  serialized_end=2624,
+  serialized_start=2593,
+  serialized_end=2679,
 )
 
 
@@ -1401,8 +1438,8 @@ _LOCATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2627,
-  serialized_end=2881,
+  serialized_start=2682,
+  serialized_end=2936,
 )
 
 
@@ -1454,8 +1491,8 @@ _ACCELEROMETER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2883,
-  serialized_end=2954,
+  serialized_start=2938,
+  serialized_end=3009,
 )
 
 
@@ -1507,8 +1544,8 @@ _MAGNETOMETER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2956,
-  serialized_end=3026,
+  serialized_start=3011,
+  serialized_end=3081,
 )
 
 
@@ -1560,8 +1597,8 @@ _GYROSCOPE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3028,
-  serialized_end=3095,
+  serialized_start=3083,
+  serialized_end=3150,
 )
 
 
@@ -1734,8 +1771,8 @@ _POINTER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3098,
-  serialized_end=3937,
+  serialized_start=3153,
+  serialized_end=3992,
 )
 
 
@@ -1780,8 +1817,8 @@ _CLICK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3939,
-  serialized_end=4050,
+  serialized_start=3994,
+  serialized_end=4105,
 )
 
 
@@ -1819,8 +1856,8 @@ _MARKER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4052,
-  serialized_end=4113,
+  serialized_start=4107,
+  serialized_end=4168,
 )
 
 
@@ -1858,8 +1895,8 @@ _TARGETELEMENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4115,
-  serialized_end=4170,
+  serialized_start=4170,
+  serialized_end=4225,
 )
 
 
@@ -1920,14 +1957,82 @@ _TEXTCHANGE = _descriptor.Descriptor(
   enum_types=[
     _TEXTCHANGE_ACTION,
   ],
+  serialized_options=b'\030\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=4228,
+  serialized_end=4458,
+)
+
+
+_INPUTCHANGE = _descriptor.Descriptor(
+  name='InputChange',
+  full_name='v2.bundle.InputChange',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='determined_at', full_name='v2.bundle.InputChange.determined_at', index=0,
+      number=1, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='target', full_name='v2.bundle.InputChange.target', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='focus', full_name='v2.bundle.InputChange.focus', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='masked_text', full_name='v2.bundle.InputChange.masked_text', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='truncated_text', full_name='v2.bundle.InputChange.truncated_text', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='action', full_name='v2.bundle.InputChange.action', index=5,
+      number=6, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+    _INPUTCHANGE_ACTION,
+  ],
   serialized_options=None,
   is_extendable=False,
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4173,
-  serialized_end=4399,
+  serialized_start=4461,
+  serialized_end=4689,
 )
 
 
@@ -2015,8 +2120,8 @@ _KEYPRESS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4402,
-  serialized_end=4680,
+  serialized_start=4692,
+  serialized_end=4970,
 )
 
 
@@ -2062,8 +2167,8 @@ _FOCUSCHANGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4683,
-  serialized_end=4859,
+  serialized_start=4973,
+  serialized_end=5149,
 )
 
 
@@ -2108,8 +2213,8 @@ _VIEWPORTSCROLL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4861,
-  serialized_end=4940,
+  serialized_start=5151,
+  serialized_end=5230,
 )
 
 
@@ -2190,8 +2295,8 @@ _MOUSEWHEEL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4943,
-  serialized_end=5257,
+  serialized_start=5233,
+  serialized_end=5547,
 )
 
 
@@ -2237,8 +2342,8 @@ _PERMISSIONEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5260,
-  serialized_end=5579,
+  serialized_start=5550,
+  serialized_end=5869,
 )
 
 
@@ -2312,8 +2417,8 @@ _VIEWPORTSIZEEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5582,
-  serialized_end=6027,
+  serialized_start=5872,
+  serialized_end=6317,
 )
 
 
@@ -2352,8 +2457,8 @@ _APPLIFECYCLEEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6030,
-  serialized_end=6254,
+  serialized_start=6320,
+  serialized_end=6544,
 )
 
 
@@ -2391,8 +2496,8 @@ _CUSTOMEVENT_PROPERTIESENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6394,
-  serialized_end=6443,
+  serialized_start=6684,
+  serialized_end=6733,
 )
 
 _CUSTOMEVENT = _descriptor.Descriptor(
@@ -2443,8 +2548,8 @@ _CUSTOMEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6257,
-  serialized_end=6443,
+  serialized_start=6547,
+  serialized_end=6733,
 )
 
 _SEALEDBUNDLE.fields_by_name['bundle'].message_type = _BUNDLE
@@ -2478,6 +2583,7 @@ _BUNDLE.fields_by_name['app_life_cycle_events'].message_type = _APPLIFECYCLEEVEN
 _BUNDLE.fields_by_name['custom_events'].message_type = _CUSTOMEVENT
 _BUNDLE.fields_by_name['click_data'].message_type = _CLICK
 _BUNDLE.fields_by_name['features'].message_type = _BUNDLE_FEATURESENTRY
+_BUNDLE.fields_by_name['input_change_data'].message_type = _INPUTCHANGE
 _BATTERY.fields_by_name['state'].enum_type = _BATTERY_STATE
 _BATTERY_STATE.containing_type = _BATTERY
 _ACTIVITY.fields_by_name['type'].enum_type = _ACTIVITY_TYPE
@@ -2498,6 +2604,9 @@ _MARKER.fields_by_name['client_time'].message_type = _CLOCK
 _TEXTCHANGE.fields_by_name['target'].message_type = _TARGETELEMENT
 _TEXTCHANGE.fields_by_name['action'].enum_type = _TEXTCHANGE_ACTION
 _TEXTCHANGE_ACTION.containing_type = _TEXTCHANGE
+_INPUTCHANGE.fields_by_name['target'].message_type = _TARGETELEMENT
+_INPUTCHANGE.fields_by_name['action'].enum_type = _INPUTCHANGE_ACTION
+_INPUTCHANGE_ACTION.containing_type = _INPUTCHANGE
 _KEYPRESS.fields_by_name['type'].enum_type = _KEYPRESS_TYPE
 _KEYPRESS.fields_by_name['target'].message_type = _TARGETELEMENT
 _KEYPRESS_TYPE.containing_type = _KEYPRESS
@@ -2538,6 +2647,7 @@ DESCRIPTOR.message_types_by_name['Click'] = _CLICK
 DESCRIPTOR.message_types_by_name['Marker'] = _MARKER
 DESCRIPTOR.message_types_by_name['TargetElement'] = _TARGETELEMENT
 DESCRIPTOR.message_types_by_name['TextChange'] = _TEXTCHANGE
+DESCRIPTOR.message_types_by_name['InputChange'] = _INPUTCHANGE
 DESCRIPTOR.message_types_by_name['KeyPress'] = _KEYPRESS
 DESCRIPTOR.message_types_by_name['FocusChange'] = _FOCUSCHANGE
 DESCRIPTOR.message_types_by_name['ViewportScroll'] = _VIEWPORTSCROLL
@@ -2717,6 +2827,13 @@ TextChange = _reflection.GeneratedProtocolMessageType('TextChange', (_message.Me
   })
 _sym_db.RegisterMessage(TextChange)
 
+InputChange = _reflection.GeneratedProtocolMessageType('InputChange', (_message.Message,), {
+  'DESCRIPTOR' : _INPUTCHANGE,
+  '__module__' : 'bundle_v2_pb2'
+  # @@protoc_insertion_point(class_scope:v2.bundle.InputChange)
+  })
+_sym_db.RegisterMessage(InputChange)
+
 KeyPress = _reflection.GeneratedProtocolMessageType('KeyPress', (_message.Message,), {
   'DESCRIPTOR' : _KEYPRESS,
   '__module__' : 'bundle_v2_pb2'
@@ -2784,6 +2901,8 @@ _sym_db.RegisterMessage(CustomEvent.PropertiesEntry)
 
 DESCRIPTOR._options = None
 _BUNDLE_FEATURESENTRY._options = None
+_BUNDLE.fields_by_name['text_change_data']._options = None
 _POINTER.fields_by_name['obscured']._options = None
+_TEXTCHANGE._options = None
 _CUSTOMEVENT_PROPERTIESENTRY._options = None
 # @@protoc_insertion_point(module_scope)

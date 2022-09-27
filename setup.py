@@ -21,7 +21,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="moonsense",
-    version="0.8.2",
+    version="0.8.3",
     packages=find_packages(exclude=["tests*"]),
     description="Moonsense Cloud API Client",
     long_description=long_description,
