@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n#io.moonsense.models.v2.controlplaneB\024ControlPlaneV2ProtosZ\'moonsense.io/pkg/pb/v2/control-plane;v2',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x16\x63ontrol_plane_v2.proto\x12\x0fv2.controlplane\x1a\x17validate/validate.proto\"\xa7\x01\n\x0f\x44\x61taPlaneRegion\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x0b\n\x03lat\x18\x03 \x01(\x01\x12\x0b\n\x03lon\x18\x04 \x01(\x01\x12\x0e\n\x06region\x18\x05 \x01(\t\x12\x0e\n\x06labels\x18\x06 \x03(\t\x12\x17\n\x0f\x64\x65\x66\x61ult_primary\x18\x07 \x01(\x08\x12\x16\n\x0e\x64\x65\x66\x61ult_backup\x18\x08 \x01(\x08\x12\x0e\n\x06status\x18\t \x01(\t\"D\n\x19\x44\x61taRegionsLocateResponse\x12\x13\n\x0bprimary_url\x18\x01 \x01(\t\x12\x12\n\nbackup_url\x18\x02 \x01(\t\"L\n\x17\x44\x61taRegionsListResponse\x12\x31\n\x07regions\x18\x01 \x03(\x0b\x32 .v2.controlplane.DataPlaneRegion\"\x80\x01\n\x13TokenUpgradeRequest\x12\x1d\n\x0cpublic_token\x18\x01 \x01(\tB\x07\xfa\x42\x04r\x02 \x01\x12\x0f\n\x07user_id\x18\x02 \x01(\t\x12\x1a\n\x12\x65xpires_in_seconds\x18\x03 \x01(\x05\x12\x1d\n\x15max_idle_time_minutes\x18\x04 \x01(\x05\"0\n\x14TokenUpgradeResponse\x12\x18\n\x10\x61pp_access_token\x18\x01 \x01(\t\"1\n\x15RevokeAppTokenRequest\x12\x18\n\x07user_id\x18\x01 \x01(\tB\x07\xfa\x42\x04r\x02 \x01\x42\x64\n#io.moonsense.models.v2.controlplaneB\x14\x43ontrolPlaneV2ProtosZ\'moonsense.io/pkg/pb/v2/control-plane;v2b\x06proto3'
+  serialized_pb=b'\n\x16\x63ontrol_plane_v2.proto\x12\x0fv2.controlplane\x1a\x17validate/validate.proto\"\xa7\x01\n\x0f\x44\x61taPlaneRegion\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x0b\n\x03lat\x18\x03 \x01(\x01\x12\x0b\n\x03lon\x18\x04 \x01(\x01\x12\x0e\n\x06region\x18\x05 \x01(\t\x12\x0e\n\x06labels\x18\x06 \x03(\t\x12\x17\n\x0f\x64\x65\x66\x61ult_primary\x18\x07 \x01(\x08\x12\x16\n\x0e\x64\x65\x66\x61ult_backup\x18\x08 \x01(\x08\x12\x0e\n\x06status\x18\t \x01(\t\"}\n\x19\x44\x61taRegionsLocateResponse\x12\x13\n\x0bprimary_url\x18\x01 \x01(\t\x12\x12\n\nbackup_url\x18\x02 \x01(\t\x12\x1b\n\x13primary_network_url\x18\x03 \x01(\t\x12\x1a\n\x12\x62\x61\x63kup_network_url\x18\x04 \x01(\t\"L\n\x17\x44\x61taRegionsListResponse\x12\x31\n\x07regions\x18\x01 \x03(\x0b\x32 .v2.controlplane.DataPlaneRegion\"\x80\x01\n\x13TokenUpgradeRequest\x12\x1d\n\x0cpublic_token\x18\x01 \x01(\tB\x07\xfa\x42\x04r\x02 \x01\x12\x0f\n\x07user_id\x18\x02 \x01(\t\x12\x1a\n\x12\x65xpires_in_seconds\x18\x03 \x01(\x05\x12\x1d\n\x15max_idle_time_minutes\x18\x04 \x01(\x05\"0\n\x14TokenUpgradeResponse\x12\x18\n\x10\x61pp_access_token\x18\x01 \x01(\t\"1\n\x15RevokeAppTokenRequest\x12\x18\n\x07user_id\x18\x01 \x01(\tB\x07\xfa\x42\x04r\x02 \x01\x42\x64\n#io.moonsense.models.v2.controlplaneB\x14\x43ontrolPlaneV2ProtosZ\'moonsense.io/pkg/pb/v2/control-plane;v2b\x06proto3'
   ,
   dependencies=[validate_dot_validate__pb2.DESCRIPTOR,])
 
@@ -137,6 +137,20 @@ _DATAREGIONSLOCATERESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='primary_network_url', full_name='v2.controlplane.DataRegionsLocateResponse.primary_network_url', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='backup_network_url', full_name='v2.controlplane.DataRegionsLocateResponse.backup_network_url', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -150,7 +164,7 @@ _DATAREGIONSLOCATERESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=238,
-  serialized_end=306,
+  serialized_end=363,
 )
 
 
@@ -181,8 +195,8 @@ _DATAREGIONSLISTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=308,
-  serialized_end=384,
+  serialized_start=365,
+  serialized_end=441,
 )
 
 
@@ -234,8 +248,8 @@ _TOKENUPGRADEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=387,
-  serialized_end=515,
+  serialized_start=444,
+  serialized_end=572,
 )
 
 
@@ -266,8 +280,8 @@ _TOKENUPGRADERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=517,
-  serialized_end=565,
+  serialized_start=574,
+  serialized_end=622,
 )
 
 
@@ -298,8 +312,8 @@ _REVOKEAPPTOKENREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=567,
-  serialized_end=616,
+  serialized_start=624,
+  serialized_end=673,
 )
 
 _DATAREGIONSLISTRESPONSE.fields_by_name['regions'].message_type = _DATAPLANEREGION
