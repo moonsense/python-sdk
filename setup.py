@@ -26,10 +26,14 @@ setup(
     description="Moonsense Cloud API Client",
     long_description=long_description,
     long_description_content_type="text/markdown",
+    entry_points={
+        'console_scripts': ['moonsense=moonsense.cli:main'],
+    },
     install_requires=[
         "protobuf>=3,<4",
         "requests>=2.26,<3",
         "pandas>=1.3,<2",
+        "click>=8.1,<9",
     ],
     url="https://github.com/moonsense/python-sdk.git",
     author="Moonsense Team",
