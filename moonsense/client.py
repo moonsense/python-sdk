@@ -258,7 +258,26 @@ class Client(object):
 
                 extracted_file_name = temp_tar_contents[0].name
                 # extract the archive.
-                temp_tar.extractall(temp_extract_path)
+                def is_within_directory(directory, target):
+                    
+                    abs_directory = os.path.abspath(directory)
+                    abs_target = os.path.abspath(target)
+                
+                    prefix = os.path.commonprefix([abs_directory, abs_target])
+                    
+                    return prefix == abs_directory
+                
+                def safe_extract(tar, path=".", members=None, *, numeric_owner=False):
+                
+                    for member in tar.getmembers():
+                        member_path = os.path.join(path, member.name)
+                        if not is_within_directory(path, member_path):
+                            raise Exception("Attempted Path Traversal in Tar File")
+                
+                    tar.extractall(path, members, numeric_owner=numeric_owner) 
+                    
+                
+                safe_extract(temp_tar, temp_extract_path)
                 # move the only file in the archive to the final user-inputted path.
                 shutil.move(os.path.join(tmpdirname, "extracted", extracted_file_name), output_file)
 
