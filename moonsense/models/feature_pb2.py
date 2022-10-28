@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\036io.moonsense.models.v2.featureB\rFeatureProtosZ&moonsense.io/pkg/pb/v2/feature;feature',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rfeature.proto\x12\nv2.feature\"\x1a\n\tBytesList\x12\r\n\x05value\x18\x01 \x03(\x0c\"\x1f\n\nDoubleList\x12\x11\n\x05value\x18\x01 \x03(\x01\x42\x02\x10\x01\"\x1e\n\tInt64List\x12\x11\n\x05value\x18\x01 \x03(\x03\x42\x02\x10\x01\"\x1b\n\nStringList\x12\r\n\x05value\x18\x01 \x03(\t\"\xc9\x01\n\x07\x46\x65\x61ture\x12+\n\nbytes_list\x18\x01 \x01(\x0b\x32\x15.v2.feature.BytesListH\x00\x12-\n\x0b\x64ouble_list\x18\x02 \x01(\x0b\x32\x16.v2.feature.DoubleListH\x00\x12+\n\nint64_list\x18\x03 \x01(\x0b\x32\x15.v2.feature.Int64ListH\x00\x12-\n\x0bstring_list\x18\x04 \x01(\x0b\x32\x16.v2.feature.StringListH\x00\x42\x06\n\x04kindBW\n\x1eio.moonsense.models.v2.featureB\rFeatureProtosZ&moonsense.io/pkg/pb/v2/feature;featureb\x06proto3'
+  serialized_pb=b'\n\rfeature.proto\x12\nv2.feature\"\x1a\n\tBytesList\x12\r\n\x05value\x18\x01 \x03(\x0c\"\x1f\n\nDoubleList\x12\x11\n\x05value\x18\x01 \x03(\x01\x42\x02\x10\x01\"j\n\tDoubleMap\x12/\n\x05value\x18\x01 \x03(\x0b\x32 .v2.feature.DoubleMap.ValueEntry\x1a,\n\nValueEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x01:\x02\x38\x01\"\x1e\n\tInt64List\x12\x11\n\x05value\x18\x01 \x03(\x03\x42\x02\x10\x01\"\x1b\n\nStringList\x12\r\n\x05value\x18\x01 \x03(\t\"\xf6\x01\n\x07\x46\x65\x61ture\x12+\n\nbytes_list\x18\x01 \x01(\x0b\x32\x15.v2.feature.BytesListH\x00\x12-\n\x0b\x64ouble_list\x18\x02 \x01(\x0b\x32\x16.v2.feature.DoubleListH\x00\x12+\n\nint64_list\x18\x03 \x01(\x0b\x32\x15.v2.feature.Int64ListH\x00\x12-\n\x0bstring_list\x18\x04 \x01(\x0b\x32\x16.v2.feature.StringListH\x00\x12+\n\ndouble_map\x18\x05 \x01(\x0b\x32\x15.v2.feature.DoubleMapH\x00\x42\x06\n\x04kindBW\n\x1eio.moonsense.models.v2.featureB\rFeatureProtosZ&moonsense.io/pkg/pb/v2/feature;featureb\x06proto3'
 )
 
 
@@ -89,6 +89,76 @@ _DOUBLELIST = _descriptor.Descriptor(
 )
 
 
+_DOUBLEMAP_VALUEENTRY = _descriptor.Descriptor(
+  name='ValueEntry',
+  full_name='v2.feature.DoubleMap.ValueEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='v2.feature.DoubleMap.ValueEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='v2.feature.DoubleMap.ValueEntry.value', index=1,
+      number=2, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=152,
+  serialized_end=196,
+)
+
+_DOUBLEMAP = _descriptor.Descriptor(
+  name='DoubleMap',
+  full_name='v2.feature.DoubleMap',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='value', full_name='v2.feature.DoubleMap.value', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[_DOUBLEMAP_VALUEENTRY, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=90,
+  serialized_end=196,
+)
+
+
 _INT64LIST = _descriptor.Descriptor(
   name='Int64List',
   full_name='v2.feature.Int64List',
@@ -116,8 +186,8 @@ _INT64LIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=90,
-  serialized_end=120,
+  serialized_start=198,
+  serialized_end=228,
 )
 
 
@@ -148,8 +218,8 @@ _STRINGLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=122,
-  serialized_end=149,
+  serialized_start=230,
+  serialized_end=257,
 )
 
 
@@ -189,6 +259,13 @@ _FEATURE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='double_map', full_name='v2.feature.Feature.double_map', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -206,14 +283,17 @@ _FEATURE = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=152,
-  serialized_end=353,
+  serialized_start=260,
+  serialized_end=506,
 )
 
+_DOUBLEMAP_VALUEENTRY.containing_type = _DOUBLEMAP
+_DOUBLEMAP.fields_by_name['value'].message_type = _DOUBLEMAP_VALUEENTRY
 _FEATURE.fields_by_name['bytes_list'].message_type = _BYTESLIST
 _FEATURE.fields_by_name['double_list'].message_type = _DOUBLELIST
 _FEATURE.fields_by_name['int64_list'].message_type = _INT64LIST
 _FEATURE.fields_by_name['string_list'].message_type = _STRINGLIST
+_FEATURE.fields_by_name['double_map'].message_type = _DOUBLEMAP
 _FEATURE.oneofs_by_name['kind'].fields.append(
   _FEATURE.fields_by_name['bytes_list'])
 _FEATURE.fields_by_name['bytes_list'].containing_oneof = _FEATURE.oneofs_by_name['kind']
@@ -226,8 +306,12 @@ _FEATURE.fields_by_name['int64_list'].containing_oneof = _FEATURE.oneofs_by_name
 _FEATURE.oneofs_by_name['kind'].fields.append(
   _FEATURE.fields_by_name['string_list'])
 _FEATURE.fields_by_name['string_list'].containing_oneof = _FEATURE.oneofs_by_name['kind']
+_FEATURE.oneofs_by_name['kind'].fields.append(
+  _FEATURE.fields_by_name['double_map'])
+_FEATURE.fields_by_name['double_map'].containing_oneof = _FEATURE.oneofs_by_name['kind']
 DESCRIPTOR.message_types_by_name['BytesList'] = _BYTESLIST
 DESCRIPTOR.message_types_by_name['DoubleList'] = _DOUBLELIST
+DESCRIPTOR.message_types_by_name['DoubleMap'] = _DOUBLEMAP
 DESCRIPTOR.message_types_by_name['Int64List'] = _INT64LIST
 DESCRIPTOR.message_types_by_name['StringList'] = _STRINGLIST
 DESCRIPTOR.message_types_by_name['Feature'] = _FEATURE
@@ -246,6 +330,21 @@ DoubleList = _reflection.GeneratedProtocolMessageType('DoubleList', (_message.Me
   # @@protoc_insertion_point(class_scope:v2.feature.DoubleList)
   })
 _sym_db.RegisterMessage(DoubleList)
+
+DoubleMap = _reflection.GeneratedProtocolMessageType('DoubleMap', (_message.Message,), {
+
+  'ValueEntry' : _reflection.GeneratedProtocolMessageType('ValueEntry', (_message.Message,), {
+    'DESCRIPTOR' : _DOUBLEMAP_VALUEENTRY,
+    '__module__' : 'feature_pb2'
+    # @@protoc_insertion_point(class_scope:v2.feature.DoubleMap.ValueEntry)
+    })
+  ,
+  'DESCRIPTOR' : _DOUBLEMAP,
+  '__module__' : 'feature_pb2'
+  # @@protoc_insertion_point(class_scope:v2.feature.DoubleMap)
+  })
+_sym_db.RegisterMessage(DoubleMap)
+_sym_db.RegisterMessage(DoubleMap.ValueEntry)
 
 Int64List = _reflection.GeneratedProtocolMessageType('Int64List', (_message.Message,), {
   'DESCRIPTOR' : _INT64LIST,
@@ -271,5 +370,6 @@ _sym_db.RegisterMessage(Feature)
 
 DESCRIPTOR._options = None
 _DOUBLELIST.fields_by_name['value']._options = None
+_DOUBLEMAP_VALUEENTRY._options = None
 _INT64LIST.fields_by_name['value']._options = None
 # @@protoc_insertion_point(module_scope)
