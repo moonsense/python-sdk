@@ -34,6 +34,7 @@ setup(
         "requests>=2.26,<3",
         "pandas>=1.3,<2",
         "click>=8.1,<9",
+        "retry>=0.9,<1",
     ],
     url="https://github.com/moonsense/python-sdk.git",
     author="Moonsense Team",

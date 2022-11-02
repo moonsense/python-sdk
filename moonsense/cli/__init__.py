@@ -12,7 +12,7 @@ def main():
 @click.option('--with-group-id', default=False, help='If true, the folder structure uses includes the \
         client session group id')
 def download(until, since, label, with_group_id):
-    click.echo('Download', until, since, label, with_group_id)
+    run_download(until, since, label, with_group_id)
 
 main.add_command(download)
 
