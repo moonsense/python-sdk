@@ -1,5 +1,5 @@
 """
-Copyright 2021 Moonsense, Inc.
+Copyright 2022 Moonsense, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -25,8 +25,8 @@ import requests
 import tempfile
 import tarfile
 import shutil
+from datetime import datetime
 
-from enum import Enum
 from google.protobuf import json_format
 from typing import Iterable, List
 
@@ -34,10 +34,8 @@ from .models import Session, Chunk, TokenSelfResponse, \
     DataRegionsListResponse, SessionListResponse, ChunksListResponse, \
     CardListResponse, Card, SealedBundle
 
-class Platform(Enum):
-    iOS = "iOS"
-    ANDROID = "ANDROID"
-    WEB = "WEB"
+from .download import DownloadAllSessions
+from . import Platform
 
 
 class Client(object):
@@ -102,7 +100,11 @@ class Client(object):
         r = requests.get(endpoint, **self._headers)
         return json_format.Parse(r.text, TokenSelfResponse(), ignore_unknown_fields=True)
 
-    def list_sessions(self, labels: List[str] = None, client_session_group_id: str = None, platforms: List[Platform] = None) -> Iterable[Session]:
+    def list_sessions(
+        self,
+        labels: List[str] = None,
+        client_session_group_id: str = None,
+        platforms: List[Platform] = None) -> Iterable[Session]:
         """
         List sessions for the current project
 
@@ -297,6 +299,34 @@ class Client(object):
                 f"unable to read: {session_id}. status code: {http_response.status_code}")
 
         self._download_file(session_id, http_response, output_file)
+    
+
+    def download_all_sessions(
+        self,
+        output: str,
+        until: datetime,
+        since: datetime,
+        labels: list[str],
+        platforms: List[Platform] = None,
+        with_group_id: bool = False) -> None:
+        """
+        Download all sessions from a project based on the provided filters.
+
+        :param output: Path to the output directory - either absolut or relative to the current
+                        directory.
+        :param until: Date in the YYYY-MM-DD format until the session data should be included.
+                    If not provided, the current day is used.
+        :param since: Date in the YYYY-MM-DD format since the session data should be included.
+                    If not provided beginning of Moonsense time - 1st of January 2021 is used.
+        :param labels: A list of labels to filter sessions by. A session needs to include at least
+                    one label in this list to be downloaded.
+        :param platform: Filter downloaded sessions by the platforms they were produced:
+                            web, ios, android or None for all.
+        :param with_group_id: If set to True, organizes the downloaded sessions by date and
+                            client session group id. Default: False.
+        """
+        DownloadAllSessions(self).download(
+            output, until, since, labels, platforms, with_group_id)
 
 
     def read_session(self, session_id) -> Iterable[SealedBundle]:
