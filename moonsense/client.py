@@ -104,19 +104,32 @@ class Client(object):
         self,
         labels: List[str] = None,
         client_session_group_id: str = None,
-        platforms: List[Platform] = None) -> Iterable[Session]:
+        platforms: List[Platform] = None,
+        since: datetime = None,
+        until: datetime = None) -> Iterable[Session]:
+
         """
         List sessions for the current project
 
         :param labels: A list of labels to match.
         :param client_session_group_id: Optional - The client session group id to match.
-        :param platforms: Optional - The list of 'Platform's to match. If 'None' is supplied, all 'Platform's will be returned.
+        :param platforms: Optional - The list of 'Platform's to match. If 'None' is supplied,\
+                          all 'Platform's will be returned.
+        :param since: Optional - The start time to match.
+        :param until: Optional - The end time to match.
         :return: a generator of 'Session' objects
         """
         endpoint = self._build_url(self._default_region) + "/v2/sessions"
+  
         page = 1
         while True:
             params = [("per_page", "50"), ("page", page)]
+
+            if since is not None:
+                params.append(("filter[min_created_at]", since.isoformat()))
+            
+            if until is not None:
+                params.append(("filter[max_created_at]", until.isoformat()))
 
             if labels != None:
                 params.append(("filter[labels][]", labels))
@@ -143,7 +156,7 @@ class Client(object):
             for session in response.sessions:
                 yield session
 
-            if response.pagination.current_page < response.pagination.total_pages:
+            if response.pagination.nextPage is not None and response.pagination.nextPage > 0:
                 page = response.pagination.current_page + 1
             else:
                 break
