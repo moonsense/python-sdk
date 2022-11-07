@@ -72,6 +72,8 @@ class DownloadAllSessions(object):
         created_at = datetime.fromtimestamp(session.created_at.seconds).date()
         formatted_created_at = created_at.strftime("%Y-%m-%d")
 
+        print("Downloading session", session_id, "created at", formatted_created_at)
+
         session_dir_path = os.path.join(datadir, formatted_created_at, session.session_id)
         if with_group_id:
             session_dir_path = os.path.join(datadir,
@@ -174,7 +176,7 @@ class DownloadAllSessions(object):
 
         try:
             # listing is in reverse chronological order - newest are first. 
-            for session in self.moonsense_client.list_sessions(filter_by_labels, platforms=platforms):        
+            for session in self.moonsense_client.list_sessions(filter_by_labels, platforms=platforms, since=since, until=until):
                 group_id = session.client_session_group_id
                 if group_id is None or len(group_id) == 0:
                     group_id = MISSING_GROUP_ID
