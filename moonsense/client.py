@@ -156,7 +156,7 @@ class Client(object):
             for session in response.sessions:
                 yield session
 
-            if response.pagination.nextPage is not None and response.pagination.nextPage > 0:
+            if response.pagination.next_page is not None and response.pagination.next_page > 0:
                 page = response.pagination.current_page + 1
             else:
                 break
