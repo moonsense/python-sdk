@@ -144,7 +144,7 @@ class Client(object):
             http_response = requests.get(
                 endpoint, params, **self._headers
             )
-            print(params)
+
             if http_response.status_code != 200:
                 raise RuntimeError(
                     f"unable to list sessions. status code: {http_response.status_code}"
@@ -154,7 +154,7 @@ class Client(object):
                 http_response.text, SessionListResponse(), ignore_unknown_fields=True)
             if len(response.sessions) == 0:
                 return  # no more sessions
-            print(len(response.sessions))
+
             for session in response.sessions:
                 yield session
 
