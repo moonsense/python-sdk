@@ -111,6 +111,7 @@ class DownloadAllSessions(object):
 
             if msg is None:
                 queue.task_done()
+                continue
 
             try:
                 session_id = msg
