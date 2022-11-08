@@ -67,13 +67,19 @@ def generate_test_sessions_list(count, current_page, total_pages, total_count):
     sessions = []
     for i in range(count):
         sessions.append(generate_test_session())
+    
+    next_page = None
+    if current_page < total_pages:
+        next_page = current_page + 1
+
     return {
         "sessions": sessions,
         "pagination":{
             "current_page": current_page,
             "per_page":50,
             "total_pages": total_pages,
-            "total_count": total_count
+            "total_count": total_count,
+            "next_page": next_page,
         }}
 
 

@@ -21,15 +21,20 @@ with open("README.md", "r") as fh:
 
 setup(
     name="moonsense",
-    version="0.8.5",
+    version="0.9.0",
     packages=find_packages(exclude=["tests*"]),
     description="Moonsense Cloud API Client",
     long_description=long_description,
     long_description_content_type="text/markdown",
+    entry_points={
+        'console_scripts': ['moonsense=moonsense.cli:main'],
+    },
     install_requires=[
         "protobuf>=3,<4",
         "requests>=2.26,<3",
         "pandas>=1.3,<2",
+        "click>=8.1,<9",
+        "retry>=0.9,<1",
     ],
     url="https://github.com/moonsense/python-sdk.git",
     author="Moonsense Team",
