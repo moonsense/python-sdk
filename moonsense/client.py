@@ -37,6 +37,8 @@ from .models import Session, Chunk, TokenSelfResponse, \
 from .download import DownloadAllSessions
 from . import Platform
 
+from retry.api import retry_call
+
 
 class Client(object):
     """ Moonsense Cloud API Client """
@@ -47,6 +49,7 @@ class Client(object):
         root_domain: str = "moonsense.cloud",
         protocol: str = "https",
         default_region: str = "us-central1.gcp",
+        tries: int = 3
     ) -> None:
         """
         Construct a new 'Client' object
@@ -69,6 +72,7 @@ class Client(object):
         self._secret_token = secret_token
         self._headers = {"headers": {
             "Authorization": f"Bearer {self._secret_token}"}}
+        self.tries = tries
 
     def _build_url(self, region: str) -> str:
         if region == "":
@@ -120,14 +124,14 @@ class Client(object):
         :return: a generator of 'Session' objects
         """
         endpoint = self._build_url(self._default_region) + "/v2/sessions"
-  
+
         page = 1
         while True:
             params = [("per_page", "50"), ("page", page)]
 
             if since is not None:
                 params.append(("filter[min_created_at]", since.isoformat()))
-            
+
             if until is not None:
                 params.append(("filter[max_created_at]", until.isoformat()))
 
@@ -141,9 +145,7 @@ class Client(object):
             if platforms != None:
                 params.append(("filter[platforms][]", [p.value for p in platforms]))
 
-            http_response = requests.get(
-                endpoint, params, **self._headers
-            )
+            http_response = retry_call(requests.get, fargs=[endpoint, params], fkwargs=self._headers, tries=self.tries)
 
             if http_response.status_code != 200:
                 raise RuntimeError(
@@ -314,7 +316,7 @@ class Client(object):
                 f"unable to read: {session_id}. status code: {http_response.status_code}")
 
         self._download_file(session_id, http_response, output_file)
-    
+
 
     def download_all_sessions(
         self,
