@@ -32,7 +32,7 @@ from typing import Iterable, List
 
 from .models import Session, Chunk, TokenSelfResponse, \
     DataRegionsListResponse, SessionListResponse, ChunksListResponse, \
-    CardListResponse, Card, SealedBundle
+    CardListResponse, Card, SealedBundle, FeatureListResponse, SignalsResponse
 
 from .download import DownloadAllSessions
 from . import Platform
@@ -254,6 +254,51 @@ class Client(object):
             )
         for line in http_response.iter_lines(chunk_size=1024 * 1024):
             yield json_format.Parse(line, SealedBundle(), ignore_unknown_fields=True)
+
+    def list_session_features(self, session_id, region=None) -> FeatureListResponse:
+        """
+        Lists the features for a given session
+
+        :param session_id: The ID of the session
+        :param region: If not set, will look it up when run
+        :return: a 'FeatureListResponse' object with details
+        """
+        if region == None:
+            session = self.describe_session(session_id)
+            region = session.region_id
+        endpoint = self._build_url(
+            region) + f"/v2/sessions/{session_id}/features"
+
+        http_response = requests.get(endpoint, **self._headers)
+        if http_response.status_code != 200:
+            raise RuntimeError(
+                f"unable to list session features. status code: {http_response.status_code}"
+            )
+
+        return json_format.Parse(http_response.text, FeatureListResponse(), ignore_unknown_fields=True)
+
+    def list_session_signals(self, session_id, region=None) -> SignalsResponse:
+        """
+        Lists the signals for a given session
+
+        :param session_id: The ID of the session
+        :param region: If not set, will look it up when run
+        :return: a 'FeatureListResponse' object with details
+        """
+        if region == None:
+            session = self.describe_session(session_id)
+            region = session.region_id
+        session = self.describe_session(session_id)
+        endpoint = self._build_url(
+            region) + f"/v2/sessions/{session_id}/signals"
+
+        http_response = requests.get(endpoint, **self._headers)
+        if http_response.status_code != 200:
+            raise RuntimeError(
+                f"unable to list session signals. status code: {http_response.status_code}"
+            )
+
+        return json_format.Parse(http_response.text, SignalsResponse(), ignore_unknown_fields=True)
 
     def _download_file(self, session_id, http_response, output_file):
         # create temporary director for writing and unpacking tar.gz file.

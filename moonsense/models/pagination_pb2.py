@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\023io.moonsense.modelsB\020PaginationProtosZ)moonsense.io/pkg/pb/pagination;pagination',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x10pagination.proto\x12\npagination\"\x13\n\x11PaginationRequest\"\x90\x01\n\x12PaginationResponse\x12\x14\n\x0c\x63urrent_page\x18\x01 \x01(\x05\x12\x15\n\rprevious_page\x18\x02 \x01(\x05\x12\x11\n\tnext_page\x18\x03 \x01(\x05\x12\x10\n\x08per_page\x18\x04 \x01(\x05\x12\x13\n\x0btotal_pages\x18\x05 \x01(\x05\x12\x13\n\x0btotal_count\x18\x06 \x01(\x05\x42R\n\x13io.moonsense.modelsB\x10PaginationProtosZ)moonsense.io/pkg/pb/pagination;paginationb\x06proto3'
+  serialized_pb=b'\n\x10pagination.proto\x12\npagination\"\x13\n\x11PaginationRequest\"\x98\x01\n\x12PaginationResponse\x12\x14\n\x0c\x63urrent_page\x18\x01 \x01(\x05\x12\x15\n\rprevious_page\x18\x02 \x01(\x05\x12\x11\n\tnext_page\x18\x03 \x01(\x05\x12\x10\n\x08per_page\x18\x04 \x01(\x05\x12\x17\n\x0btotal_pages\x18\x05 \x01(\x05\x42\x02\x18\x01\x12\x17\n\x0btotal_count\x18\x06 \x01(\x05\x42\x02\x18\x01\x42R\n\x13io.moonsense.modelsB\x10PaginationProtosZ)moonsense.io/pkg/pb/pagination;paginationb\x06proto3'
 )
 
 
@@ -92,14 +92,14 @@ _PAGINATIONRESPONSE = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+      serialized_options=b'\030\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='total_count', full_name='pagination.PaginationResponse.total_count', index=5,
       number=6, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+      serialized_options=b'\030\001', file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -113,7 +113,7 @@ _PAGINATIONRESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=54,
-  serialized_end=198,
+  serialized_end=206,
 )
 
 DESCRIPTOR.message_types_by_name['PaginationRequest'] = _PAGINATIONREQUEST
@@ -136,4 +136,6 @@ _sym_db.RegisterMessage(PaginationResponse)
 
 
 DESCRIPTOR._options = None
+_PAGINATIONRESPONSE.fields_by_name['total_pages']._options = None
+_PAGINATIONRESPONSE.fields_by_name['total_count']._options = None
 # @@protoc_insertion_point(module_scope)
