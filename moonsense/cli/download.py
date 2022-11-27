@@ -4,7 +4,7 @@ import signal
 from moonsense import Platform
 from moonsense.client import Client
 
-MISSING_GROUP_ID = "missing-group-id"
+MISSING_JOURNEY_ID = "missing-journey-id"
 GRACE_PERIOD = 2
 KILL_PERIOD = 30
 
@@ -22,7 +22,7 @@ def run_download(
     since: datetime,
     labels: list[str],
     platforms: list[str],
-    with_group_id: bool = False) -> None:
+    with_journey_id: bool = False) -> None:
     """
     Download all sessions from a project based on the provided filters.
 
@@ -36,8 +36,8 @@ def run_download(
                 one label in this list to be downloaded.
     :param platform: Filter downloaded sessions by the platforms they were produced:
                         web, ios, android or None for all.
-    :param with_group_id: If set to True, organizes the downloaded sessions by date and
-                        client session group id. Default: False.
+    :param with_journey_id: If set to True, organizes the downloaded sessions by date and
+                        journey id. Default: False.
     """
     signal.signal(signal.SIGINT, handler("SIGINT"))
     signal.signal(signal.SIGTERM, handler("SIGTERM"))
@@ -68,4 +68,4 @@ def run_download(
         filter_by_since,
         labels,
         filter_by_platforms,
-        with_group_id)
+        with_journey_id)
