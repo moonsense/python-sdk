@@ -31,7 +31,7 @@ from retry import retry
 
 from . import Platform
 
-MISSING_GROUP_ID = "missing-group-id"
+MISSING_JOURNEY_ID = "missing-journey-id"
 GRACE_PERIOD = 2
 KILL_PERIOD = 30
 
@@ -53,7 +53,7 @@ class DownloadAllSessions(object):
     def download_data_into_folder(
         self,
         datadir: str,
-        with_group_id: bool,
+        with_journey_id: bool,
         session_id: str) -> None:
 
         session = None
@@ -63,9 +63,9 @@ class DownloadAllSessions(object):
             print("Error encountered while describing session", e)
             raise e
 
-        group_id = session.client_session_group_id
-        if group_id is None or len(group_id) == 0:
-            group_id = MISSING_GROUP_ID
+        journey_id = session.journey_id
+        if journey_id is None or len(journey_id) == 0:
+            journey_id = MISSING_JOURNEY_ID
         
         session_as_json = MessageToJson(session)
 
@@ -75,10 +75,10 @@ class DownloadAllSessions(object):
         print("Downloading session", session_id, "created at", formatted_created_at)
 
         session_dir_path = os.path.join(datadir, formatted_created_at, session.session_id)
-        if with_group_id:
+        if with_journey_id:
             session_dir_path = os.path.join(datadir,
                 created_at.strftime("%Y-%m-%d"),
-                group_id,
+                journey_id,
                 session.session_id)
 
         metadata_path = os.path.join(session_dir_path, "metadata.json")
@@ -96,7 +96,7 @@ class DownloadAllSessions(object):
             print("Error encountered while downloading session", e)
             raise e
 
-    def download_session(self, queue, stop_event, datadir, with_group_id):
+    def download_session(self, queue, stop_event, datadir, with_journey_id):
         signal.signal(signal.SIGINT, signal.SIG_IGN)
 
         while True:
@@ -115,7 +115,7 @@ class DownloadAllSessions(object):
 
             try:
                 session_id = msg
-                self.download_data_into_folder(datadir, with_group_id, session_id)
+                self.download_data_into_folder(datadir, with_journey_id, session_id)
             finally:
                 queue.task_done()
     
@@ -126,7 +126,7 @@ class DownloadAllSessions(object):
         since: datetime,
         labels: list[str],
         platforms: list[Platform],
-        with_group_id: bool = False) -> None:
+        with_journey_id: bool = False) -> None:
         """
         Download all sessions from a project based on the provided filters.
 
@@ -140,8 +140,8 @@ class DownloadAllSessions(object):
                     one label in this list to be downloaded.
         :param platforms: Filter downloaded sessions by the platforms they were produced:
                          web, ios, android or None for all.
-        :param with_group_id: If set to True, organizes the downloaded sessions by date and
-                            client session group id. Default: False.
+        :param with_journey_id: If set to True, organizes the downloaded sessions by date and
+                            journey id. Default: False.
         """
         signal.signal(signal.SIGINT, handler("SIGINT"))
         signal.signal(signal.SIGTERM, handler("SIGTERM"))
@@ -168,7 +168,7 @@ class DownloadAllSessions(object):
         for process_count in range(number_of_processes):
             local_process = Process(target=self.download_session,
                 daemon=True,
-                args=((self.queue, self.stop_event, datadir, with_group_id)))
+                args=((self.queue, self.stop_event, datadir, with_journey_id)))
             all_procs.append(local_process)
             local_process.start()
 
@@ -178,9 +178,9 @@ class DownloadAllSessions(object):
         try:
             # listing is in reverse chronological order - newest are first. 
             for session in self.moonsense_client.list_sessions(filter_by_labels, platforms=platforms, since=since, until=until):
-                group_id = session.client_session_group_id
-                if group_id is None or len(group_id) == 0:
-                    group_id = MISSING_GROUP_ID
+                journey_id = session.journey_id
+                if journey_id is None or len(journey_id) == 0:
+                    journey_id = MISSING_JOURNEY_ID
 
                 created_at = datetime.fromtimestamp(session.created_at.seconds).date()
 
@@ -191,10 +191,10 @@ class DownloadAllSessions(object):
                     break
 
                 session_dir_path = os.path.join(datadir, created_at.strftime("%Y-%m-%d"), session.session_id)
-                if with_group_id:
+                if with_journey_id:
                     session_dir_path = os.path.join(datadir,
                         created_at.strftime("%Y-%m-%d"),
-                        group_id,
+                        journey_id,
                         session.session_id)
 
                 if not os.path.isdir(session_dir_path):
