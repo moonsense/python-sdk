@@ -12,10 +12,10 @@ def main():
 @click.option('--label', '-l', multiple=True, help='Filter downloaded sessions by provided labels')
 @click.option('--platform', '-p', multiple=True, help='Filter downloaded sessions by platform: web,\
               ios, android. Leave this empty for all platforms')
-@click.option('--with-group-id', default=False, help='If true, the folder structure uses includes the \
-              client session group id')
-def download(until, since, output, label, platform, with_group_id):
-    run_download(output, until, since, label, platform, with_group_id)
+@click.option('--with-journey-id', default=False, help='If true, the folder structure uses includes the \
+              journey id')
+def download(until, since, output, label, platform, with_journey_id):
+    run_download(output, until, since, label, platform, with_journey_id)
 
 main.add_command(download)
 
