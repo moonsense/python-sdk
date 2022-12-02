@@ -37,6 +37,8 @@ from .models import Session, Chunk, TokenSelfResponse, \
 from .download import DownloadAllSessions
 from . import Platform
 
+from retry.api import retry_call
+
 
 class Client(object):
     """ Moonsense Cloud API Client """
@@ -47,6 +49,7 @@ class Client(object):
         root_domain: str = "moonsense.cloud",
         protocol: str = "https",
         default_region: str = "us-central1.gcp",
+        tries: int = 3
     ) -> None:
         """
         Construct a new 'Client' object
@@ -69,6 +72,7 @@ class Client(object):
         self._secret_token = secret_token
         self._headers = {"headers": {
             "Authorization": f"Bearer {self._secret_token}"}}
+        self.tries = tries
 
     def _build_url(self, region: str) -> str:
         if region == "":
@@ -140,9 +144,7 @@ class Client(object):
             if platforms is not None:
                 params.append(("filter[platforms][]", [p.value for p in platforms]))
 
-            http_response = requests.get(
-                endpoint, params, **self._headers
-            )
+            http_response = retry_call(requests.get, fargs=[endpoint, params], fkwargs=self._headers, tries=self.tries)
 
             if http_response.status_code != 200:
                 raise RuntimeError(

@@ -8,7 +8,7 @@ MISSING_JOURNEY_ID = "missing-journey-id"
 GRACE_PERIOD = 2
 KILL_PERIOD = 30
 
-moonsense_client = Client()
+moonsense_client = Client(tries=5)
 
 
 def handler(signalname):
@@ -53,7 +53,7 @@ def run_download(
         filter_by_until = datetime.strptime(until, "%Y-%m-%d").date()
     else:
         filter_by_until = date.today()
-    
+
     filter_by_platforms = None
     if platforms is not None:
         filter_by_platforms = []

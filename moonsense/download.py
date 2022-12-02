@@ -48,7 +48,7 @@ class DownloadAllSessions(object):
         self.moonsense_client = moonsense_client
         self.queue = JoinableQueue()
         self.stop_event = Event()
-    
+
     @retry(Exception, tries=3, delay=0)
     def download_data_into_folder(
         self,
@@ -62,6 +62,7 @@ class DownloadAllSessions(object):
         except Exception as e:
             print("Error encountered while describing session", e)
             raise e
+
 
         journey_id = session.journey_id
         if journey_id is None or len(journey_id) == 0:
@@ -118,7 +119,7 @@ class DownloadAllSessions(object):
                 self.download_data_into_folder(datadir, with_journey_id, session_id)
             finally:
                 queue.task_done()
-    
+
     def download(
         self,
         output: str,
@@ -154,7 +155,7 @@ class DownloadAllSessions(object):
                 datadir = output
             else:
                 datadir = os.path.join(os.getcwd(), output)
-        
+
         # if path not present create it
         if not os.path.isdir(datadir):
             os.makedirs(datadir, exist_ok=True)
@@ -176,7 +177,7 @@ class DownloadAllSessions(object):
         filter_by_labels = labels if len(labels) > 0 else None
 
         try:
-            # listing is in reverse chronological order - newest are first. 
+            # listing is in reverse chronological order - newest are first.
             for session in self.moonsense_client.list_sessions(filter_by_labels, platforms=platforms, since=since, until=until):
                 journey_id = session.journey_id
                 if journey_id is None or len(journey_id) == 0:
@@ -202,10 +203,10 @@ class DownloadAllSessions(object):
 
                 session_counter += 1
                 self.queue.put(session.session_id)
-            
+
             for local_process in all_procs:
                 self.queue.put(None)
-            
+
             self.queue.join()
         except KeyboardInterrupt:
             self.stop_event.set()
