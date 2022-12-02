@@ -55,8 +55,8 @@ The request payload use the following schema:
     string session_id = 3;
     WebhookEventTypes event_type = 4;
     v2.bundle.SealedBundle bundle = 5; // payload is optional and only a small number of events require a bundle.
-    string client_session_group_id = 6;
     repeated string session_labels = 7;
+    string journey_id = 8;
 }
 ```
 
