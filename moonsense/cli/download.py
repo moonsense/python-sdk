@@ -11,15 +11,12 @@ KILL_PERIOD = 30
 moonsense_client = Client(tries=5)
 
 
-def handler(signalname):
-    def wrapper_handler(signal_received, frame):
-        raise KeyboardInterrupt(f"{signalname} received")
-    return wrapper_handler
-
 def run_download(
     output: str,
     until: datetime,
     since: datetime,
+    skip_days: list[str],
+    incremental: bool,
     labels: list[str],
     platforms: list[str],
     with_journey_id: bool = False) -> None:
@@ -32,6 +29,8 @@ def run_download(
                 If not provided, the current day is used.
     :param since: Date in the YYYY-MM-DD format since the session data should be included.
                 If not provided beginning of Moonsense time - 1st of January 2021 is used.
+    :param skip_days: A list of days in the YYYY-MM-DD format that should be skipped.
+    :param incremental: If set to True, only downloads sessions that are not already downloaded.
     :param labels: A list of labels to filter sessions by. A session needs to include at least
                 one label in this list to be downloaded.
     :param platform: Filter downloaded sessions by the platforms they were produced:
@@ -39,8 +38,6 @@ def run_download(
     :param with_journey_id: If set to True, organizes the downloaded sessions by date and
                         journey id. Default: False.
     """
-    signal.signal(signal.SIGINT, handler("SIGINT"))
-    signal.signal(signal.SIGTERM, handler("SIGTERM"))
 
     filter_by_since = datetime
     if since is not None:
@@ -52,20 +49,26 @@ def run_download(
     if until is not None:
         filter_by_until = datetime.strptime(until, "%Y-%m-%d").date()
     else:
-        filter_by_until = date.today()
+        filter_by_until = datetime.utcnow().date()
 
     filter_by_platforms = None
     if platforms is not None:
         filter_by_platforms = []
         for p in platforms:
             filter_by_platforms.append(Platform.from_str(p))
-
-    print("Downloading sessions in between", filter_by_since, filter_by_until)
+    
+    filter_by_skip_days = []
+    if skip_days is not None:
+        for day in skip_days:
+            parsed_day_to_skip = datetime.strptime(day, "%Y-%m-%d").date()
+            filter_by_skip_days.append(parsed_day_to_skip)
 
     moonsense_client.download_all_sessions(
         output,
         filter_by_until,
         filter_by_since,
+        filter_by_skip_days,
+        incremental,
         labels,
         filter_by_platforms,
         with_journey_id)
