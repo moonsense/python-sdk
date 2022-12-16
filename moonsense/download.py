@@ -65,7 +65,7 @@ class DownloadAllSessions(object):
         journey_id = session.journey_id
         if journey_id is None or len(journey_id) == 0:
             journey_id = MISSING_JOURNEY_ID
-        
+
         session_as_json = MessageToJson(session)
 
         created_at = datetime.fromtimestamp(session.created_at.seconds).date()
@@ -133,7 +133,7 @@ class DownloadAllSessions(object):
                     max_date = date
             except ValueError:
                 continue
-        
+
         if max_date is None:
             return None
 
@@ -158,16 +158,16 @@ class DownloadAllSessions(object):
                     # if with_journey_id is not set, the folder name is a session_id
                     metadata_file_path = os.path.join(max_folder_path, folder_name, "metadata.json")
                     max_timestamp = self._read_metadata_file_for_created_at(metadata_file_path)
-        
+
         return max_timestamp
-    
+
 
     def _write_max_timestamp_file(self, datadir: str, created_at_str: str, max_timestamp: int):
         max_timestamp_file_path = os.path.join(datadir, created_at_str, MAX_TIMESTAMP_FILENAME)
         with open(max_timestamp_file_path, "w") as f:
             f.write(str(max_timestamp))
 
-    
+
     def download(
         self,
         output: str,
@@ -204,10 +204,10 @@ class DownloadAllSessions(object):
                 datadir = output
             else:
                 datadir = os.path.join(os.getcwd(), output)
-        
+
         if not isinstance(since, datetime):
             since = datetime.combine(since, datetime.min.time())
-        
+
         if not isinstance(until, datetime):
             until = datetime.combine(until, datetime.max.time())
 
@@ -217,7 +217,7 @@ class DownloadAllSessions(object):
 
         # MOONSENSE_DOWNLOAD_PARALLELISM is the number of parallel processes to use
         # if not set, use the number of cores * 2    
-        number_of_processes = os.environ.get("MOONSENSE_DOWNLOAD_PARALLELISM", os.cpu_count() * 2)
+        number_of_processes = int(os.environ.get("MOONSENSE_DOWNLOAD_PARALLELISM", os.cpu_count() * 2))
 
         max_timestamp = None
         if incremental:
@@ -228,7 +228,7 @@ class DownloadAllSessions(object):
                 # so that we don't download the same session again
                 max_timestamp = max_timestamp + timedelta(seconds=1)
                 since = max_timestamp
-        
+
         if since > until:
             raise ValueError("Since value larger than until value")
 
@@ -246,7 +246,7 @@ class DownloadAllSessions(object):
         max_timestamp_per_day = {}
 
         print("Downloading sessions from {} to {}".format(since, until))
-        
+
         try:
             # listing is in reverse chronological order - newest are first.
             for session in self.moonsense_client.list_sessions(filter_by_labels, platforms=platforms, since=since,
@@ -268,7 +268,6 @@ class DownloadAllSessions(object):
 
                     if matched:
                         continue
-                        
 
                 if created_at_datetime > until:
                     continue
@@ -287,7 +286,7 @@ class DownloadAllSessions(object):
 
                 if not os.path.isdir(session_dir_path):
                     os.makedirs(session_dir_path)
-                
+
                 if created_at_str in max_timestamp_per_day:
                     if created_at_timestamp > max_timestamp_per_day[created_at_str]:
                         max_timestamp_per_day[created_at_str] = created_at_timestamp
