@@ -25,7 +25,7 @@ import requests
 import tempfile
 import tarfile
 import shutil
-from datetime import datetime
+from datetime import date, datetime
 
 from google.protobuf import json_format
 from typing import Iterable, List
@@ -367,6 +367,8 @@ class Client(object):
         output: str,
         until: datetime,
         since: datetime,
+        skip_days: list[date],
+        incremental: bool,
         labels: list[str],
         platforms: List[Platform] = None,
         with_journey_id: bool = False) -> None:
@@ -387,7 +389,7 @@ class Client(object):
                             journey id. Default: False.
         """
         DownloadAllSessions(self).download(
-            output, until, since, labels, platforms, with_journey_id)
+            output, until, since, skip_days, incremental, labels, platforms, with_journey_id)
 
 
     def read_session(self, session_id) -> Iterable[SealedBundle]:

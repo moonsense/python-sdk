@@ -18,11 +18,12 @@ limitations under the License.
 
 
 import os
-from time import time, sleep
 import signal
+import json
+from time import time, sleep
 from functools import partial
 
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from multiprocessing import Process, JoinableQueue, Event
 from queue import Empty
 
@@ -35,10 +36,7 @@ MISSING_JOURNEY_ID = "missing-journey-id"
 GRACE_PERIOD = 2
 KILL_PERIOD = 30
 
-def handler(signalname):
-    def wrapper_handler(signal_received, frame):
-        raise KeyboardInterrupt(f"{signalname} received")
-    return wrapper_handler
+MAX_TIMESTAMP_FILENAME = "max_timestamp"
 
 
 class DownloadAllSessions(object):
@@ -46,7 +44,7 @@ class DownloadAllSessions(object):
         self,
         moonsense_client) -> None:
         self.moonsense_client = moonsense_client
-        self.queue = JoinableQueue()
+        self.queue = JoinableQueue(maxsize=25)
         self.stop_event = Event()
 
     @retry(Exception, tries=3, delay=0)
@@ -120,11 +118,63 @@ class DownloadAllSessions(object):
             finally:
                 queue.task_done()
 
+    def _read_metadata_file_for_created_at(self, metadata_file_path: str) -> int:
+        with open(metadata_file_path, "r") as metadata_file:
+            metadata = json.load(metadata_file)
+            created_at = datetime.strptime(metadata["createdAt"], "%Y-%m-%dT%H:%M:%S.%fZ")
+            return int(created_at.timestamp())
+
+    def get_max_timestamp(self, datadir: str, with_journey_id: bool) -> int:
+        max_date = None
+        for dated_dir in os.listdir(datadir):
+            try:
+                date = datetime.strptime(dated_dir, "%Y-%m-%d")
+                if max_date is None or date > max_date:
+                    max_date = date
+            except ValueError:
+                continue
+        
+        if max_date is None:
+            return None
+
+        # within the folder with max date - do we have the max_timestamp file? if so read that and return
+        max_timestamp_file_path = os.path.join(datadir, max_date.strftime("%Y-%m-%d"), MAX_TIMESTAMP_FILENAME)
+        if os.path.isfile(max_timestamp_file_path):
+            with open(max_timestamp_file_path, "r") as max_timestamp_file:
+                max_timestamp = max_timestamp_file.read()
+        else:
+            # if there is no max_timestamp file, look through the max_date folder and find the max timestamp
+            # by reading the created_at field from the metadata.json file
+            max_folder_path = os.path.join(datadir, max_date.strftime("%Y-%m-%d"))
+            for folder_name in os.listdir(max_folder_path):
+                # folder name can be either a session_id or a journey_id depending if with_journey_id is set
+                if with_journey_id:
+                    # if with_journey_id is set, the folder name is a journey_id
+                    for session_id in os.listdir(os.path.join(max_folder_path, folder_name)):
+                        metadata_file_path = os.path.join(max_folder_path, folder_name, session_id, "metadata.json")
+                        if os.path.isfile(metadata_file_path):
+                            max_timestamp = self._read_metadata_file_for_created_at(metadata_file_path)
+                else:
+                    # if with_journey_id is not set, the folder name is a session_id
+                    metadata_file_path = os.path.join(max_folder_path, folder_name, "metadata.json")
+                    max_timestamp = self._read_metadata_file_for_created_at(metadata_file_path)
+        
+        return max_timestamp
+    
+
+    def _write_max_timestamp_file(self, datadir: str, created_at_str: str, max_timestamp: int):
+        max_timestamp_file_path = os.path.join(datadir, created_at_str, MAX_TIMESTAMP_FILENAME)
+        with open(max_timestamp_file_path, "w") as f:
+            f.write(str(max_timestamp))
+
+    
     def download(
         self,
         output: str,
         until: datetime,
         since: datetime,
+        skip_days: list[date],
+        incremental: bool,
         labels: list[str],
         platforms: list[Platform],
         with_journey_id: bool = False) -> None:
@@ -135,6 +185,8 @@ class DownloadAllSessions(object):
                        directory.
         :param until: Date in the YYYY-MM-DD format until the session data should be included.
                     If not provided, the current day is used.
+        :param skip_days: A list of dates that should be skipped.
+        :param incremental: If set to True, only downloads sessions that are not already downloaded.
         :param since: Date in the YYYY-MM-DD format since the session data should be included.
                     If not provided beginning of Moonsense time - 1st of January 2021 is used.
         :param labels: A list of labels to filter sessions by. A session needs to include at least
@@ -144,9 +196,6 @@ class DownloadAllSessions(object):
         :param with_journey_id: If set to True, organizes the downloaded sessions by date and
                             journey id. Default: False.
         """
-        signal.signal(signal.SIGINT, handler("SIGINT"))
-        signal.signal(signal.SIGTERM, handler("SIGTERM"))
-
         localdir = os.getcwd()
         datadir = os.path.join(localdir, "data")
         # if output is present, check if it's absolute or relative
@@ -155,14 +204,33 @@ class DownloadAllSessions(object):
                 datadir = output
             else:
                 datadir = os.path.join(os.getcwd(), output)
+        
+        if not isinstance(since, datetime):
+            since = datetime.combine(since, datetime.min.time())
+        
+        if not isinstance(until, datetime):
+            until = datetime.combine(until, datetime.max.time())
 
         # if path not present create it
         if not os.path.isdir(datadir):
             os.makedirs(datadir, exist_ok=True)
 
-        number_of_processes = os.cpu_count() * 2
+        # MOONSENSE_DOWNLOAD_PARALLELISM is the number of parallel processes to use
+        # if not set, use the number of cores * 2    
+        number_of_processes = os.environ.get("MOONSENSE_DOWNLOAD_PARALLELISM", os.cpu_count() * 2)
 
+        max_timestamp = None
+        if incremental:
+            max_timestamp = self.get_max_timestamp(datadir, with_journey_id)
+            if max_timestamp is not None:
+                max_timestamp = datetime.fromtimestamp(int(max_timestamp))
+                # if we have a max_timestamp, we need to add 1 second to it
+                # so that we don't download the same session again
+                max_timestamp = max_timestamp + timedelta(seconds=1)
+                since = max_timestamp
+        
         if since > until:
+            print(since, until)
             raise ValueError("Since value larger than until value")
 
         all_procs = []
@@ -176,30 +244,58 @@ class DownloadAllSessions(object):
         session_counter = 0
         filter_by_labels = labels if len(labels) > 0 else None
 
+        max_timestamp_per_day = {}
+
+        print(since, until)
+        
         try:
             # listing is in reverse chronological order - newest are first.
-            for session in self.moonsense_client.list_sessions(filter_by_labels, platforms=platforms, since=since, until=until):
+            for session in self.moonsense_client.list_sessions(filter_by_labels, platforms=platforms, since=since,
+                                                               until=until):
                 journey_id = session.journey_id
                 if journey_id is None or len(journey_id) == 0:
                     journey_id = MISSING_JOURNEY_ID
 
-                created_at = datetime.fromtimestamp(session.created_at.seconds).date()
+                created_at_datetime = datetime.fromtimestamp(session.created_at.seconds)
+                created_at_timestamp = int(created_at_datetime.timestamp())
 
-                if created_at > until:
+                if skip_days is not None:
+                    matched = False
+                    for skip_day in skip_days:
+                        if (created_at_datetime.date() - skip_day).days == 0:
+                            print("Skipping sessions id {} because it was created on {}".format(session.session_id, skip_day))
+                            matched = True
+                            break
+
+                    if matched:
+                        continue
+                        
+
+                if created_at_datetime > until:
                     continue
 
-                if created_at < since:
+                if created_at_datetime < since:
                     break
 
-                session_dir_path = os.path.join(datadir, created_at.strftime("%Y-%m-%d"), session.session_id)
+                created_at_str = created_at_datetime.date().strftime("%Y-%m-%d")
+
+                session_dir_path = os.path.join(datadir, created_at_str, session.session_id)
                 if with_journey_id:
                     session_dir_path = os.path.join(datadir,
-                        created_at.strftime("%Y-%m-%d"),
+                        created_at_str,
                         journey_id,
                         session.session_id)
 
                 if not os.path.isdir(session_dir_path):
                     os.makedirs(session_dir_path)
+                
+                if created_at_str in max_timestamp_per_day:
+                    if created_at_timestamp > max_timestamp_per_day[created_at_str]:
+                        max_timestamp_per_day[created_at_str] = created_at_timestamp
+                        self._write_max_timestamp_file(datadir, created_at_str, created_at_timestamp)
+                else:
+                    max_timestamp_per_day[created_at_str] = created_at_timestamp
+                    self._write_max_timestamp_file(datadir, created_at_str, created_at_timestamp)
 
                 session_counter += 1
                 self.queue.put(session.session_id)
