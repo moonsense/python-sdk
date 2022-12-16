@@ -230,7 +230,6 @@ class DownloadAllSessions(object):
                 since = max_timestamp
         
         if since > until:
-            print(since, until)
             raise ValueError("Since value larger than until value")
 
         all_procs = []
@@ -246,7 +245,7 @@ class DownloadAllSessions(object):
 
         max_timestamp_per_day = {}
 
-        print(since, until)
+        print("Downloading sessions from {} to {}".format(since, until))
         
         try:
             # listing is in reverse chronological order - newest are first.
