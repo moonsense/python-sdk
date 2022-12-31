@@ -100,7 +100,6 @@ class DownloadAllSessions(object):
             raise e
 
     def download_session(self, queue, stop_event, datadir, with_journey_id, process_count):
-        signal.signal(signal.SIGINT, signal.SIG_IGN)
 
         while True:
             if stop_event.is_set():
