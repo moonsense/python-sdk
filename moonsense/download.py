@@ -44,8 +44,12 @@ class DownloadAllSessions(object):
         self,
         moonsense_client) -> None:
         self.moonsense_client = moonsense_client
-        self.queue = JoinableQueue(maxsize=25)
         self.stop_event = Event()
+        
+        # MOONSENSE_DOWNLOAD_PARALLELISM is the number of parallel processes to use
+        # if not set, use the number of cores * 2    
+        self.number_of_processes = int(os.environ.get("MOONSENSE_DOWNLOAD_PARALLELISM", os.cpu_count() * 2))
+        self.queue = JoinableQueue(maxsize=self.number_of_processes * 2)
 
     @retry(Exception, tries=3, delay=0)
     def download_data_into_folder(
@@ -95,7 +99,7 @@ class DownloadAllSessions(object):
             print("Error encountered while downloading session", e)
             raise e
 
-    def download_session(self, queue, stop_event, datadir, with_journey_id):
+    def download_session(self, queue, stop_event, datadir, with_journey_id, process_count):
         signal.signal(signal.SIGINT, signal.SIG_IGN)
 
         while True:
@@ -114,7 +118,9 @@ class DownloadAllSessions(object):
 
             try:
                 session_id = msg
+                print("Process", process_count, "downloading session", session_id)
                 self.download_data_into_folder(datadir, with_journey_id, session_id)
+                print("Process", process_count, "finished downloading session", session_id)
             finally:
                 queue.task_done()
 
@@ -215,9 +221,6 @@ class DownloadAllSessions(object):
         if not os.path.isdir(datadir):
             os.makedirs(datadir, exist_ok=True)
 
-        # MOONSENSE_DOWNLOAD_PARALLELISM is the number of parallel processes to use
-        # if not set, use the number of cores * 2    
-        number_of_processes = int(os.environ.get("MOONSENSE_DOWNLOAD_PARALLELISM", os.cpu_count() * 2))
 
         max_timestamp = None
         if incremental:
@@ -231,14 +234,15 @@ class DownloadAllSessions(object):
 
         if since > until:
             raise ValueError("Since value larger than until value")
-
+        
         all_procs = []
-        for process_count in range(number_of_processes):
+        for process_count in range(self.number_of_processes):
             local_process = Process(target=self.download_session,
                 daemon=True,
-                args=((self.queue, self.stop_event, datadir, with_journey_id)))
+                args=((self.queue, self.stop_event, datadir, with_journey_id, process_count)))
             all_procs.append(local_process)
             local_process.start()
+
 
         session_counter = 0
         filter_by_labels = labels if len(labels) > 0 else None
@@ -296,7 +300,9 @@ class DownloadAllSessions(object):
                     self._write_max_timestamp_file(datadir, created_at_str, created_at_timestamp)
 
                 session_counter += 1
+                print("Submitting session {} for download".format(session.session_id))
                 self.queue.put(session.session_id)
+                print("Done submitting session {} for download".format(session.session_id))
 
             for local_process in all_procs:
                 self.queue.put(None)

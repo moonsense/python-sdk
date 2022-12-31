@@ -143,7 +143,8 @@ class Client(object):
 
             if platforms is not None:
                 params.append(("filter[platforms][]", [p.value for p in platforms]))
-
+            
+            print("Fetching session list with params: ", params)
             http_response = retry_call(requests.get, fargs=[endpoint, params], fkwargs=self._headers, tries=self.tries)
 
             if http_response.status_code != 200:
@@ -153,6 +154,9 @@ class Client(object):
 
             response = json_format.Parse(
                 http_response.text, SessionListResponse(), ignore_unknown_fields=True)
+            
+            print("Got %s sessions" % len(response.sessions))
+
             if len(response.sessions) == 0:
                 return  # no more sessions
 
