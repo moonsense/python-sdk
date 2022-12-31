@@ -100,7 +100,6 @@ class DownloadAllSessions(object):
             raise e
 
     def download_session(self, queue, stop_event, datadir, with_journey_id, process_count):
-
         while True:
             if stop_event.is_set():
                 break
@@ -120,6 +119,8 @@ class DownloadAllSessions(object):
                 print("Process", process_count, "downloading session", session_id)
                 self.download_data_into_folder(datadir, with_journey_id, session_id)
                 print("Process", process_count, "finished downloading session", session_id)
+            except:
+                print("Process", process_count, "failed downloading session", session_id)
             finally:
                 queue.task_done()
 
