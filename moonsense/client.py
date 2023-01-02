@@ -26,6 +26,7 @@ import tempfile
 import tarfile
 import shutil
 from datetime import date, datetime
+import pytz
 
 from google.protobuf import json_format
 from typing import Iterable, List
@@ -130,10 +131,12 @@ class Client(object):
             params = [("per_page", "50"), ("page", page)]
 
             if since is not None:
-                params.append(("filter[min_created_at]", since.isoformat()))
+                since_with_tz = since.replace(tzinfo=pytz.UTC)
+                params.append(("filter[min_created_at]", since_with_tz.isoformat()))
 
             if until is not None:
-                params.append(("filter[max_created_at]", until.isoformat()))
+                until_with_tz = since.replace(tzinfo=pytz.UTC)
+                params.append(("filter[max_created_at]", until_with_tz.isoformat()))
 
             if labels is not None:
                 params.append(("filter[labels][]", labels))
