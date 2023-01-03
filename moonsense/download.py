@@ -22,6 +22,7 @@ import signal
 import json
 from time import time, sleep
 from functools import partial
+import logging
 
 from datetime import date, datetime, timedelta
 from multiprocessing import Process, JoinableQueue, Event
@@ -38,13 +39,21 @@ KILL_PERIOD = 30
 
 MAX_TIMESTAMP_FILENAME = "max_timestamp"
 
+log = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
+
 
 class DownloadAllSessions(object):
     def __init__(
         self,
         moonsense_client) -> None:
         self.moonsense_client = moonsense_client
-        self.queue = JoinableQueue(maxsize=25)
+
+        # MOONSENSE_DOWNLOAD_PARALLELISM is the number of parallel processes to use
+        # if not set, use the number of cores * 2
+        self.number_of_processes = int(os.environ.get("MOONSENSE_DOWNLOAD_PARALLELISM", os.cpu_count() * 2))
+
+        self.queue = JoinableQueue(maxsize=2 * self.number_of_processes)
         self.stop_event = Event()
 
     @retry(Exception, tries=3, delay=0)
@@ -61,7 +70,6 @@ class DownloadAllSessions(object):
             print("Error encountered while describing session", e)
             raise e
 
-
         journey_id = session.journey_id
         if journey_id is None or len(journey_id) == 0:
             journey_id = MISSING_JOURNEY_ID
@@ -71,7 +79,7 @@ class DownloadAllSessions(object):
         created_at = datetime.fromtimestamp(session.created_at.seconds).date()
         formatted_created_at = created_at.strftime("%Y-%m-%d")
 
-        print("Downloading session", session_id, "created at", formatted_created_at)
+        log.info("Downloading session %s created at %s", session_id, formatted_created_at)
 
         session_dir_path = os.path.join(datadir, formatted_created_at, session.session_id)
         if with_journey_id:
@@ -177,7 +185,8 @@ class DownloadAllSessions(object):
         incremental: bool,
         labels: list[str],
         platforms: list[Platform],
-        with_journey_id: bool = False) -> None:
+        with_journey_id: bool = False,
+        verbose: bool = False) -> None:
         """
         Download all sessions from a project based on the provided filters.
 
@@ -195,7 +204,11 @@ class DownloadAllSessions(object):
                          web, ios, android or None for all.
         :param with_journey_id: If set to True, organizes the downloaded sessions by date and
                             journey id. Default: False.
+        :param verbose: If set to True, turns on more verbose logging. Default: False.
         """
+        if verbose:
+            logging.basicConfig(level=logging.DEBUG)
+
         localdir = os.getcwd()
         datadir = os.path.join(localdir, "data")
         # if output is present, check if it's absolute or relative
@@ -215,10 +228,6 @@ class DownloadAllSessions(object):
         if not os.path.isdir(datadir):
             os.makedirs(datadir, exist_ok=True)
 
-        # MOONSENSE_DOWNLOAD_PARALLELISM is the number of parallel processes to use
-        # if not set, use the number of cores * 2    
-        number_of_processes = int(os.environ.get("MOONSENSE_DOWNLOAD_PARALLELISM", os.cpu_count() * 2))
-
         max_timestamp = None
         if incremental:
             max_timestamp = self.get_max_timestamp(datadir, with_journey_id)
@@ -233,7 +242,7 @@ class DownloadAllSessions(object):
             raise ValueError("Since value larger than until value")
 
         all_procs = []
-        for process_count in range(number_of_processes):
+        for process_count in range(self.number_of_processes):
             local_process = Process(target=self.download_session,
                 daemon=True,
                 args=((self.queue, self.stop_event, datadir, with_journey_id)))
@@ -245,7 +254,7 @@ class DownloadAllSessions(object):
 
         max_timestamp_per_day = {}
 
-        print("Downloading sessions from {} to {}".format(since, until))
+        log.info("Downloading sessions from {} to {}".format(since, until))
 
         try:
             # listing is in reverse chronological order - newest are first.
@@ -262,7 +271,7 @@ class DownloadAllSessions(object):
                     matched = False
                     for skip_day in skip_days:
                         if (created_at_datetime.date() - skip_day).days == 0:
-                            print("Skipping sessions id {} because it was created on {}".format(session.session_id, skip_day))
+                            log.info("Skipping sessions id {} because it was created on {}".format(session.session_id, skip_day))
                             matched = True
                             break
 
@@ -296,6 +305,7 @@ class DownloadAllSessions(object):
                     self._write_max_timestamp_file(datadir, created_at_str, created_at_timestamp)
 
                 session_counter += 1
+                log.debug("Adding session {} to the queue".format(session.session_id))
                 self.queue.put(session.session_id)
 
             for local_process in all_procs:

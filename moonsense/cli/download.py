@@ -19,7 +19,8 @@ def run_download(
     incremental: bool,
     labels: list[str],
     platforms: list[str],
-    with_journey_id: bool = False) -> None:
+    with_journey_id: bool = False,
+    verbose: bool = False) -> None:
     """
     Download all sessions from a project based on the provided filters.
 
@@ -37,6 +38,7 @@ def run_download(
                         web, ios, android or None for all.
     :param with_journey_id: If set to True, organizes the downloaded sessions by date and
                         journey id. Default: False.
+    :param verbose: If set to True, turns on more verbose logging. Default: False.
     """
 
     filter_by_since = datetime

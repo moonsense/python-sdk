@@ -21,10 +21,12 @@ create Cards that will be displayed back in the Moonsense Recorder.
 """
 
 import os
+import pytz
 import requests
 import tempfile
 import tarfile
 import shutil
+import logging
 from datetime import date, datetime
 
 from google.protobuf import json_format
@@ -39,6 +41,8 @@ from . import Platform
 
 from retry.api import retry_call
 
+log = logging.getLogger(__name__)
+
 
 class Client(object):
     """ Moonsense Cloud API Client """
@@ -46,6 +50,9 @@ class Client(object):
     def __init__(
         self,
         secret_token: str = None,
+        # root_domain: str = "localhost:8081",
+        # protocol: str = "http",
+        # default_region: str = "",
         root_domain: str = "moonsense.cloud",
         protocol: str = "https",
         default_region: str = "us-central1.gcp",
@@ -130,10 +137,12 @@ class Client(object):
             params = [("per_page", "50"), ("page", page)]
 
             if since is not None:
-                params.append(("filter[min_created_at]", since.isoformat()))
+                since_with_tz = since.replace(tzinfo=pytz.UTC)
+                params.append(("filter[min_created_at]", since_with_tz.isoformat()))
 
             if until is not None:
-                params.append(("filter[max_created_at]", until.isoformat()))
+                until_with_tz = until.replace(tzinfo=pytz.UTC)
+                params.append(("filter[max_created_at]", until_with_tz.isoformat()))
 
             if labels is not None:
                 params.append(("filter[labels][]", labels))
@@ -144,6 +153,7 @@ class Client(object):
             if platforms is not None:
                 params.append(("filter[platforms][]", [p.value for p in platforms]))
 
+            log.debug("Sending list sessions request with params: ", params)
             http_response = retry_call(requests.get, fargs=[endpoint, params], fkwargs=self._headers, tries=self.tries)
 
             if http_response.status_code != 200:
@@ -153,6 +163,7 @@ class Client(object):
 
             response = json_format.Parse(
                 http_response.text, SessionListResponse(), ignore_unknown_fields=True)
+
             if len(response.sessions) == 0:
                 return  # no more sessions
 

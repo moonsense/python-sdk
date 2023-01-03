@@ -17,8 +17,10 @@ def main():
               ios, android. Leave this empty for all platforms')
 @click.option('--with-journey-id', default=False, help='If true, the folder structure uses includes the \
               journey id')
-def download(until, since, output, skip_days, incremental, label, platform, with_journey_id):
-    run_download(output, until, since, skip_days, incremental, label, platform, with_journey_id)
+@click.option("--verbose", is_flag=True, show_default=True, default=False, \
+              help="Turn on more verbose logging.")
+def download(until, since, output, skip_days, incremental, label, platform, with_journey_id, verbose):
+    run_download(output, until, since, skip_days, incremental, label, platform, with_journey_id, verbose)
 
 main.add_command(download)
 
