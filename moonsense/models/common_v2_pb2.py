@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n\026io.moonsense.models.v2B\014CommonProtosZ moonsense.io/pkg/pb/v2/common;v2',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x0f\x63ommon_v2.proto\x12\tv2.common\"\x07\n\x05\x45mpty\"=\n\rErrorResponse\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\r\n\x05param\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t\"}\n\x11TokenSelfResponse\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x12\n\nproject_id\x18\x02 \x01(\t\x12\x0e\n\x06scopes\x18\x03 \x01(\t\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12\x15\n\rcredential_id\x18\x05 \x01(\t\x12\x0c\n\x04type\x18\x06 \x01(\x03*<\n\x0e\x44\x65vicePlatform\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03iOS\x10\x01\x12\x0b\n\x07\x41NDROID\x10\x02\x12\x07\n\x03WEB\x10\x03*\x80\x03\n\nSensorType\x12\x12\n\x0eUNKNOWN_SENSOR\x10\x00\x12\x0c\n\x08LOCATION\x10\x01\x12\x11\n\rACCELEROMETER\x10\x02\x12\x18\n\x14LINEAR_ACCELEROMETER\x10\x03\x12\x10\n\x0cMAGNETOMETER\x10\x04\x12\r\n\tGYROSCOPE\x10\x05\x12\x0b\n\x07\x42\x41TTERY\x10\x06\x12\x0f\n\x0bORIENTATION\x10\x07\x12\x0f\n\x0bTEMPERATURE\x10\x08\x12\t\n\x05LIGHT\x10\t\x12\x0c\n\x08PRESSURE\x10\n\x12\x0c\n\x08HUMIDITY\x10\x0b\x12\t\n\x05STEPS\x10\x0c\x12\x0e\n\nHEART_RATE\x10\r\x12\x0b\n\x07POINTER\x10\x0e\x12\x13\n\x0bTEXT_CHANGE\x10\x0f\x1a\x02\x08\x01\x12\r\n\tKEY_PRESS\x10\x10\x12\x10\n\x0c\x46OCUS_CHANGE\x10\x11\x12\x0f\n\x0bVIEW_SCROLL\x10\x12\x12\x0f\n\x0bMOUSE_WHEEL\x10\x13\x12\t\n\x05\x43LICK\x10\x14\x12\x10\n\x0cINPUT_CHANGE\x10\x15\x12\x0f\n\x0b\x46ORM_SUBMIT\x10\x16\x42H\n\x16io.moonsense.models.v2B\x0c\x43ommonProtosZ moonsense.io/pkg/pb/v2/common;v2b\x06proto3'
+  serialized_pb=b'\n\x0f\x63ommon_v2.proto\x12\tv2.common\"\x07\n\x05\x45mpty\"=\n\rErrorResponse\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\r\n\x05param\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t\"}\n\x11TokenSelfResponse\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x12\n\nproject_id\x18\x02 \x01(\t\x12\x0e\n\x06scopes\x18\x03 \x01(\t\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12\x15\n\rcredential_id\x18\x05 \x01(\t\x12\x0c\n\x04type\x18\x06 \x01(\x03*<\n\x0e\x44\x65vicePlatform\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03iOS\x10\x01\x12\x0b\n\x07\x41NDROID\x10\x02\x12\x07\n\x03WEB\x10\x03*\x8c\x03\n\nSensorType\x12\x12\n\x0eUNKNOWN_SENSOR\x10\x00\x12\x0c\n\x08LOCATION\x10\x01\x12\x11\n\rACCELEROMETER\x10\x02\x12\x18\n\x14LINEAR_ACCELEROMETER\x10\x03\x12\x10\n\x0cMAGNETOMETER\x10\x04\x12\r\n\tGYROSCOPE\x10\x05\x12\x0b\n\x07\x42\x41TTERY\x10\x06\x12\x0f\n\x0bORIENTATION\x10\x07\x12\x0b\n\x07POINTER\x10\x0e\x12\x13\n\x0bTEXT_CHANGE\x10\x0f\x1a\x02\x08\x01\x12\r\n\tKEY_PRESS\x10\x10\x12\x10\n\x0c\x46OCUS_CHANGE\x10\x11\x12\x0f\n\x0bVIEW_SCROLL\x10\x12\x12\x0f\n\x0bMOUSE_WHEEL\x10\x13\x12\t\n\x05\x43LICK\x10\x14\x12\x10\n\x0cINPUT_CHANGE\x10\x15\x12\x0f\n\x0b\x46ORM_SUBMIT\x10\x16\"\x04\x08\x08\x10\x08\"\x04\x08\t\x10\t\"\x04\x08\n\x10\n\"\x04\x08\x0b\x10\x0b\"\x04\x08\x0c\x10\x0c\"\x04\x08\r\x10\r*\x0bTEMPERATURE*\x05LIGHT*\x08PRESSURE*\x08HUMIDITY*\x05STEPS*\nHEART_RATEBH\n\x16io.moonsense.models.v2B\x0c\x43ommonProtosZ moonsense.io/pkg/pb/v2/common;v2b\x06proto3'
 )
 
 _DEVICEPLATFORM = _descriptor.EnumDescriptor(
@@ -107,77 +107,47 @@ _SENSORTYPE = _descriptor.EnumDescriptor(
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='TEMPERATURE', index=8, number=8,
+      name='POINTER', index=8, number=14,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='LIGHT', index=9, number=9,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='PRESSURE', index=10, number=10,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='HUMIDITY', index=11, number=11,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='STEPS', index=12, number=12,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='HEART_RATE', index=13, number=13,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='POINTER', index=14, number=14,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='TEXT_CHANGE', index=15, number=15,
+      name='TEXT_CHANGE', index=9, number=15,
       serialized_options=b'\010\001',
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='KEY_PRESS', index=16, number=16,
+      name='KEY_PRESS', index=10, number=16,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='FOCUS_CHANGE', index=17, number=17,
+      name='FOCUS_CHANGE', index=11, number=17,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='VIEW_SCROLL', index=18, number=18,
+      name='VIEW_SCROLL', index=12, number=18,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='MOUSE_WHEEL', index=19, number=19,
+      name='MOUSE_WHEEL', index=13, number=19,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='CLICK', index=20, number=20,
+      name='CLICK', index=14, number=20,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_CHANGE', index=21, number=21,
+      name='INPUT_CHANGE', index=15, number=21,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
     _descriptor.EnumValueDescriptor(
-      name='FORM_SUBMIT', index=22, number=22,
+      name='FORM_SUBMIT', index=16, number=22,
       serialized_options=None,
       type=None,
       create_key=_descriptor._internal_create_key),
@@ -185,7 +155,7 @@ _SENSORTYPE = _descriptor.EnumDescriptor(
   containing_type=None,
   serialized_options=None,
   serialized_start=292,
-  serialized_end=676,
+  serialized_end=688,
 )
 _sym_db.RegisterEnumDescriptor(_SENSORTYPE)
 
@@ -202,12 +172,6 @@ MAGNETOMETER = 4
 GYROSCOPE = 5
 BATTERY = 6
 ORIENTATION = 7
-TEMPERATURE = 8
-LIGHT = 9
-PRESSURE = 10
-HUMIDITY = 11
-STEPS = 12
-HEART_RATE = 13
 POINTER = 14
 TEXT_CHANGE = 15
 KEY_PRESS = 16
