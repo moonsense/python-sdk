@@ -25,6 +25,7 @@ import requests
 import tempfile
 import tarfile
 import shutil
+import pytz
 from datetime import date, datetime
 
 from google.protobuf import json_format
@@ -130,10 +131,12 @@ class Client(object):
             params = [("per_page", "50"), ("page", page)]
 
             if since is not None:
-                params.append(("filter[min_created_at]", since.isoformat()))
+                since_with_tz = pytz.utc.localize(since)
+                params.append(("filter[min_created_at]", since_with_tz.isoformat()))
 
             if until is not None:
-                params.append(("filter[max_created_at]", until.isoformat()))
+                until_with_tz = pytz.utc.localize(until)
+                params.append(("filter[max_created_at]", until_with_tz.isoformat()))
 
             if labels is not None:
                 params.append(("filter[labels][]", labels))
@@ -150,7 +153,6 @@ class Client(object):
                 raise RuntimeError(
                     f"unable to list sessions. status code: {http_response.status_code}"
                 )
-
             response = json_format.Parse(
                 http_response.text, SessionListResponse(), ignore_unknown_fields=True)
             if len(response.sessions) == 0:
