@@ -16,7 +16,6 @@ from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__
 from . import validate_pb2 as validate_dot_validate__pb2
 from . import pagination_pb2 as pagination__pb2
 from . import bundle_v2_pb2 as bundle__v2__pb2
-from . import common_v2_pb2 as common__v2__pb2
 from . import data_plane_v2_sdk_pb2 as data__plane__v2__sdk__pb2
 from . import feature_pb2 as feature__pb2
 from . import signal_pb2 as signal__pb2
@@ -28,9 +27,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n io.moonsense.models.v2.dataplaneB\021DataPlaneV2ProtosZ$moonsense.io/pkg/pb/v2/data-plane;v2',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x13\x64\x61ta_plane_v2.proto\x12\x0cv2.dataplane\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x17validate/validate.proto\x1a\x10pagination.proto\x1a\x0f\x62undle_v2.proto\x1a\x0f\x63ommon_v2.proto\x1a\x17\x64\x61ta_plane_v2_sdk.proto\x1a\rfeature.proto\x1a\x0csignal.proto\"6\n\x0eLabelWithStats\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x16\n\x0esessions_count\x18\x02 \x01(\x03\"Y\n\x03\x41pp\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x12\n\nproject_id\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xac\x01\n\x08\x41ppStats\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12R\n\x17recording_profile_stats\x18\x02 \x03(\x0b\x32\x31.v2.dataplane.AppStats.RecordingProfileStatsEntry\x1a<\n\x1aRecordingProfileStatsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x03:\x02\x38\x01\"V\n\x05\x43hunk\x12\x10\n\x08\x63hunk_id\x18\x01 \x01(\t\x12\x0b\n\x03md5\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xb8\x01\n\x04\x43\x61rd\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\x0f\n\x07\x63\x61rd_id\x18\x02 \x01(\t\x12\r\n\x05title\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x13\n\x0bsource_type\x18\x05 \x01(\t\x12\x11\n\tsource_id\x18\x06 \x01(\t\x12\x0f\n\x07payload\x18\x07 \x01(\t\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x93\x02\n\x0eWebhookPayload\x12\x12\n\nproject_id\x18\x01 \x01(\t\x12\x17\n\x06\x61pp_id\x18\x02 \x01(\tB\x07\xfa\x42\x04r\x02 \x01\x12\x1b\n\nsession_id\x18\x03 \x01(\tB\x07\xfa\x42\x04r\x02 \x01\x12=\n\nevent_type\x18\x04 \x01(\x0e\x32\x1f.v2.dataplane.WebhookEventTypesB\x08\xfa\x42\x05\x82\x01\x02\x10\x01\x12\'\n\x06\x62undle\x18\x05 \x01(\x0b\x32\x17.v2.bundle.SealedBundle\x12#\n\x17\x63lient_session_group_id\x18\x06 \x01(\tB\x02\x18\x01\x12\x16\n\x0esession_labels\x18\x07 \x03(\t\x12\x12\n\njourney_id\x18\x08 \x01(\t\"r\n\x13SessionListResponse\x12\'\n\x08sessions\x18\x02 \x03(\x0b\x32\x15.v2.dataplane.Session\x12\x32\n\npagination\x18\x03 \x01(\x0b\x32\x1e.pagination.PaginationResponse\"+\n\x15SessionDeleteResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\"\x81\x01\n\x12\x43hunksListResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12#\n\x06\x63hunks\x18\x02 \x03(\x0b\x32\x13.v2.dataplane.Chunk\x12\x32\n\npagination\x18\x03 \x01(\x0b\x32\x1e.pagination.PaginationResponse\"}\n\x10\x43\x61rdListResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12!\n\x05\x63\x61rds\x18\x02 \x03(\x0b\x32\x12.v2.dataplane.Card\x12\x32\n\npagination\x18\x03 \x01(\x0b\x32\x1e.pagination.PaginationResponse\"%\n\x12\x43\x61rdDeleteResponse\x12\x0f\n\x07\x63\x61rd_id\x18\x01 \x01(\t\"?\n\x11LabelListResponse\x12*\n\x06labels\x18\x01 \x03(\x0b\x32\x1a.v2.dataplane.SessionLabel\"A\n\x11LabelsTopResponse\x12,\n\x06labels\x18\x01 \x03(\x0b\x32\x1c.v2.dataplane.LabelWithStats\"s\n\x17PaginatedFieldsResponse\x12!\n\x06\x62undle\x18\x01 \x01(\x0b\x32\x11.v2.bundle.Bundle\x12\x19\n\x11max_determined_at\x18\x02 \x01(\x03\x12\x1a\n\x12\x66rom_bundle_cursor\x18\x03 \x01(\x03\"D\n\x0f\x46\x65\x61tureEnvelope\x12$\n\x07\x66\x65\x61ture\x18\x01 \x01(\x0b\x32\x13.v2.feature.Feature\x12\x0b\n\x03key\x18\x02 \x01(\t\"F\n\x13\x46\x65\x61tureEnvelopeList\x12/\n\x08\x66\x65\x61tures\x18\x01 \x03(\x0b\x32\x1d.v2.dataplane.FeatureEnvelope\"\xc0\x01\n\x13\x46\x65\x61tureListResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\x41\n\x08\x66\x65\x61tures\x18\x02 \x03(\x0b\x32/.v2.dataplane.FeatureListResponse.FeaturesEntry\x1aR\n\rFeaturesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x30\n\x05value\x18\x02 \x01(\x0b\x32!.v2.dataplane.FeatureEnvelopeList:\x02\x38\x01\",\n\x0fSignalsResponse\x12\x19\n\x02os\x18\x01 \x01(\x0b\x32\r.v2.signal.Os*u\n\x11WebhookEventTypes\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x13\n\x0fSESSION_CREATED\x10\x01\x12\x13\n\x0f\x42UNDLE_RECEIVED\x10\x02\x12\x13\n\x0f\x43HUNK_PERSISTED\x10\x03\x12\x14\n\x10SESSION_INACTIVE\x10\x04\x42[\n io.moonsense.models.v2.dataplaneB\x11\x44\x61taPlaneV2ProtosZ$moonsense.io/pkg/pb/v2/data-plane;v2b\x06proto3'
+  serialized_pb=b'\n\x13\x64\x61ta_plane_v2.proto\x12\x0cv2.dataplane\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x17validate/validate.proto\x1a\x10pagination.proto\x1a\x0f\x62undle_v2.proto\x1a\x17\x64\x61ta_plane_v2_sdk.proto\x1a\rfeature.proto\x1a\x0csignal.proto\"6\n\x0eLabelWithStats\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x16\n\x0esessions_count\x18\x02 \x01(\x03\"Y\n\x03\x41pp\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x12\n\nproject_id\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xac\x01\n\x08\x41ppStats\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12R\n\x17recording_profile_stats\x18\x02 \x03(\x0b\x32\x31.v2.dataplane.AppStats.RecordingProfileStatsEntry\x1a<\n\x1aRecordingProfileStatsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x03:\x02\x38\x01\"V\n\x05\x43hunk\x12\x10\n\x08\x63hunk_id\x18\x01 \x01(\t\x12\x0b\n\x03md5\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xb8\x01\n\x04\x43\x61rd\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\x0f\n\x07\x63\x61rd_id\x18\x02 \x01(\t\x12\r\n\x05title\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x13\n\x0bsource_type\x18\x05 \x01(\t\x12\x11\n\tsource_id\x18\x06 \x01(\t\x12\x0f\n\x07payload\x18\x07 \x01(\t\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x93\x02\n\x0eWebhookPayload\x12\x12\n\nproject_id\x18\x01 \x01(\t\x12\x17\n\x06\x61pp_id\x18\x02 \x01(\tB\x07\xfa\x42\x04r\x02 \x01\x12\x1b\n\nsession_id\x18\x03 \x01(\tB\x07\xfa\x42\x04r\x02 \x01\x12=\n\nevent_type\x18\x04 \x01(\x0e\x32\x1f.v2.dataplane.WebhookEventTypesB\x08\xfa\x42\x05\x82\x01\x02\x10\x01\x12\'\n\x06\x62undle\x18\x05 \x01(\x0b\x32\x17.v2.bundle.SealedBundle\x12#\n\x17\x63lient_session_group_id\x18\x06 \x01(\tB\x02\x18\x01\x12\x16\n\x0esession_labels\x18\x07 \x03(\t\x12\x12\n\njourney_id\x18\x08 \x01(\t\"r\n\x13SessionListResponse\x12\'\n\x08sessions\x18\x02 \x03(\x0b\x32\x15.v2.dataplane.Session\x12\x32\n\npagination\x18\x03 \x01(\x0b\x32\x1e.pagination.PaginationResponse\"+\n\x15SessionDeleteResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\"\x81\x01\n\x12\x43hunksListResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12#\n\x06\x63hunks\x18\x02 \x03(\x0b\x32\x13.v2.dataplane.Chunk\x12\x32\n\npagination\x18\x03 \x01(\x0b\x32\x1e.pagination.PaginationResponse\"}\n\x10\x43\x61rdListResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12!\n\x05\x63\x61rds\x18\x02 \x03(\x0b\x32\x12.v2.dataplane.Card\x12\x32\n\npagination\x18\x03 \x01(\x0b\x32\x1e.pagination.PaginationResponse\"%\n\x12\x43\x61rdDeleteResponse\x12\x0f\n\x07\x63\x61rd_id\x18\x01 \x01(\t\"?\n\x11LabelListResponse\x12*\n\x06labels\x18\x01 \x03(\x0b\x32\x1a.v2.dataplane.SessionLabel\"A\n\x11LabelsTopResponse\x12,\n\x06labels\x18\x01 \x03(\x0b\x32\x1c.v2.dataplane.LabelWithStats\"s\n\x17PaginatedFieldsResponse\x12!\n\x06\x62undle\x18\x01 \x01(\x0b\x32\x11.v2.bundle.Bundle\x12\x19\n\x11max_determined_at\x18\x02 \x01(\x03\x12\x1a\n\x12\x66rom_bundle_cursor\x18\x03 \x01(\x03\"D\n\x0f\x46\x65\x61tureEnvelope\x12$\n\x07\x66\x65\x61ture\x18\x01 \x01(\x0b\x32\x13.v2.feature.Feature\x12\x0b\n\x03key\x18\x02 \x01(\t\"F\n\x13\x46\x65\x61tureEnvelopeList\x12/\n\x08\x66\x65\x61tures\x18\x01 \x03(\x0b\x32\x1d.v2.dataplane.FeatureEnvelope\"\xc0\x01\n\x13\x46\x65\x61tureListResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\x41\n\x08\x66\x65\x61tures\x18\x02 \x03(\x0b\x32/.v2.dataplane.FeatureListResponse.FeaturesEntry\x1aR\n\rFeaturesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x30\n\x05value\x18\x02 \x01(\x0b\x32!.v2.dataplane.FeatureEnvelopeList:\x02\x38\x01\",\n\x0fSignalsResponse\x12\x19\n\x02os\x18\x01 \x01(\x0b\x32\r.v2.signal.Os*u\n\x11WebhookEventTypes\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x13\n\x0fSESSION_CREATED\x10\x01\x12\x13\n\x0f\x42UNDLE_RECEIVED\x10\x02\x12\x13\n\x0f\x43HUNK_PERSISTED\x10\x03\x12\x14\n\x10SESSION_INACTIVE\x10\x04\x42[\n io.moonsense.models.v2.dataplaneB\x11\x44\x61taPlaneV2ProtosZ$moonsense.io/pkg/pb/v2/data-plane;v2b\x06proto3'
   ,
-  dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,validate_dot_validate__pb2.DESCRIPTOR,pagination__pb2.DESCRIPTOR,bundle__v2__pb2.DESCRIPTOR,common__v2__pb2.DESCRIPTOR,data__plane__v2__sdk__pb2.DESCRIPTOR,feature__pb2.DESCRIPTOR,signal__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,validate_dot_validate__pb2.DESCRIPTOR,pagination__pb2.DESCRIPTOR,bundle__v2__pb2.DESCRIPTOR,data__plane__v2__sdk__pb2.DESCRIPTOR,feature__pb2.DESCRIPTOR,signal__pb2.DESCRIPTOR,])
 
 _WEBHOOKEVENTTYPES = _descriptor.EnumDescriptor(
   name='WebhookEventTypes',
@@ -67,8 +66,8 @@ _WEBHOOKEVENTTYPES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2167,
-  serialized_end=2284,
+  serialized_start=2150,
+  serialized_end=2267,
 )
 _sym_db.RegisterEnumDescriptor(_WEBHOOKEVENTTYPES)
 
@@ -115,8 +114,8 @@ _LABELWITHSTATS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=201,
-  serialized_end=255,
+  serialized_start=184,
+  serialized_end=238,
 )
 
 
@@ -161,8 +160,8 @@ _APP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=257,
-  serialized_end=346,
+  serialized_start=240,
+  serialized_end=329,
 )
 
 
@@ -200,8 +199,8 @@ _APPSTATS_RECORDINGPROFILESTATSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=461,
-  serialized_end=521,
+  serialized_start=444,
+  serialized_end=504,
 )
 
 _APPSTATS = _descriptor.Descriptor(
@@ -238,8 +237,8 @@ _APPSTATS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=349,
-  serialized_end=521,
+  serialized_start=332,
+  serialized_end=504,
 )
 
 
@@ -284,8 +283,8 @@ _CHUNK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=523,
-  serialized_end=609,
+  serialized_start=506,
+  serialized_end=592,
 )
 
 
@@ -365,8 +364,8 @@ _CARD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=612,
-  serialized_end=796,
+  serialized_start=595,
+  serialized_end=779,
 )
 
 
@@ -446,8 +445,8 @@ _WEBHOOKPAYLOAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=799,
-  serialized_end=1074,
+  serialized_start=782,
+  serialized_end=1057,
 )
 
 
@@ -485,8 +484,8 @@ _SESSIONLISTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1076,
-  serialized_end=1190,
+  serialized_start=1059,
+  serialized_end=1173,
 )
 
 
@@ -517,8 +516,8 @@ _SESSIONDELETERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1192,
-  serialized_end=1235,
+  serialized_start=1175,
+  serialized_end=1218,
 )
 
 
@@ -563,8 +562,8 @@ _CHUNKSLISTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1238,
-  serialized_end=1367,
+  serialized_start=1221,
+  serialized_end=1350,
 )
 
 
@@ -609,8 +608,8 @@ _CARDLISTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1369,
-  serialized_end=1494,
+  serialized_start=1352,
+  serialized_end=1477,
 )
 
 
@@ -641,8 +640,8 @@ _CARDDELETERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1496,
-  serialized_end=1533,
+  serialized_start=1479,
+  serialized_end=1516,
 )
 
 
@@ -673,8 +672,8 @@ _LABELLISTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1535,
-  serialized_end=1598,
+  serialized_start=1518,
+  serialized_end=1581,
 )
 
 
@@ -705,8 +704,8 @@ _LABELSTOPRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1600,
-  serialized_end=1665,
+  serialized_start=1583,
+  serialized_end=1648,
 )
 
 
@@ -751,8 +750,8 @@ _PAGINATEDFIELDSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1667,
-  serialized_end=1782,
+  serialized_start=1650,
+  serialized_end=1765,
 )
 
 
@@ -790,8 +789,8 @@ _FEATUREENVELOPE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1784,
-  serialized_end=1852,
+  serialized_start=1767,
+  serialized_end=1835,
 )
 
 
@@ -822,8 +821,8 @@ _FEATUREENVELOPELIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1854,
-  serialized_end=1924,
+  serialized_start=1837,
+  serialized_end=1907,
 )
 
 
@@ -861,8 +860,8 @@ _FEATURELISTRESPONSE_FEATURESENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2037,
-  serialized_end=2119,
+  serialized_start=2020,
+  serialized_end=2102,
 )
 
 _FEATURELISTRESPONSE = _descriptor.Descriptor(
@@ -899,8 +898,8 @@ _FEATURELISTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1927,
-  serialized_end=2119,
+  serialized_start=1910,
+  serialized_end=2102,
 )
 
 
@@ -931,8 +930,8 @@ _SIGNALSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2121,
-  serialized_end=2165,
+  serialized_start=2104,
+  serialized_end=2148,
 )
 
 _APP.fields_by_name['created_at'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP

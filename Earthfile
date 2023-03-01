@@ -4,7 +4,7 @@ FROM golang:1.16-alpine
 
 cleanup:
     LOCALLY
-    RUN rm moonsense/models/*_pb2.py*
+    RUN rm -f moonsense/models/*_pb2.py*
 
 generate:
     BUILD +cleanup
