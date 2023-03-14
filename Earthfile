@@ -9,5 +9,5 @@ cleanup:
 generate:
     BUILD +cleanup
     ARG DEFINITIONS_BRANCH=main
-    COPY github.com/moonsense/definitions/proto:$DEFINITIONS_BRANCH+generate-python/python /python
+    COPY github.com/moonsense/definitions/proto:$DEFINITIONS_BRANCH+generate-python-sdk/python /python
     SAVE ARTIFACT /python/*_pb2.py AS LOCAL moonsense/models/
