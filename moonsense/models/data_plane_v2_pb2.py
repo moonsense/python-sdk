@@ -19,6 +19,7 @@ from . import bundle_v2_pb2 as bundle__v2__pb2
 from . import data_plane_v2_sdk_pb2 as data__plane__v2__sdk__pb2
 from . import feature_pb2 as feature__pb2
 from . import signal_pb2 as signal__pb2
+from . import common_v2_pb2 as common__v2__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
@@ -27,9 +28,9 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n io.moonsense.models.v2.dataplaneB\021DataPlaneV2ProtosZ$moonsense.io/pkg/pb/v2/data-plane;v2',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x13\x64\x61ta_plane_v2.proto\x12\x0cv2.dataplane\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x17validate/validate.proto\x1a\x10pagination.proto\x1a\x0f\x62undle_v2.proto\x1a\x17\x64\x61ta_plane_v2_sdk.proto\x1a\rfeature.proto\x1a\x0csignal.proto\"6\n\x0eLabelWithStats\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x16\n\x0esessions_count\x18\x02 \x01(\x03\"Y\n\x03\x41pp\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x12\n\nproject_id\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xac\x01\n\x08\x41ppStats\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12R\n\x17recording_profile_stats\x18\x02 \x03(\x0b\x32\x31.v2.dataplane.AppStats.RecordingProfileStatsEntry\x1a<\n\x1aRecordingProfileStatsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x03:\x02\x38\x01\"V\n\x05\x43hunk\x12\x10\n\x08\x63hunk_id\x18\x01 \x01(\t\x12\x0b\n\x03md5\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xb8\x01\n\x04\x43\x61rd\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\x0f\n\x07\x63\x61rd_id\x18\x02 \x01(\t\x12\r\n\x05title\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x13\n\x0bsource_type\x18\x05 \x01(\t\x12\x11\n\tsource_id\x18\x06 \x01(\t\x12\x0f\n\x07payload\x18\x07 \x01(\t\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x93\x02\n\x0eWebhookPayload\x12\x12\n\nproject_id\x18\x01 \x01(\t\x12\x17\n\x06\x61pp_id\x18\x02 \x01(\tB\x07\xfa\x42\x04r\x02 \x01\x12\x1b\n\nsession_id\x18\x03 \x01(\tB\x07\xfa\x42\x04r\x02 \x01\x12=\n\nevent_type\x18\x04 \x01(\x0e\x32\x1f.v2.dataplane.WebhookEventTypesB\x08\xfa\x42\x05\x82\x01\x02\x10\x01\x12\'\n\x06\x62undle\x18\x05 \x01(\x0b\x32\x17.v2.bundle.SealedBundle\x12#\n\x17\x63lient_session_group_id\x18\x06 \x01(\tB\x02\x18\x01\x12\x16\n\x0esession_labels\x18\x07 \x03(\t\x12\x12\n\njourney_id\x18\x08 \x01(\t\"r\n\x13SessionListResponse\x12\'\n\x08sessions\x18\x02 \x03(\x0b\x32\x15.v2.dataplane.Session\x12\x32\n\npagination\x18\x03 \x01(\x0b\x32\x1e.pagination.PaginationResponse\"+\n\x15SessionDeleteResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\"\x81\x01\n\x12\x43hunksListResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12#\n\x06\x63hunks\x18\x02 \x03(\x0b\x32\x13.v2.dataplane.Chunk\x12\x32\n\npagination\x18\x03 \x01(\x0b\x32\x1e.pagination.PaginationResponse\"}\n\x10\x43\x61rdListResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12!\n\x05\x63\x61rds\x18\x02 \x03(\x0b\x32\x12.v2.dataplane.Card\x12\x32\n\npagination\x18\x03 \x01(\x0b\x32\x1e.pagination.PaginationResponse\"%\n\x12\x43\x61rdDeleteResponse\x12\x0f\n\x07\x63\x61rd_id\x18\x01 \x01(\t\"?\n\x11LabelListResponse\x12*\n\x06labels\x18\x01 \x03(\x0b\x32\x1a.v2.dataplane.SessionLabel\"A\n\x11LabelsTopResponse\x12,\n\x06labels\x18\x01 \x03(\x0b\x32\x1c.v2.dataplane.LabelWithStats\"s\n\x17PaginatedFieldsResponse\x12!\n\x06\x62undle\x18\x01 \x01(\x0b\x32\x11.v2.bundle.Bundle\x12\x19\n\x11max_determined_at\x18\x02 \x01(\x03\x12\x1a\n\x12\x66rom_bundle_cursor\x18\x03 \x01(\x03\"D\n\x0f\x46\x65\x61tureEnvelope\x12$\n\x07\x66\x65\x61ture\x18\x01 \x01(\x0b\x32\x13.v2.feature.Feature\x12\x0b\n\x03key\x18\x02 \x01(\t\"F\n\x13\x46\x65\x61tureEnvelopeList\x12/\n\x08\x66\x65\x61tures\x18\x01 \x03(\x0b\x32\x1d.v2.dataplane.FeatureEnvelope\"\xc0\x01\n\x13\x46\x65\x61tureListResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\x41\n\x08\x66\x65\x61tures\x18\x02 \x03(\x0b\x32/.v2.dataplane.FeatureListResponse.FeaturesEntry\x1aR\n\rFeaturesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x30\n\x05value\x18\x02 \x01(\x0b\x32!.v2.dataplane.FeatureEnvelopeList:\x02\x38\x01\",\n\x0fSignalsResponse\x12\x19\n\x02os\x18\x01 \x01(\x0b\x32\r.v2.signal.Os*u\n\x11WebhookEventTypes\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x13\n\x0fSESSION_CREATED\x10\x01\x12\x13\n\x0f\x42UNDLE_RECEIVED\x10\x02\x12\x13\n\x0f\x43HUNK_PERSISTED\x10\x03\x12\x14\n\x10SESSION_INACTIVE\x10\x04\x42[\n io.moonsense.models.v2.dataplaneB\x11\x44\x61taPlaneV2ProtosZ$moonsense.io/pkg/pb/v2/data-plane;v2b\x06proto3'
+  serialized_pb=b'\n\x13\x64\x61ta_plane_v2.proto\x12\x0cv2.dataplane\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x17validate/validate.proto\x1a\x10pagination.proto\x1a\x0f\x62undle_v2.proto\x1a\x17\x64\x61ta_plane_v2_sdk.proto\x1a\rfeature.proto\x1a\x0csignal.proto\x1a\x0f\x63ommon_v2.proto\"6\n\x0eLabelWithStats\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x16\n\x0esessions_count\x18\x02 \x01(\x03\"Y\n\x03\x41pp\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x12\n\nproject_id\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xac\x01\n\x08\x41ppStats\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12R\n\x17recording_profile_stats\x18\x02 \x03(\x0b\x32\x31.v2.dataplane.AppStats.RecordingProfileStatsEntry\x1a<\n\x1aRecordingProfileStatsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x03:\x02\x38\x01\"V\n\x05\x43hunk\x12\x10\n\x08\x63hunk_id\x18\x01 \x01(\t\x12\x0b\n\x03md5\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xb8\x01\n\x04\x43\x61rd\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\x0f\n\x07\x63\x61rd_id\x18\x02 \x01(\t\x12\r\n\x05title\x18\x03 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x13\n\x0bsource_type\x18\x05 \x01(\t\x12\x11\n\tsource_id\x18\x06 \x01(\t\x12\x0f\n\x07payload\x18\x07 \x01(\t\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x93\x02\n\x0eWebhookPayload\x12\x12\n\nproject_id\x18\x01 \x01(\t\x12\x17\n\x06\x61pp_id\x18\x02 \x01(\tB\x07\xfa\x42\x04r\x02 \x01\x12\x1b\n\nsession_id\x18\x03 \x01(\tB\x07\xfa\x42\x04r\x02 \x01\x12=\n\nevent_type\x18\x04 \x01(\x0e\x32\x1f.v2.dataplane.WebhookEventTypesB\x08\xfa\x42\x05\x82\x01\x02\x10\x01\x12\'\n\x06\x62undle\x18\x05 \x01(\x0b\x32\x17.v2.bundle.SealedBundle\x12#\n\x17\x63lient_session_group_id\x18\x06 \x01(\tB\x02\x18\x01\x12\x16\n\x0esession_labels\x18\x07 \x03(\t\x12\x12\n\njourney_id\x18\x08 \x01(\t\"\xa8\x02\n\x07Journey\x12\x12\n\njourney_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12\x30\n\x0coldest_event\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x30\n\x0cnewest_event\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x15\n\rsession_count\x18\x06 \x01(\x05\x12\x33\n\x10primary_platform\x18\x07 \x01(\x0e\x32\x19.v2.common.DevicePlatform\x12\x19\n\x11primary_region_id\x18\x08 \x01(\t\"r\n\x13SessionListResponse\x12\'\n\x08sessions\x18\x02 \x03(\x0b\x32\x15.v2.dataplane.Session\x12\x32\n\npagination\x18\x03 \x01(\x0b\x32\x1e.pagination.PaginationResponse\"+\n\x15SessionDeleteResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\"r\n\x13JourneyListResponse\x12\'\n\x08journeys\x18\x01 \x03(\x0b\x32\x15.v2.dataplane.Journey\x12\x32\n\npagination\x18\x02 \x01(\x0b\x32\x1e.pagination.PaginationResponse\"h\n\x15JourneyDetailResponse\x12&\n\x07journey\x18\x01 \x01(\x0b\x32\x15.v2.dataplane.Journey\x12\'\n\x08sessions\x18\x02 \x03(\x0b\x32\x15.v2.dataplane.Session\"\x81\x01\n\x12\x43hunksListResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12#\n\x06\x63hunks\x18\x02 \x03(\x0b\x32\x13.v2.dataplane.Chunk\x12\x32\n\npagination\x18\x03 \x01(\x0b\x32\x1e.pagination.PaginationResponse\"}\n\x10\x43\x61rdListResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12!\n\x05\x63\x61rds\x18\x02 \x03(\x0b\x32\x12.v2.dataplane.Card\x12\x32\n\npagination\x18\x03 \x01(\x0b\x32\x1e.pagination.PaginationResponse\"%\n\x12\x43\x61rdDeleteResponse\x12\x0f\n\x07\x63\x61rd_id\x18\x01 \x01(\t\"?\n\x11LabelListResponse\x12*\n\x06labels\x18\x01 \x03(\x0b\x32\x1a.v2.dataplane.SessionLabel\"A\n\x11LabelsTopResponse\x12,\n\x06labels\x18\x01 \x03(\x0b\x32\x1c.v2.dataplane.LabelWithStats\"s\n\x17PaginatedFieldsResponse\x12!\n\x06\x62undle\x18\x01 \x01(\x0b\x32\x11.v2.bundle.Bundle\x12\x19\n\x11max_determined_at\x18\x02 \x01(\x03\x12\x1a\n\x12\x66rom_bundle_cursor\x18\x03 \x01(\x03\"D\n\x0f\x46\x65\x61tureEnvelope\x12$\n\x07\x66\x65\x61ture\x18\x01 \x01(\x0b\x32\x13.v2.feature.Feature\x12\x0b\n\x03key\x18\x02 \x01(\t\"F\n\x13\x46\x65\x61tureEnvelopeList\x12/\n\x08\x66\x65\x61tures\x18\x01 \x03(\x0b\x32\x1d.v2.dataplane.FeatureEnvelope\"\xc0\x01\n\x13\x46\x65\x61tureListResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\x41\n\x08\x66\x65\x61tures\x18\x02 \x03(\x0b\x32/.v2.dataplane.FeatureListResponse.FeaturesEntry\x1aR\n\rFeaturesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x30\n\x05value\x18\x02 \x01(\x0b\x32!.v2.dataplane.FeatureEnvelopeList:\x02\x38\x01\"\xfb\x03\n\x17SessionFeaturesResponse\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12H\n\nclient_sdk\x18\x02 \x03(\x0b\x32\x34.v2.dataplane.SessionFeaturesResponse.ClientSdkEntry\x12N\n\rcloud_network\x18\x03 \x03(\x0b\x32\x37.v2.dataplane.SessionFeaturesResponse.CloudNetworkEntry\x12T\n\x10\x63loud_behavioral\x18\x04 \x03(\x0b\x32:.v2.dataplane.SessionFeaturesResponse.CloudBehavioralEntry\x1a\x45\n\x0e\x43lientSdkEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\"\n\x05value\x18\x02 \x01(\x0b\x32\x13.v2.feature.Feature:\x02\x38\x01\x1aH\n\x11\x43loudNetworkEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\"\n\x05value\x18\x02 \x01(\x0b\x32\x13.v2.feature.Feature:\x02\x38\x01\x1aK\n\x14\x43loudBehavioralEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\"\n\x05value\x18\x02 \x01(\x0b\x32\x13.v2.feature.Feature:\x02\x38\x01\"\xfb\x03\n\x17JourneyFeaturesResponse\x12\x12\n\njourney_id\x18\x01 \x01(\t\x12H\n\nclient_sdk\x18\x02 \x03(\x0b\x32\x34.v2.dataplane.JourneyFeaturesResponse.ClientSdkEntry\x12N\n\rcloud_network\x18\x03 \x03(\x0b\x32\x37.v2.dataplane.JourneyFeaturesResponse.CloudNetworkEntry\x12T\n\x10\x63loud_behavioral\x18\x04 \x03(\x0b\x32:.v2.dataplane.JourneyFeaturesResponse.CloudBehavioralEntry\x1a\x45\n\x0e\x43lientSdkEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\"\n\x05value\x18\x02 \x01(\x0b\x32\x13.v2.feature.Feature:\x02\x38\x01\x1aH\n\x11\x43loudNetworkEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\"\n\x05value\x18\x02 \x01(\x0b\x32\x13.v2.feature.Feature:\x02\x38\x01\x1aK\n\x14\x43loudBehavioralEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\"\n\x05value\x18\x02 \x01(\x0b\x32\x13.v2.feature.Feature:\x02\x38\x01\",\n\x0fSignalsResponse\x12\x19\n\x02os\x18\x01 \x01(\x0b\x32\r.v2.signal.Os*u\n\x11WebhookEventTypes\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x13\n\x0fSESSION_CREATED\x10\x01\x12\x13\n\x0f\x42UNDLE_RECEIVED\x10\x02\x12\x13\n\x0f\x43HUNK_PERSISTED\x10\x03\x12\x14\n\x10SESSION_INACTIVE\x10\x04\x42[\n io.moonsense.models.v2.dataplaneB\x11\x44\x61taPlaneV2ProtosZ$moonsense.io/pkg/pb/v2/data-plane;v2b\x06proto3'
   ,
-  dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,validate_dot_validate__pb2.DESCRIPTOR,pagination__pb2.DESCRIPTOR,bundle__v2__pb2.DESCRIPTOR,data__plane__v2__sdk__pb2.DESCRIPTOR,feature__pb2.DESCRIPTOR,signal__pb2.DESCRIPTOR,])
+  dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,validate_dot_validate__pb2.DESCRIPTOR,pagination__pb2.DESCRIPTOR,bundle__v2__pb2.DESCRIPTOR,data__plane__v2__sdk__pb2.DESCRIPTOR,feature__pb2.DESCRIPTOR,signal__pb2.DESCRIPTOR,common__v2__pb2.DESCRIPTOR,])
 
 _WEBHOOKEVENTTYPES = _descriptor.EnumDescriptor(
   name='WebhookEventTypes',
@@ -66,8 +67,8 @@ _WEBHOOKEVENTTYPES = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=2150,
-  serialized_end=2267,
+  serialized_start=3708,
+  serialized_end=3825,
 )
 _sym_db.RegisterEnumDescriptor(_WEBHOOKEVENTTYPES)
 
@@ -114,8 +115,8 @@ _LABELWITHSTATS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=184,
-  serialized_end=238,
+  serialized_start=201,
+  serialized_end=255,
 )
 
 
@@ -160,8 +161,8 @@ _APP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=240,
-  serialized_end=329,
+  serialized_start=257,
+  serialized_end=346,
 )
 
 
@@ -199,8 +200,8 @@ _APPSTATS_RECORDINGPROFILESTATSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=444,
-  serialized_end=504,
+  serialized_start=461,
+  serialized_end=521,
 )
 
 _APPSTATS = _descriptor.Descriptor(
@@ -237,8 +238,8 @@ _APPSTATS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=332,
-  serialized_end=504,
+  serialized_start=349,
+  serialized_end=521,
 )
 
 
@@ -283,8 +284,8 @@ _CHUNK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=506,
-  serialized_end=592,
+  serialized_start=523,
+  serialized_end=609,
 )
 
 
@@ -364,8 +365,8 @@ _CARD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=595,
-  serialized_end=779,
+  serialized_start=612,
+  serialized_end=796,
 )
 
 
@@ -445,8 +446,89 @@ _WEBHOOKPAYLOAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=782,
-  serialized_end=1057,
+  serialized_start=799,
+  serialized_end=1074,
+)
+
+
+_JOURNEY = _descriptor.Descriptor(
+  name='Journey',
+  full_name='v2.dataplane.Journey',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='journey_id', full_name='v2.dataplane.Journey.journey_id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='v2.dataplane.Journey.app_id', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='oldest_event', full_name='v2.dataplane.Journey.oldest_event', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='newest_event', full_name='v2.dataplane.Journey.newest_event', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='created_at', full_name='v2.dataplane.Journey.created_at', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='session_count', full_name='v2.dataplane.Journey.session_count', index=5,
+      number=6, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='primary_platform', full_name='v2.dataplane.Journey.primary_platform', index=6,
+      number=7, type=14, cpp_type=8, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='primary_region_id', full_name='v2.dataplane.Journey.primary_region_id', index=7,
+      number=8, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1077,
+  serialized_end=1373,
 )
 
 
@@ -484,8 +566,8 @@ _SESSIONLISTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1059,
-  serialized_end=1173,
+  serialized_start=1375,
+  serialized_end=1489,
 )
 
 
@@ -516,8 +598,86 @@ _SESSIONDELETERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1175,
-  serialized_end=1218,
+  serialized_start=1491,
+  serialized_end=1534,
+)
+
+
+_JOURNEYLISTRESPONSE = _descriptor.Descriptor(
+  name='JourneyListResponse',
+  full_name='v2.dataplane.JourneyListResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='journeys', full_name='v2.dataplane.JourneyListResponse.journeys', index=0,
+      number=1, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='pagination', full_name='v2.dataplane.JourneyListResponse.pagination', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1536,
+  serialized_end=1650,
+)
+
+
+_JOURNEYDETAILRESPONSE = _descriptor.Descriptor(
+  name='JourneyDetailResponse',
+  full_name='v2.dataplane.JourneyDetailResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='journey', full_name='v2.dataplane.JourneyDetailResponse.journey', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='sessions', full_name='v2.dataplane.JourneyDetailResponse.sessions', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1652,
+  serialized_end=1756,
 )
 
 
@@ -562,8 +722,8 @@ _CHUNKSLISTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1221,
-  serialized_end=1350,
+  serialized_start=1759,
+  serialized_end=1888,
 )
 
 
@@ -608,8 +768,8 @@ _CARDLISTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1352,
-  serialized_end=1477,
+  serialized_start=1890,
+  serialized_end=2015,
 )
 
 
@@ -640,8 +800,8 @@ _CARDDELETERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1479,
-  serialized_end=1516,
+  serialized_start=2017,
+  serialized_end=2054,
 )
 
 
@@ -672,8 +832,8 @@ _LABELLISTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1518,
-  serialized_end=1581,
+  serialized_start=2056,
+  serialized_end=2119,
 )
 
 
@@ -704,8 +864,8 @@ _LABELSTOPRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1583,
-  serialized_end=1648,
+  serialized_start=2121,
+  serialized_end=2186,
 )
 
 
@@ -750,8 +910,8 @@ _PAGINATEDFIELDSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1650,
-  serialized_end=1765,
+  serialized_start=2188,
+  serialized_end=2303,
 )
 
 
@@ -789,8 +949,8 @@ _FEATUREENVELOPE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1767,
-  serialized_end=1835,
+  serialized_start=2305,
+  serialized_end=2373,
 )
 
 
@@ -821,8 +981,8 @@ _FEATUREENVELOPELIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1837,
-  serialized_end=1907,
+  serialized_start=2375,
+  serialized_end=2445,
 )
 
 
@@ -860,8 +1020,8 @@ _FEATURELISTRESPONSE_FEATURESENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2020,
-  serialized_end=2102,
+  serialized_start=2558,
+  serialized_end=2640,
 )
 
 _FEATURELISTRESPONSE = _descriptor.Descriptor(
@@ -898,8 +1058,342 @@ _FEATURELISTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1910,
-  serialized_end=2102,
+  serialized_start=2448,
+  serialized_end=2640,
+)
+
+
+_SESSIONFEATURESRESPONSE_CLIENTSDKENTRY = _descriptor.Descriptor(
+  name='ClientSdkEntry',
+  full_name='v2.dataplane.SessionFeaturesResponse.ClientSdkEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='v2.dataplane.SessionFeaturesResponse.ClientSdkEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='v2.dataplane.SessionFeaturesResponse.ClientSdkEntry.value', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2930,
+  serialized_end=2999,
+)
+
+_SESSIONFEATURESRESPONSE_CLOUDNETWORKENTRY = _descriptor.Descriptor(
+  name='CloudNetworkEntry',
+  full_name='v2.dataplane.SessionFeaturesResponse.CloudNetworkEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='v2.dataplane.SessionFeaturesResponse.CloudNetworkEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='v2.dataplane.SessionFeaturesResponse.CloudNetworkEntry.value', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3001,
+  serialized_end=3073,
+)
+
+_SESSIONFEATURESRESPONSE_CLOUDBEHAVIORALENTRY = _descriptor.Descriptor(
+  name='CloudBehavioralEntry',
+  full_name='v2.dataplane.SessionFeaturesResponse.CloudBehavioralEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='v2.dataplane.SessionFeaturesResponse.CloudBehavioralEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='v2.dataplane.SessionFeaturesResponse.CloudBehavioralEntry.value', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3075,
+  serialized_end=3150,
+)
+
+_SESSIONFEATURESRESPONSE = _descriptor.Descriptor(
+  name='SessionFeaturesResponse',
+  full_name='v2.dataplane.SessionFeaturesResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='session_id', full_name='v2.dataplane.SessionFeaturesResponse.session_id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='client_sdk', full_name='v2.dataplane.SessionFeaturesResponse.client_sdk', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='cloud_network', full_name='v2.dataplane.SessionFeaturesResponse.cloud_network', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='cloud_behavioral', full_name='v2.dataplane.SessionFeaturesResponse.cloud_behavioral', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[_SESSIONFEATURESRESPONSE_CLIENTSDKENTRY, _SESSIONFEATURESRESPONSE_CLOUDNETWORKENTRY, _SESSIONFEATURESRESPONSE_CLOUDBEHAVIORALENTRY, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2643,
+  serialized_end=3150,
+)
+
+
+_JOURNEYFEATURESRESPONSE_CLIENTSDKENTRY = _descriptor.Descriptor(
+  name='ClientSdkEntry',
+  full_name='v2.dataplane.JourneyFeaturesResponse.ClientSdkEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='v2.dataplane.JourneyFeaturesResponse.ClientSdkEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='v2.dataplane.JourneyFeaturesResponse.ClientSdkEntry.value', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2930,
+  serialized_end=2999,
+)
+
+_JOURNEYFEATURESRESPONSE_CLOUDNETWORKENTRY = _descriptor.Descriptor(
+  name='CloudNetworkEntry',
+  full_name='v2.dataplane.JourneyFeaturesResponse.CloudNetworkEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='v2.dataplane.JourneyFeaturesResponse.CloudNetworkEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='v2.dataplane.JourneyFeaturesResponse.CloudNetworkEntry.value', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3001,
+  serialized_end=3073,
+)
+
+_JOURNEYFEATURESRESPONSE_CLOUDBEHAVIORALENTRY = _descriptor.Descriptor(
+  name='CloudBehavioralEntry',
+  full_name='v2.dataplane.JourneyFeaturesResponse.CloudBehavioralEntry',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='key', full_name='v2.dataplane.JourneyFeaturesResponse.CloudBehavioralEntry.key', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='value', full_name='v2.dataplane.JourneyFeaturesResponse.CloudBehavioralEntry.value', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=b'8\001',
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3075,
+  serialized_end=3150,
+)
+
+_JOURNEYFEATURESRESPONSE = _descriptor.Descriptor(
+  name='JourneyFeaturesResponse',
+  full_name='v2.dataplane.JourneyFeaturesResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='journey_id', full_name='v2.dataplane.JourneyFeaturesResponse.journey_id', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='client_sdk', full_name='v2.dataplane.JourneyFeaturesResponse.client_sdk', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='cloud_network', full_name='v2.dataplane.JourneyFeaturesResponse.cloud_network', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='cloud_behavioral', full_name='v2.dataplane.JourneyFeaturesResponse.cloud_behavioral', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[_JOURNEYFEATURESRESPONSE_CLIENTSDKENTRY, _JOURNEYFEATURESRESPONSE_CLOUDNETWORKENTRY, _JOURNEYFEATURESRESPONSE_CLOUDBEHAVIORALENTRY, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=3153,
+  serialized_end=3660,
 )
 
 
@@ -930,8 +1424,8 @@ _SIGNALSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2104,
-  serialized_end=2148,
+  serialized_start=3662,
+  serialized_end=3706,
 )
 
 _APP.fields_by_name['created_at'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
@@ -941,8 +1435,16 @@ _CHUNK.fields_by_name['created_at'].message_type = google_dot_protobuf_dot_times
 _CARD.fields_by_name['created_at'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _WEBHOOKPAYLOAD.fields_by_name['event_type'].enum_type = _WEBHOOKEVENTTYPES
 _WEBHOOKPAYLOAD.fields_by_name['bundle'].message_type = bundle__v2__pb2._SEALEDBUNDLE
+_JOURNEY.fields_by_name['oldest_event'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_JOURNEY.fields_by_name['newest_event'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_JOURNEY.fields_by_name['created_at'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
+_JOURNEY.fields_by_name['primary_platform'].enum_type = common__v2__pb2._DEVICEPLATFORM
 _SESSIONLISTRESPONSE.fields_by_name['sessions'].message_type = data__plane__v2__sdk__pb2._SESSION
 _SESSIONLISTRESPONSE.fields_by_name['pagination'].message_type = pagination__pb2._PAGINATIONRESPONSE
+_JOURNEYLISTRESPONSE.fields_by_name['journeys'].message_type = _JOURNEY
+_JOURNEYLISTRESPONSE.fields_by_name['pagination'].message_type = pagination__pb2._PAGINATIONRESPONSE
+_JOURNEYDETAILRESPONSE.fields_by_name['journey'].message_type = _JOURNEY
+_JOURNEYDETAILRESPONSE.fields_by_name['sessions'].message_type = data__plane__v2__sdk__pb2._SESSION
 _CHUNKSLISTRESPONSE.fields_by_name['chunks'].message_type = _CHUNK
 _CHUNKSLISTRESPONSE.fields_by_name['pagination'].message_type = pagination__pb2._PAGINATIONRESPONSE
 _CARDLISTRESPONSE.fields_by_name['cards'].message_type = _CARD
@@ -955,6 +1457,24 @@ _FEATUREENVELOPELIST.fields_by_name['features'].message_type = _FEATUREENVELOPE
 _FEATURELISTRESPONSE_FEATURESENTRY.fields_by_name['value'].message_type = _FEATUREENVELOPELIST
 _FEATURELISTRESPONSE_FEATURESENTRY.containing_type = _FEATURELISTRESPONSE
 _FEATURELISTRESPONSE.fields_by_name['features'].message_type = _FEATURELISTRESPONSE_FEATURESENTRY
+_SESSIONFEATURESRESPONSE_CLIENTSDKENTRY.fields_by_name['value'].message_type = feature__pb2._FEATURE
+_SESSIONFEATURESRESPONSE_CLIENTSDKENTRY.containing_type = _SESSIONFEATURESRESPONSE
+_SESSIONFEATURESRESPONSE_CLOUDNETWORKENTRY.fields_by_name['value'].message_type = feature__pb2._FEATURE
+_SESSIONFEATURESRESPONSE_CLOUDNETWORKENTRY.containing_type = _SESSIONFEATURESRESPONSE
+_SESSIONFEATURESRESPONSE_CLOUDBEHAVIORALENTRY.fields_by_name['value'].message_type = feature__pb2._FEATURE
+_SESSIONFEATURESRESPONSE_CLOUDBEHAVIORALENTRY.containing_type = _SESSIONFEATURESRESPONSE
+_SESSIONFEATURESRESPONSE.fields_by_name['client_sdk'].message_type = _SESSIONFEATURESRESPONSE_CLIENTSDKENTRY
+_SESSIONFEATURESRESPONSE.fields_by_name['cloud_network'].message_type = _SESSIONFEATURESRESPONSE_CLOUDNETWORKENTRY
+_SESSIONFEATURESRESPONSE.fields_by_name['cloud_behavioral'].message_type = _SESSIONFEATURESRESPONSE_CLOUDBEHAVIORALENTRY
+_JOURNEYFEATURESRESPONSE_CLIENTSDKENTRY.fields_by_name['value'].message_type = feature__pb2._FEATURE
+_JOURNEYFEATURESRESPONSE_CLIENTSDKENTRY.containing_type = _JOURNEYFEATURESRESPONSE
+_JOURNEYFEATURESRESPONSE_CLOUDNETWORKENTRY.fields_by_name['value'].message_type = feature__pb2._FEATURE
+_JOURNEYFEATURESRESPONSE_CLOUDNETWORKENTRY.containing_type = _JOURNEYFEATURESRESPONSE
+_JOURNEYFEATURESRESPONSE_CLOUDBEHAVIORALENTRY.fields_by_name['value'].message_type = feature__pb2._FEATURE
+_JOURNEYFEATURESRESPONSE_CLOUDBEHAVIORALENTRY.containing_type = _JOURNEYFEATURESRESPONSE
+_JOURNEYFEATURESRESPONSE.fields_by_name['client_sdk'].message_type = _JOURNEYFEATURESRESPONSE_CLIENTSDKENTRY
+_JOURNEYFEATURESRESPONSE.fields_by_name['cloud_network'].message_type = _JOURNEYFEATURESRESPONSE_CLOUDNETWORKENTRY
+_JOURNEYFEATURESRESPONSE.fields_by_name['cloud_behavioral'].message_type = _JOURNEYFEATURESRESPONSE_CLOUDBEHAVIORALENTRY
 _SIGNALSRESPONSE.fields_by_name['os'].message_type = signal__pb2._OS
 DESCRIPTOR.message_types_by_name['LabelWithStats'] = _LABELWITHSTATS
 DESCRIPTOR.message_types_by_name['App'] = _APP
@@ -962,8 +1482,11 @@ DESCRIPTOR.message_types_by_name['AppStats'] = _APPSTATS
 DESCRIPTOR.message_types_by_name['Chunk'] = _CHUNK
 DESCRIPTOR.message_types_by_name['Card'] = _CARD
 DESCRIPTOR.message_types_by_name['WebhookPayload'] = _WEBHOOKPAYLOAD
+DESCRIPTOR.message_types_by_name['Journey'] = _JOURNEY
 DESCRIPTOR.message_types_by_name['SessionListResponse'] = _SESSIONLISTRESPONSE
 DESCRIPTOR.message_types_by_name['SessionDeleteResponse'] = _SESSIONDELETERESPONSE
+DESCRIPTOR.message_types_by_name['JourneyListResponse'] = _JOURNEYLISTRESPONSE
+DESCRIPTOR.message_types_by_name['JourneyDetailResponse'] = _JOURNEYDETAILRESPONSE
 DESCRIPTOR.message_types_by_name['ChunksListResponse'] = _CHUNKSLISTRESPONSE
 DESCRIPTOR.message_types_by_name['CardListResponse'] = _CARDLISTRESPONSE
 DESCRIPTOR.message_types_by_name['CardDeleteResponse'] = _CARDDELETERESPONSE
@@ -973,6 +1496,8 @@ DESCRIPTOR.message_types_by_name['PaginatedFieldsResponse'] = _PAGINATEDFIELDSRE
 DESCRIPTOR.message_types_by_name['FeatureEnvelope'] = _FEATUREENVELOPE
 DESCRIPTOR.message_types_by_name['FeatureEnvelopeList'] = _FEATUREENVELOPELIST
 DESCRIPTOR.message_types_by_name['FeatureListResponse'] = _FEATURELISTRESPONSE
+DESCRIPTOR.message_types_by_name['SessionFeaturesResponse'] = _SESSIONFEATURESRESPONSE
+DESCRIPTOR.message_types_by_name['JourneyFeaturesResponse'] = _JOURNEYFEATURESRESPONSE
 DESCRIPTOR.message_types_by_name['SignalsResponse'] = _SIGNALSRESPONSE
 DESCRIPTOR.enum_types_by_name['WebhookEventTypes'] = _WEBHOOKEVENTTYPES
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
@@ -1027,6 +1552,13 @@ WebhookPayload = _reflection.GeneratedProtocolMessageType('WebhookPayload', (_me
   })
 _sym_db.RegisterMessage(WebhookPayload)
 
+Journey = _reflection.GeneratedProtocolMessageType('Journey', (_message.Message,), {
+  'DESCRIPTOR' : _JOURNEY,
+  '__module__' : 'data_plane_v2_pb2'
+  # @@protoc_insertion_point(class_scope:v2.dataplane.Journey)
+  })
+_sym_db.RegisterMessage(Journey)
+
 SessionListResponse = _reflection.GeneratedProtocolMessageType('SessionListResponse', (_message.Message,), {
   'DESCRIPTOR' : _SESSIONLISTRESPONSE,
   '__module__' : 'data_plane_v2_pb2'
@@ -1040,6 +1572,20 @@ SessionDeleteResponse = _reflection.GeneratedProtocolMessageType('SessionDeleteR
   # @@protoc_insertion_point(class_scope:v2.dataplane.SessionDeleteResponse)
   })
 _sym_db.RegisterMessage(SessionDeleteResponse)
+
+JourneyListResponse = _reflection.GeneratedProtocolMessageType('JourneyListResponse', (_message.Message,), {
+  'DESCRIPTOR' : _JOURNEYLISTRESPONSE,
+  '__module__' : 'data_plane_v2_pb2'
+  # @@protoc_insertion_point(class_scope:v2.dataplane.JourneyListResponse)
+  })
+_sym_db.RegisterMessage(JourneyListResponse)
+
+JourneyDetailResponse = _reflection.GeneratedProtocolMessageType('JourneyDetailResponse', (_message.Message,), {
+  'DESCRIPTOR' : _JOURNEYDETAILRESPONSE,
+  '__module__' : 'data_plane_v2_pb2'
+  # @@protoc_insertion_point(class_scope:v2.dataplane.JourneyDetailResponse)
+  })
+_sym_db.RegisterMessage(JourneyDetailResponse)
 
 ChunksListResponse = _reflection.GeneratedProtocolMessageType('ChunksListResponse', (_message.Message,), {
   'DESCRIPTOR' : _CHUNKSLISTRESPONSE,
@@ -1112,6 +1658,68 @@ FeatureListResponse = _reflection.GeneratedProtocolMessageType('FeatureListRespo
 _sym_db.RegisterMessage(FeatureListResponse)
 _sym_db.RegisterMessage(FeatureListResponse.FeaturesEntry)
 
+SessionFeaturesResponse = _reflection.GeneratedProtocolMessageType('SessionFeaturesResponse', (_message.Message,), {
+
+  'ClientSdkEntry' : _reflection.GeneratedProtocolMessageType('ClientSdkEntry', (_message.Message,), {
+    'DESCRIPTOR' : _SESSIONFEATURESRESPONSE_CLIENTSDKENTRY,
+    '__module__' : 'data_plane_v2_pb2'
+    # @@protoc_insertion_point(class_scope:v2.dataplane.SessionFeaturesResponse.ClientSdkEntry)
+    })
+  ,
+
+  'CloudNetworkEntry' : _reflection.GeneratedProtocolMessageType('CloudNetworkEntry', (_message.Message,), {
+    'DESCRIPTOR' : _SESSIONFEATURESRESPONSE_CLOUDNETWORKENTRY,
+    '__module__' : 'data_plane_v2_pb2'
+    # @@protoc_insertion_point(class_scope:v2.dataplane.SessionFeaturesResponse.CloudNetworkEntry)
+    })
+  ,
+
+  'CloudBehavioralEntry' : _reflection.GeneratedProtocolMessageType('CloudBehavioralEntry', (_message.Message,), {
+    'DESCRIPTOR' : _SESSIONFEATURESRESPONSE_CLOUDBEHAVIORALENTRY,
+    '__module__' : 'data_plane_v2_pb2'
+    # @@protoc_insertion_point(class_scope:v2.dataplane.SessionFeaturesResponse.CloudBehavioralEntry)
+    })
+  ,
+  'DESCRIPTOR' : _SESSIONFEATURESRESPONSE,
+  '__module__' : 'data_plane_v2_pb2'
+  # @@protoc_insertion_point(class_scope:v2.dataplane.SessionFeaturesResponse)
+  })
+_sym_db.RegisterMessage(SessionFeaturesResponse)
+_sym_db.RegisterMessage(SessionFeaturesResponse.ClientSdkEntry)
+_sym_db.RegisterMessage(SessionFeaturesResponse.CloudNetworkEntry)
+_sym_db.RegisterMessage(SessionFeaturesResponse.CloudBehavioralEntry)
+
+JourneyFeaturesResponse = _reflection.GeneratedProtocolMessageType('JourneyFeaturesResponse', (_message.Message,), {
+
+  'ClientSdkEntry' : _reflection.GeneratedProtocolMessageType('ClientSdkEntry', (_message.Message,), {
+    'DESCRIPTOR' : _JOURNEYFEATURESRESPONSE_CLIENTSDKENTRY,
+    '__module__' : 'data_plane_v2_pb2'
+    # @@protoc_insertion_point(class_scope:v2.dataplane.JourneyFeaturesResponse.ClientSdkEntry)
+    })
+  ,
+
+  'CloudNetworkEntry' : _reflection.GeneratedProtocolMessageType('CloudNetworkEntry', (_message.Message,), {
+    'DESCRIPTOR' : _JOURNEYFEATURESRESPONSE_CLOUDNETWORKENTRY,
+    '__module__' : 'data_plane_v2_pb2'
+    # @@protoc_insertion_point(class_scope:v2.dataplane.JourneyFeaturesResponse.CloudNetworkEntry)
+    })
+  ,
+
+  'CloudBehavioralEntry' : _reflection.GeneratedProtocolMessageType('CloudBehavioralEntry', (_message.Message,), {
+    'DESCRIPTOR' : _JOURNEYFEATURESRESPONSE_CLOUDBEHAVIORALENTRY,
+    '__module__' : 'data_plane_v2_pb2'
+    # @@protoc_insertion_point(class_scope:v2.dataplane.JourneyFeaturesResponse.CloudBehavioralEntry)
+    })
+  ,
+  'DESCRIPTOR' : _JOURNEYFEATURESRESPONSE,
+  '__module__' : 'data_plane_v2_pb2'
+  # @@protoc_insertion_point(class_scope:v2.dataplane.JourneyFeaturesResponse)
+  })
+_sym_db.RegisterMessage(JourneyFeaturesResponse)
+_sym_db.RegisterMessage(JourneyFeaturesResponse.ClientSdkEntry)
+_sym_db.RegisterMessage(JourneyFeaturesResponse.CloudNetworkEntry)
+_sym_db.RegisterMessage(JourneyFeaturesResponse.CloudBehavioralEntry)
+
 SignalsResponse = _reflection.GeneratedProtocolMessageType('SignalsResponse', (_message.Message,), {
   'DESCRIPTOR' : _SIGNALSRESPONSE,
   '__module__' : 'data_plane_v2_pb2'
@@ -1127,4 +1735,10 @@ _WEBHOOKPAYLOAD.fields_by_name['session_id']._options = None
 _WEBHOOKPAYLOAD.fields_by_name['event_type']._options = None
 _WEBHOOKPAYLOAD.fields_by_name['client_session_group_id']._options = None
 _FEATURELISTRESPONSE_FEATURESENTRY._options = None
+_SESSIONFEATURESRESPONSE_CLIENTSDKENTRY._options = None
+_SESSIONFEATURESRESPONSE_CLOUDNETWORKENTRY._options = None
+_SESSIONFEATURESRESPONSE_CLOUDBEHAVIORALENTRY._options = None
+_JOURNEYFEATURESRESPONSE_CLIENTSDKENTRY._options = None
+_JOURNEYFEATURESRESPONSE_CLOUDNETWORKENTRY._options = None
+_JOURNEYFEATURESRESPONSE_CLOUDBEHAVIORALENTRY._options = None
 # @@protoc_insertion_point(module_scope)
