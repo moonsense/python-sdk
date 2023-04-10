@@ -23,7 +23,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=b'\n$io.moonsense.models.v2.sdk.dataplaneB\024DataPlaneSDKV2ProtosZ(moonsense.io/pkg/pb/v2/data-plane-sdk;v2',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x17\x64\x61ta_plane_v2_sdk.proto\x12\x0cv2.dataplane\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x17validate/validate.proto\x1a\x0f\x63ommon_v2.proto\x1a\x0f\x62undle_v2.proto\"8\n\x11LatitudeLongitude\x12\x10\n\x08latitude\x18\x01 \x01(\x01\x12\x11\n\tlongitude\x18\x02 \x01(\x01\"S\n\x0e\x42oundingCircle\x12\x31\n\x08\x63\x65ntroid\x18\x01 \x01(\x0b\x32\x1f.v2.dataplane.LatitudeLongitude\x12\x0e\n\x06radius\x18\x02 \x01(\x01\"1\n\x10RecordingProfile\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\x03\"\xfa\x03\n\x0fSessionMetadata\x12\x12\n\ninstall_id\x18\x01 \x01(\t\x12\x42\n\x08platform\x18\x03 \x01(\x0e\x32&.v2.dataplane.SessionMetadata.PlatformB\x08\xfa\x42\x05\x82\x01\x02\x10\x01\x12\x14\n\x0cmanufacturer\x18\x04 \x01(\t\x12\r\n\x05model\x18\x05 \x01(\t\x12\x16\n\x0esystem_version\x18\x06 \x01(\t\x12\x1a\n\x12is_device_physical\x18\x07 \x01(\x08\x12\x39\n\x11recording_profile\x18\x08 \x01(\x0b\x32\x1e.v2.dataplane.RecordingProfile\x12!\n\x15\x64\x65vice_physical_width\x18\t \x01(\x03\x42\x02\x18\x01\x12\"\n\x16\x64\x65vice_physical_height\x18\n \x01(\x03\x42\x02\x18\x01\x12 \n\x14\x64\x65vice_logical_width\x18\x0b \x01(\x03\x42\x02\x18\x01\x12!\n\x15\x64\x65vice_logical_height\x18\x0c \x01(\x03\x42\x02\x18\x01\x12\x1e\n\x12\x64\x65vice_pixel_ratio\x18\r \x01(\x01\x42\x02\x18\x01\x12\x17\n\x0frelease_version\x18\x0e \x01(\t\"6\n\x08Platform\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03iOS\x10\x01\x12\x0b\n\x07\x41NDROID\x10\x02\x12\x07\n\x03WEB\x10\x03\"\xc0\x01\n\rSessionConfig\x12!\n\x19requested_duration_millis\x18\x01 \x01(\x03\x12\x11\n\tmask_text\x18\x02 \x01(\x08\x12\x1c\n\x14sensor_sampling_rate\x18\x03 \x01(\x05\x12)\n!bundle_generation_interval_millis\x18\x04 \x01(\x05\x12\x30\n\x11requested_sensors\x18\x05 \x03(\x0e\x32\x15.v2.common.SensorType\"\x81\x01\n\x0cSessionLabel\x12\x10\n\x08label_id\x18\x01 \x01(\t\x12\x18\n\x10session_label_id\x18\x02 \x01(\t\x12\x15\n\x04name\x18\x03 \x01(\tB\x07\xfa\x42\x04r\x02 \x01\x12.\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x84\x01\n\x0f\x42ucketedCounter\x12\x35\n\x07\x62uckets\x18\x01 \x03(\x0b\x32$.v2.dataplane.BucketedCounter.Bucket\x12\r\n\x05total\x18\x02 \x01(\x05\x1a+\n\x06\x42ucket\x12\x12\n\nstart_time\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x03\"\x15\n\x03\x43\x44\x46\x12\x0e\n\x06values\x18\x01 \x03(\x01\"\xbb\x05\n\x07Session\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12\x30\n\x0coldest_event\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x30\n\x0cnewest_event\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x06\x63ircle\x18\x06 \x01(\x0b\x32\x1c.v2.dataplane.BoundingCircle\x12/\n\x08metadata\x18\x07 \x01(\x0b\x32\x1d.v2.dataplane.SessionMetadata\x12\x35\n\x08\x63ounters\x18\x08 \x03(\x0b\x32#.v2.dataplane.Session.CountersEntry\x12*\n\x06labels\x18\t \x03(\x0b\x32\x1a.v2.dataplane.SessionLabel\x12-\n\x04\x63\x64\x66s\x18\n \x03(\x0b\x32\x1f.v2.dataplane.Session.CdfsEntry\x12\x11\n\tregion_id\x18\x0b \x01(\t\x12#\n\x17\x63lient_session_group_id\x18\x0c \x01(\tB\x02\x18\x01\x12+\n\x06\x63onfig\x18\r \x01(\x0b\x32\x1b.v2.dataplane.SessionConfig\x12\x12\n\njourney_id\x18\x0e \x01(\t\x1aN\n\rCountersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12,\n\x05value\x18\x02 \x01(\x0b\x32\x1d.v2.dataplane.BucketedCounter:\x02\x38\x01\x1a>\n\tCdfsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12 \n\x05value\x18\x02 \x01(\x0b\x32\x11.v2.dataplane.CDF:\x02\x38\x01\"G\n\x19SessionLabelCreateRequest\x12*\n\x06labels\x18\x01 \x03(\x0b\x32\x1a.v2.dataplane.SessionLabel\"\x1c\n\x1aSessionLabelCreateResponse\"7\n\"NetworkPacketCaptureClientResponse\x12\x11\n\tsessionId\x18\x01 \x01(\t\"y\n\x13\x42undleCreateRequest\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\"\n\x07\x62undles\x18\x02 \x03(\x0b\x32\x11.v2.bundle.Bundle\x12\x12\n\ninstall_id\x18\x03 \x01(\t\x12\x16\n\x0e\x63lient_user_id\x18\x04 \x01(\t\"B\n\x14\x42undleCreateResponse\x12\x13\n\x0b\x65rror_count\x18\x01 \x01(\x05\x12\x15\n\rsuccess_count\x18\x02 \x01(\x05\x42\x66\n$io.moonsense.models.v2.sdk.dataplaneB\x14\x44\x61taPlaneSDKV2ProtosZ(moonsense.io/pkg/pb/v2/data-plane-sdk;v2b\x06proto3'
+  serialized_pb=b'\n\x17\x64\x61ta_plane_v2_sdk.proto\x12\x0cv2.dataplane\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x17validate/validate.proto\x1a\x0f\x63ommon_v2.proto\x1a\x0f\x62undle_v2.proto\"8\n\x11LatitudeLongitude\x12\x10\n\x08latitude\x18\x01 \x01(\x01\x12\x11\n\tlongitude\x18\x02 \x01(\x01\"S\n\x0e\x42oundingCircle\x12\x31\n\x08\x63\x65ntroid\x18\x01 \x01(\x0b\x32\x1f.v2.dataplane.LatitudeLongitude\x12\x0e\n\x06radius\x18\x02 \x01(\x01\"1\n\x10RecordingProfile\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\x03\"\xfa\x03\n\x0fSessionMetadata\x12\x12\n\ninstall_id\x18\x01 \x01(\t\x12\x42\n\x08platform\x18\x03 \x01(\x0e\x32&.v2.dataplane.SessionMetadata.PlatformB\x08\xfa\x42\x05\x82\x01\x02\x10\x01\x12\x14\n\x0cmanufacturer\x18\x04 \x01(\t\x12\r\n\x05model\x18\x05 \x01(\t\x12\x16\n\x0esystem_version\x18\x06 \x01(\t\x12\x1a\n\x12is_device_physical\x18\x07 \x01(\x08\x12\x39\n\x11recording_profile\x18\x08 \x01(\x0b\x32\x1e.v2.dataplane.RecordingProfile\x12!\n\x15\x64\x65vice_physical_width\x18\t \x01(\x03\x42\x02\x18\x01\x12\"\n\x16\x64\x65vice_physical_height\x18\n \x01(\x03\x42\x02\x18\x01\x12 \n\x14\x64\x65vice_logical_width\x18\x0b \x01(\x03\x42\x02\x18\x01\x12!\n\x15\x64\x65vice_logical_height\x18\x0c \x01(\x03\x42\x02\x18\x01\x12\x1e\n\x12\x64\x65vice_pixel_ratio\x18\r \x01(\x01\x42\x02\x18\x01\x12\x17\n\x0frelease_version\x18\x0e \x01(\t\"6\n\x08Platform\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03iOS\x10\x01\x12\x0b\n\x07\x41NDROID\x10\x02\x12\x07\n\x03WEB\x10\x03\"\x88\x02\n\rSessionConfig\x12!\n\x19requested_duration_millis\x18\x01 \x01(\x03\x12\x11\n\tmask_text\x18\x02 \x01(\x08\x12\x1c\n\x14sensor_sampling_rate\x18\x03 \x01(\x05\x12)\n!bundle_generation_interval_millis\x18\x04 \x01(\x05\x12\x30\n\x11requested_sensors\x18\x05 \x03(\x0e\x32\x15.v2.common.SensorType\x12\x46\n\x18network_telemetry_config\x18\x06 \x01(\x0b\x32$.v2.dataplane.NetworkTelemetryConfig\"V\n\x16NetworkTelemetryConfig\x12\x1d\n\x15ipv4_capture_attempts\x18\x01 \x01(\x05\x12\x1d\n\x15ipv6_capture_attempts\x18\x02 \x01(\x05\"\x81\x01\n\x0cSessionLabel\x12\x10\n\x08label_id\x18\x01 \x01(\t\x12\x18\n\x10session_label_id\x18\x02 \x01(\t\x12\x15\n\x04name\x18\x03 \x01(\tB\x07\xfa\x42\x04r\x02 \x01\x12.\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x84\x01\n\x0f\x42ucketedCounter\x12\x35\n\x07\x62uckets\x18\x01 \x03(\x0b\x32$.v2.dataplane.BucketedCounter.Bucket\x12\r\n\x05total\x18\x02 \x01(\x05\x1a+\n\x06\x42ucket\x12\x12\n\nstart_time\x18\x01 \x01(\x03\x12\r\n\x05value\x18\x02 \x01(\x03\"\x15\n\x03\x43\x44\x46\x12\x0e\n\x06values\x18\x01 \x03(\x01\"\xbb\x05\n\x07Session\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12\x30\n\x0coldest_event\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x30\n\x0cnewest_event\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x06\x63ircle\x18\x06 \x01(\x0b\x32\x1c.v2.dataplane.BoundingCircle\x12/\n\x08metadata\x18\x07 \x01(\x0b\x32\x1d.v2.dataplane.SessionMetadata\x12\x35\n\x08\x63ounters\x18\x08 \x03(\x0b\x32#.v2.dataplane.Session.CountersEntry\x12*\n\x06labels\x18\t \x03(\x0b\x32\x1a.v2.dataplane.SessionLabel\x12-\n\x04\x63\x64\x66s\x18\n \x03(\x0b\x32\x1f.v2.dataplane.Session.CdfsEntry\x12\x11\n\tregion_id\x18\x0b \x01(\t\x12#\n\x17\x63lient_session_group_id\x18\x0c \x01(\tB\x02\x18\x01\x12+\n\x06\x63onfig\x18\r \x01(\x0b\x32\x1b.v2.dataplane.SessionConfig\x12\x12\n\njourney_id\x18\x0e \x01(\t\x1aN\n\rCountersEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12,\n\x05value\x18\x02 \x01(\x0b\x32\x1d.v2.dataplane.BucketedCounter:\x02\x38\x01\x1a>\n\tCdfsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12 \n\x05value\x18\x02 \x01(\x0b\x32\x11.v2.dataplane.CDF:\x02\x38\x01\"G\n\x19SessionLabelCreateRequest\x12*\n\x06labels\x18\x01 \x03(\x0b\x32\x1a.v2.dataplane.SessionLabel\"\x1c\n\x1aSessionLabelCreateResponse\"7\n\"NetworkPacketCaptureClientResponse\x12\x11\n\tsessionId\x18\x01 \x01(\t\"y\n\x13\x42undleCreateRequest\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\"\n\x07\x62undles\x18\x02 \x03(\x0b\x32\x11.v2.bundle.Bundle\x12\x12\n\ninstall_id\x18\x03 \x01(\t\x12\x16\n\x0e\x63lient_user_id\x18\x04 \x01(\t\"B\n\x14\x42undleCreateResponse\x12\x13\n\x0b\x65rror_count\x18\x01 \x01(\x05\x12\x15\n\rsuccess_count\x18\x02 \x01(\x05\x42\x66\n$io.moonsense.models.v2.sdk.dataplaneB\x14\x44\x61taPlaneSDKV2ProtosZ(moonsense.io/pkg/pb/v2/data-plane-sdk;v2b\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,validate_dot_validate__pb2.DESCRIPTOR,common__v2__pb2.DESCRIPTOR,bundle__v2__pb2.DESCRIPTOR,])
 
@@ -342,6 +342,13 @@ _SESSIONCONFIG = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='network_telemetry_config', full_name='v2.dataplane.SessionConfig.network_telemetry_config', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -355,7 +362,46 @@ _SESSIONCONFIG = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=837,
-  serialized_end=1029,
+  serialized_end=1101,
+)
+
+
+_NETWORKTELEMETRYCONFIG = _descriptor.Descriptor(
+  name='NetworkTelemetryConfig',
+  full_name='v2.dataplane.NetworkTelemetryConfig',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='ipv4_capture_attempts', full_name='v2.dataplane.NetworkTelemetryConfig.ipv4_capture_attempts', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='ipv6_capture_attempts', full_name='v2.dataplane.NetworkTelemetryConfig.ipv6_capture_attempts', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1103,
+  serialized_end=1189,
 )
 
 
@@ -407,8 +453,8 @@ _SESSIONLABEL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1032,
-  serialized_end=1161,
+  serialized_start=1192,
+  serialized_end=1321,
 )
 
 
@@ -446,8 +492,8 @@ _BUCKETEDCOUNTER_BUCKET = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1253,
-  serialized_end=1296,
+  serialized_start=1413,
+  serialized_end=1456,
 )
 
 _BUCKETEDCOUNTER = _descriptor.Descriptor(
@@ -484,8 +530,8 @@ _BUCKETEDCOUNTER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1164,
-  serialized_end=1296,
+  serialized_start=1324,
+  serialized_end=1456,
 )
 
 
@@ -516,8 +562,8 @@ _CDF = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1298,
-  serialized_end=1319,
+  serialized_start=1458,
+  serialized_end=1479,
 )
 
 
@@ -555,8 +601,8 @@ _SESSION_COUNTERSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1879,
-  serialized_end=1957,
+  serialized_start=2039,
+  serialized_end=2117,
 )
 
 _SESSION_CDFSENTRY = _descriptor.Descriptor(
@@ -593,8 +639,8 @@ _SESSION_CDFSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1959,
-  serialized_end=2021,
+  serialized_start=2119,
+  serialized_end=2181,
 )
 
 _SESSION = _descriptor.Descriptor(
@@ -715,8 +761,8 @@ _SESSION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1322,
-  serialized_end=2021,
+  serialized_start=1482,
+  serialized_end=2181,
 )
 
 
@@ -747,8 +793,8 @@ _SESSIONLABELCREATEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2023,
-  serialized_end=2094,
+  serialized_start=2183,
+  serialized_end=2254,
 )
 
 
@@ -772,8 +818,8 @@ _SESSIONLABELCREATERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2096,
-  serialized_end=2124,
+  serialized_start=2256,
+  serialized_end=2284,
 )
 
 
@@ -804,8 +850,8 @@ _NETWORKPACKETCAPTURECLIENTRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2126,
-  serialized_end=2181,
+  serialized_start=2286,
+  serialized_end=2341,
 )
 
 
@@ -857,8 +903,8 @@ _BUNDLECREATEREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2183,
-  serialized_end=2304,
+  serialized_start=2343,
+  serialized_end=2464,
 )
 
 
@@ -896,8 +942,8 @@ _BUNDLECREATERESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2306,
-  serialized_end=2372,
+  serialized_start=2466,
+  serialized_end=2532,
 )
 
 _BOUNDINGCIRCLE.fields_by_name['centroid'].message_type = _LATITUDELONGITUDE
@@ -905,6 +951,7 @@ _SESSIONMETADATA.fields_by_name['platform'].enum_type = _SESSIONMETADATA_PLATFOR
 _SESSIONMETADATA.fields_by_name['recording_profile'].message_type = _RECORDINGPROFILE
 _SESSIONMETADATA_PLATFORM.containing_type = _SESSIONMETADATA
 _SESSIONCONFIG.fields_by_name['requested_sensors'].enum_type = common__v2__pb2._SENSORTYPE
+_SESSIONCONFIG.fields_by_name['network_telemetry_config'].message_type = _NETWORKTELEMETRYCONFIG
 _SESSIONLABEL.fields_by_name['created_at'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _BUCKETEDCOUNTER_BUCKET.containing_type = _BUCKETEDCOUNTER
 _BUCKETEDCOUNTER.fields_by_name['buckets'].message_type = _BUCKETEDCOUNTER_BUCKET
@@ -928,6 +975,7 @@ DESCRIPTOR.message_types_by_name['BoundingCircle'] = _BOUNDINGCIRCLE
 DESCRIPTOR.message_types_by_name['RecordingProfile'] = _RECORDINGPROFILE
 DESCRIPTOR.message_types_by_name['SessionMetadata'] = _SESSIONMETADATA
 DESCRIPTOR.message_types_by_name['SessionConfig'] = _SESSIONCONFIG
+DESCRIPTOR.message_types_by_name['NetworkTelemetryConfig'] = _NETWORKTELEMETRYCONFIG
 DESCRIPTOR.message_types_by_name['SessionLabel'] = _SESSIONLABEL
 DESCRIPTOR.message_types_by_name['BucketedCounter'] = _BUCKETEDCOUNTER
 DESCRIPTOR.message_types_by_name['CDF'] = _CDF
@@ -973,6 +1021,13 @@ SessionConfig = _reflection.GeneratedProtocolMessageType('SessionConfig', (_mess
   # @@protoc_insertion_point(class_scope:v2.dataplane.SessionConfig)
   })
 _sym_db.RegisterMessage(SessionConfig)
+
+NetworkTelemetryConfig = _reflection.GeneratedProtocolMessageType('NetworkTelemetryConfig', (_message.Message,), {
+  'DESCRIPTOR' : _NETWORKTELEMETRYCONFIG,
+  '__module__' : 'data_plane_v2_sdk_pb2'
+  # @@protoc_insertion_point(class_scope:v2.dataplane.NetworkTelemetryConfig)
+  })
+_sym_db.RegisterMessage(NetworkTelemetryConfig)
 
 SessionLabel = _reflection.GeneratedProtocolMessageType('SessionLabel', (_message.Message,), {
   'DESCRIPTOR' : _SESSIONLABEL,

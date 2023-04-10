@@ -26,14 +26,17 @@ import tempfile
 import tarfile
 import shutil
 import pytz
-from datetime import date, datetime
+from datetime import date, datetime, timedelta, timezone
 
 from google.protobuf import json_format
 from typing import Iterable, List
 
 from .models import Session, Chunk, TokenSelfResponse, \
     DataRegionsListResponse, SessionListResponse, ChunksListResponse, \
-    CardListResponse, Card, SealedBundle, FeatureListResponse, SignalsResponse
+    CardListResponse, Card, SealedBundle, FeatureListResponse, SignalsResponse, \
+    Journey, JourneyListResponse, JourneyDetailResponse
+
+from .models.journey_feedback_pb2 import JourneyFeedback
 
 from .download import DownloadAllSessions
 from . import Platform
@@ -104,6 +107,116 @@ class Client(object):
         endpoint = self._build_url(self._default_region) + "/v2/tokens/self"
         r = requests.get(endpoint, **self._headers)
         return json_format.Parse(r.text, TokenSelfResponse(), ignore_unknown_fields=True)
+
+    def list_journeys(
+        self,
+        journeys_per_page: int = 50,
+        platforms: List[Platform] = None,
+        since: datetime = None,
+        until: datetime = None) -> Iterable[Journey]:
+        """
+        List journeys for the current project
+
+        :param journeys_per_page: The number of journeys to return per page
+        :param platforms: Optional - The list of 'Platform's to match. If 'None' is supplied,\
+                            all 'Platform's will be returned.
+        :param since: Optional - The start time to match.
+        :param until: Optional - The end time to match.
+        :return: a generator of 'Journey' objects
+        """
+        endpoint = self._build_url(self._default_region) + "/v2/journeys"
+
+        page = 1
+        while True:
+            params = [("per_page", journeys_per_page)]
+
+            if since is not None:
+                since_with_tz = pytz.utc.localize(since)
+                params.append(("filter[min_created_at]", since_with_tz.isoformat()))
+
+            if until is not None:
+                until_with_tz = pytz.utc.localize(until)
+                print('until:' + until_with_tz.isoformat())
+                params.append(("filter[max_created_at]", until_with_tz.isoformat()))
+
+            if platforms is not None:
+                params.append(("filter[platforms][]", platforms))
+
+            http_response = retry_call(requests.get, fargs=[endpoint, params], fkwargs=self._headers, tries=self.tries)
+
+            if http_response.status_code != 200:
+                raise RuntimeError(
+                    f"unable to list journeys. status code: {http_response.status_code}"
+                )
+            response = json_format.Parse(
+                http_response.text, JourneyListResponse(), ignore_unknown_fields=True)
+            if len(response.journeys) == 0:
+                return  # no more journeys
+
+            for journey in response.journeys:
+                yield journey
+
+            if response.pagination.next_page is not None and response.pagination.next_page > 0:
+                # Start the next fetch 1microsecond after this one ended
+                until = response.journeys[-1].created_at.ToDatetime() - timedelta(microseconds=1)
+            else:
+                break
+    
+    def describe_journey(self, journey_id: str) -> JourneyDetailResponse:
+        """
+        Describe a specific journey
+
+        :param journey_id: The ID of the journey
+        :return: a 'Journey' object with details
+        """
+        endpoint = self._build_url(
+            self._default_region) + f"/v2/journeys/{journey_id}"
+
+        http_response = requests.get(endpoint, **self._headers)
+        if http_response.status_code != 200:
+            raise RuntimeError(
+                f"unable to describe journey. status code: {http_response.status_code}"
+            )
+
+        return json_format.Parse(http_response.text, JourneyDetailResponse(), ignore_unknown_fields=True)
+    
+
+    def get_journey_feedback(self, journey_id: str) -> JourneyFeedback:
+        """
+        Fetches the feedback associated with a journey with the specified journeyId.
+
+        :param journey_id: The ID of the journey
+        :return: a 'JourneyFeedback' object with details
+        """
+        endpoint = self._build_url(
+            self._default_region) + f"/v2/journeys/{journey_id}/feedback"
+
+        http_response = requests.get(endpoint, **self._headers)
+        if http_response.status_code != 200:
+            raise RuntimeError(
+                f"unable to get journey feedback. status code: {http_response.status_code}"
+            )
+
+        return json_format.Parse(http_response.text, JourneyFeedback(), ignore_unknown_fields=True)
+    
+    def add_journey_feedback(self, journey_id: str, feedback: JourneyFeedback):
+        """
+        Sets the feedback associated with a journey with the specified journeyId.
+
+        :param journey_id: The ID of the journey
+        :param feedback: The feedback to set. Feedback is additive. If the feedback type already
+            exists, it will be overwritten. If the feedback type does not exist, it will be added.
+        :return: a 'JourneyFeedback' object with details
+        """
+        endpoint = self._build_url(
+            self._default_region) + f"/v2/journeys/{journey_id}/feedback"
+
+        http_response = requests.post(endpoint, json=feedback, **self._headers)
+
+        if http_response.status_code != 200:
+            raise RuntimeError(
+                f"unable to update journey feedback. status code: {http_response.status_code}, response: {http_response.text}"
+            )
 
     def list_sessions(
         self,
