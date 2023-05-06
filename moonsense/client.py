@@ -34,7 +34,8 @@ from typing import Iterable, List
 from .models import Session, Chunk, TokenSelfResponse, \
     DataRegionsListResponse, SessionListResponse, ChunksListResponse, \
     CardListResponse, Card, SealedBundle, FeatureListResponse, SignalsResponse, \
-    Journey, JourneyListResponse, JourneyDetailResponse
+    Journey, JourneyListResponse, JourneyDetailResponse, SessionFeaturesResponse, \
+    JourneyFeaturesResponse
 
 from .models.journey_feedback_pb2 import JourneyFeedback
 
@@ -161,7 +162,7 @@ class Client(object):
                 until = response.journeys[-1].created_at.ToDatetime() - timedelta(microseconds=1)
             else:
                 break
-    
+
     def describe_journey(self, journey_id: str) -> JourneyDetailResponse:
         """
         Describe a specific journey
@@ -179,7 +180,7 @@ class Client(object):
             )
 
         return json_format.Parse(http_response.text, JourneyDetailResponse(), ignore_unknown_fields=True)
-    
+
 
     def get_journey_feedback(self, journey_id: str) -> JourneyFeedback:
         """
@@ -198,7 +199,8 @@ class Client(object):
             )
 
         return json_format.Parse(http_response.text, JourneyFeedback(), ignore_unknown_fields=True)
-    
+
+
     def add_journey_feedback(self, journey_id: str, feedback: JourneyFeedback):
         """
         Sets the feedback associated with a journey with the specified journeyId.
@@ -371,13 +373,13 @@ class Client(object):
         for line in http_response.iter_lines(chunk_size=1024 * 1024):
             yield json_format.Parse(line, SealedBundle(), ignore_unknown_fields=True)
 
-    def list_session_features(self, session_id, region=None) -> FeatureListResponse:
+    def list_session_features(self, session_id, region=None) -> SessionFeaturesResponse:
         """
         Lists the features for a given session
 
         :param session_id: The ID of the session
         :param region: If not set, will look it up when run
-        :return: a 'FeatureListResponse' object with details
+        :return: a 'SessionFeaturesResponse' object with details
         """
         if region == None:
             session = self.describe_session(session_id)
@@ -391,7 +393,31 @@ class Client(object):
                 f"unable to list session features. status code: {http_response.status_code}"
             )
 
-        return json_format.Parse(http_response.text, FeatureListResponse(), ignore_unknown_fields=True)
+        return json_format.Parse(http_response.text, SessionFeaturesResponse(), ignore_unknown_fields=True)
+
+    def list_journey_features(self, journey_id, region=None) -> JourneyFeaturesResponse:
+        """
+        Lists the features for a given session
+
+        :param session_id: The ID of the session
+        :param region: If not set, will look it up when run
+        :return: a 'JourneyFeaturesResponse' object with details
+        """
+        if region == None:
+            journey = self.describe_journey(journey_id)
+            region = journey.journey.primary_region_id
+
+        endpoint = self._build_url(
+            region) + f"/v2/journeys/{journey_id}/features"
+
+        http_response = requests.get(endpoint, **self._headers)
+        if http_response.status_code != 200:
+            raise RuntimeError(
+                f"unable to list journey features. status code: {http_response.status_code}"
+            )
+
+        return json_format.Parse(http_response.text, JourneyFeaturesResponse(), ignore_unknown_fields=True)
+
 
     def list_session_signals(self, session_id, region=None) -> SignalsResponse:
         """
